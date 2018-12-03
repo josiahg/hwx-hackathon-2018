@@ -1,0 +1,19 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-6 col-md-4" *ngFor="let recipe of recipes">
+            <div class="card">
+                <div class="card-header">
+                    {{ recipe.name }}
+                    <label class="switch switch-pill switch-success float-right">
+                        <input type="checkbox" class="switch-input">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+                <div class="card-body">
+                    {{ recipe.description }}
+                    <i class="cui-code float-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
