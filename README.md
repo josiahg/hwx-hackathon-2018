@@ -25,3 +25,7 @@ cd hwx-hackathon-2018
 ``` bash
 docker-compose up
 ```
+
+## Have Fun!
+
+Open a browser to [<http://localhost:3000/>](http://localhost:3000/)
