@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+  frontend:
+    image: 'josiahgoodson/hackathon-frontend'
+    ports:
+      - 3000:80
+    links:
+      - backend
+  backend:
+    image: 'josiahgoodson/hackathon-backend'
+    ports:
+      - 4000:4000
+    links:
+      - mongo
+  mongo:
+    image: mongo
+    volumes:
+      - /data/db:/data/db
+    ports:
+      - "27017:27017"

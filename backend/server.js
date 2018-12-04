@@ -10,13 +10,22 @@ const router = express.Router();
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost/recipes');
-
 const connection = mongoose.connection;
 
-connection.once('open', () => {
-    console.log('MongoDB database connection established successfully!');
-});
+function connectWithRetry() {
+    mongoose.connect('mongodb://mongo/recipes').then(
+        () => { connection.once('open', () => {
+                    console.log('MongoDB database connection established successfully!');
+                });},
+        err => { 
+            console.log('Could not connect to DB. Retrying in 5 seconds.');
+            setTimeout(connectWithRetry, 5000);
+        }
+    );        
+};
+
+connectWithRetry();
+
 
 router.route('/recipes').get((req, res) => {
     Recipe.find((err, recipes) => {

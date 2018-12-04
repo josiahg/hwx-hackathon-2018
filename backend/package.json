@@ -1,11 +1,12 @@
 {
-  "name": "gen-backend",
+  "name": "hackathon-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend Express server for Hackathon Team One",
   "main": "index.js",
   "scripts": {
     "dev": "babel-watch server.js"
   },
+  "repository": {},
   "keywords": [],
   "author": "",
   "license": "ISC",

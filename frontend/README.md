@@ -1,3 +1,4 @@
 # Hortonworks SE Hackathon 2018, Team One
 
-Assets for the Team One project.
+## Frontend
+Frontend assets for the Team One project.
