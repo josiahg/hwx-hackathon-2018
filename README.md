@@ -1,4 +1,4 @@
-# hwx-hackathon-2018
+# HWX Hackathon 2018
 
 # Running The Generator
 
