@@ -41,17 +41,18 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule, 
-  MatFormFieldModule, 
-  MatInputModule, 
-  MatOptionModule, 
-  MatSelectModule, 
-  MatIconModule, 
-  MatButtonModule, 
-  MatCardModule, 
-  MatTableModule, 
-  MatDividerModule, 
+import { MatToolbarModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatOptionModule,
+  MatSelectModule,
+  MatIconModule,
+  MatButtonModule,
+  MatCardModule,
+  MatTableModule,
+  MatDividerModule,
   MatSnackBarModule } from '@angular/material';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 
 @NgModule({
   imports: [
@@ -78,7 +79,8 @@ import { MatToolbarModule,
     MatCardModule,
     MatTableModule,
     MatDividerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    ProgressbarModule.forRoot()
   ],
   declarations: [
     AppComponent,

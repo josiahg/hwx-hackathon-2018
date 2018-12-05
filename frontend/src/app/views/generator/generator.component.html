@@ -1,19 +1,61 @@
 <div class="animated fadeIn">
-    <div class="row">
-        <div class="col-sm-6 col-md-4" *ngFor="let recipe of recipes">
-            <div class="card">
-                <div class="card-header">
-                    {{ recipe.name }}
-                    <label class="switch switch-pill switch-success float-right">
-                        <input type="checkbox" class="switch-input">
-                        <span class="switch-slider"></span>
-                    </label>
-                </div>
-                <div class="card-body">
-                    {{ recipe.description }}
-                    <i class="cui-code float-right"></i>
-                </div>
+  <div class="card">
+      <div class="card-body">
+        <progressbar class="progress progress-striped progress-animated" [max]="max" [value]="dynamic">
+          <span style="color:white; white-space:nowrap;">Step {{dynamic}} / {{max}}</span>
+        </progressbar>
+      </div>
+  </div>
+  <div class="row animated fadeIn" *ngIf="showClusterTypes">
+      <div class="col-sm-6 col-md-4" *ngFor="let type of clusterTypes">
+          <div class="card" (click)="clusterTypeSelect()">
+            <a href="#">
+              <div class="card-body">
+                  <img src={{type}} width=100%>
+              </div>
+            </a>
+          </div>
+      </div>
+  </div>
+  <div class="row animated fadeIn" *ngIf="showSize">
+    <div class="col-sm-6 col-md-4" *ngFor="let nodeType of nodeTypes">
+        <div class="card">
+            <div class="card-header">
+                {{ nodeType }} Nodes
+            </div>
+            <div class="card-body" align="center">
+              <a href="#"><i class="cui-chevron-top font-2xl"></i></a>
+              <h1>1</h1>
+              <a href="#"><i class="cui-chevron-bottom font-2xl"></i></a>
             </div>
         </div>
     </div>
+    <button class="btn btn-block btn-primary" (click)="setSize()">Set size</button>
+  </div>
+  <div class="row animated fadeIn" *ngIf="showRecipes">
+      <div class="col-sm-6 col-md-4" *ngFor="let recipe of recipes">
+          <div class="card">
+              <div class="card-header">
+                  {{ recipe.name }}
+                  <label class="switch switch-pill switch-success float-right">
+                      <input type="checkbox" class="switch-input">
+                      <span class="switch-slider"></span>
+                  </label>
+              </div>
+              <div class="card-body">
+                  {{ recipe.description }}
+                  <i class="cui-code float-right"></i>
+              </div>
+          </div>
+      </div>
+      <button class="btn btn-block btn-primary" (click)="addRecipes()">Add Selected</button>
+  </div>
+  <div class="row animated fadeIn" *ngIf="showOptions">
+      <h1>Additional Options</h1>
+      <button class="btn btn-block btn-primary" (click)="addOptions()">Add Selected</button>
+  </div>
+  <div class="row animated fadeIn" *ngIf="showGenerate">
+      <h1>Generate Bundle</h1>
+      <button class="btn btn-block btn-primary" (click)="genBundle()">Generate!</button>
+  </div>
 </div>

@@ -6,12 +6,6 @@
     "name": "Josiah Goodson",
     "github": "https://github.com/josiahg"
   },
-  "contributors": [
-    {
-      "name": "",
-      "url": ""
-    }
-  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

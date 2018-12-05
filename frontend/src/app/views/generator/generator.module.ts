@@ -9,6 +9,8 @@ import { GeneratorRoutingModule } from './generator-routing.module';
 
 import { CommonModule } from '@angular/common';
 
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +18,8 @@ import { CommonModule } from '@angular/common';
     GeneratorRoutingModule,
     ChartsModule,
     BsDropdownModule,
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    ProgressbarModule.forRoot()
   ],
   declarations: [ GeneratorComponent ]
 })
