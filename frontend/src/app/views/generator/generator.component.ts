@@ -15,7 +15,10 @@ export class GeneratorComponent implements OnInit {
   max: number = 5;
   dynamic: number = 1;
 
-  clusterTypes = ['../../../assets/img/hwx/icon-hdp.png', '../../../assets/img/hwx/icon-dataflow.png', '../../../assets/img/hwx/hdf-hdp-connected.png'];
+  clusterTypes = ['../../../assets/img/hwx/icon-hdp.png',
+                  '../../../assets/img/hwx/icon-dataflow.png',
+                  '../../../assets/img/hwx/hdf-hdp-connected-sq2.png'
+  ];
   showClusterTypes = true;
   showRecipes = false;
   showOptions = false;
