@@ -19,3 +19,18 @@ services:
       - /data/db:/data/db
     ports:
       - 27017:27017
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: pg_pass123!
+    volumes:
+      - /data/pg:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080

@@ -1,0 +1,19 @@
+<div class="row animated fadeIn" *ngIf="showLibraryItems">
+  <div class="col-sm-6 col-md-4" *ngFor="let recipe of recipes">
+      <div class="brand-card" (click)="displayItem(recipe._id)">
+          <div class="brand-card-header">
+              <img src='../../../assets/img/hwx/metron-logo.png' height=90% >
+          </div>
+          <div class="card-body">
+              {{ recipe.description }}
+          </div>
+      </div>
+  </div>
+  <!--<button class="btn btn-block btn-primary" (click)="addRecipes()">Add Selected</button>-->
+</div>
+
+<div class="row animated fadeIn" *ngIf="showItemDetails">
+  <div>{{ selectedRecipeCode }}</div>&nbsp;
+  <div width="500px"><button class="btn btn-block btn-primary" (click)="displayLibrary()">Back to Library</button></div>
+  &nbsp;&nbsp;<div width="500px"><a href="../../../assets/perso-detection-blueprint.json"><button class="btn btn-block btn-primary" (click)="displayLibrary()">Download Bundle</button></a></div>
+</div>

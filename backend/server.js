@@ -12,19 +12,19 @@ app.use(bodyParser.json());
 
 const connection = mongoose.connection;
 
-function connectWithRetry() {
-    mongoose.connect('mongodb://mongo/recipes').then(
+function connectWithRetry(url) {
+    mongoose.connect(url).then(
         () => { connection.once('open', () => {
-                    console.log('MongoDB database connection established successfully!');
+                    console.log('MongoDB database connection to ' + url + ' established successfully!');
                 });},
         err => { 
-            console.log('Could not connect to DB. Retrying in 5 seconds.');
-            setTimeout(connectWithRetry, 5000);
+            console.log('Could not connect to ' + url + ' - Retrying in 5 seconds.');
+            setTimeout(connectWithRetry.bind(null, url), 5000);
         }
     );        
 };
 
-connectWithRetry();
+connectWithRetry('mongodb://mongo/recipes');
 
 
 router.route('/recipes').get((req, res) => {
@@ -37,7 +37,7 @@ router.route('/recipes').get((req, res) => {
 });
 
 router.route('/recipes/:id').get((req, res) => {
-    Issue.findById(req.params.id, (err, recipe) => {
+    Recipe.findById(req.params.id, (err, recipe) => {
         if (err)
             console.log(err);
         else

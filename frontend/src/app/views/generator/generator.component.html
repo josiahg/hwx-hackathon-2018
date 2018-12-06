@@ -9,7 +9,7 @@
   <div class="row animated fadeIn" *ngIf="showClusterTypes">
       <div class="col-sm-6 col-md-4" *ngFor="let type of clusterTypes">
           <div class="card" (click)="clusterTypeSelect()">
-            <a href="#">
+            <a href='#/generator'>
               <div class="card-body">
                   <img src={{type}} width=100%>
               </div>
@@ -33,6 +33,7 @@
     <button class="btn btn-block btn-primary" (click)="setSize()">Set size</button>
   </div>
   <div class="row animated fadeIn" *ngIf="showRecipes">
+      <h1>Select Service</h1> <!-- mandatory components will not be selectable-->
       <div class="col-sm-6 col-md-4" *ngFor="let recipe of recipes">
           <div class="card">
               <div class="card-header">

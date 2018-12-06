@@ -1,5 +1,10 @@
 export const navItems = [
   {
+    name: 'Library',
+    url: '/library',
+    icon:'icon-notebook'
+  },
+  {
     name: 'Generator',
     url: '/generator',
     icon: 'icon-puzzle'

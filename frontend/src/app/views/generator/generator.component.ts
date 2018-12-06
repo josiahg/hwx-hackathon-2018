@@ -33,7 +33,7 @@ export class GeneratorComponent implements OnInit {
   constructor(private recipeService: RecipeService) {}
 
   ngOnInit(): void {
-    this.fetchRecipes();
+    //this.fetchRecipes();
   }
 
   fetchRecipes(){
