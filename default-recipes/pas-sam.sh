@@ -1,0 +1,7 @@
+mysql --execute="CREATE DATABASE streamline DEFAULT CHARACTER SET utf8"
+mysql --execute="GRANT ALL PRIVILEGES ON *.* TO 'streamline'@'localhost'"
+mysql --execute="GRANT ALL PRIVILEGES ON *.* TO 'streamline'@'%'"
+mysql --execute="GRANT ALL PRIVILEGES ON *.* TO 'streamline'@'localhost' WITH GRANT OPTION"
+mysql --execute="GRANT ALL PRIVILEGES ON streamline.* TO 'streamline'@'%' WITH GRANT OPTION"
+mysql --execute="FLUSH PRIVILEGES"
+mysql --execute="COMMIT"
