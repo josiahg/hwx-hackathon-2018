@@ -6,9 +6,9 @@
 # Overview
 
 Cloudbreak Cuisine is a self contained application allowing easier use of Hortonworks Cloudbreak, by offering the following functionalities:
-[x] Choose from a Library Of Pre-Built Blueprints & Recipes combinations (a.k.a. Bundles)
-[x] Generate your own Bundles
-[ ] Deploy your Bundles
+- [x] Choose from a Library Of Pre-Built Blueprints & Recipes combinations (a.k.a. Bundles)
+- [x] Generate your own Bundles
+- [ ] Deploy your Bundles
 
 # Installation 
 
