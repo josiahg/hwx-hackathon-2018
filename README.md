@@ -1,6 +1,16 @@
-# HWX Hackathon 2018
+# Cloudbreak Cuisine v0.1
 
-# Running The Generator
+![Cloudbreak Cuisine](http://url/to/img.png)
+
+
+# Overview
+
+Cloudbreak Cuisine is a self contained application allowing easier use of Hortonworks Cloudbreak, by offering the following functionalities:
+* Choose from a Library Of Pre-Built Blueprints & Recipes combinations (a.k.a. Bundles)
+* Generate your own Bundles
+* Deploy your Bundles
+
+# Installation 
 
 ## Create A Local Storage Location for Mongo
 ``` bash
@@ -29,3 +39,9 @@ docker-compose up
 ## Have Fun!
 
 Open a browser to [<http://localhost:3000/>](http://localhost:3000/)
+
+
+# Authors
+
+* **Josiah Goodson** - *Initial work* - [LinkedIn](https://www.linkedin.com/in/josiahgoodson/)
+* **Paul Vidal** - *Initial work* - [LinkedIn](https://www.linkedin.com/in/paulvid/)
