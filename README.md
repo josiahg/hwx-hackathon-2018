@@ -1,6 +1,6 @@
 # Cloudbreak Cuisine v0.1
 
-<img src="https://github.com/josiahg/hwx-hackathon-2018/blob/master/CLOUBREAK_CUISINE_LOGO.png" width="500" height="500">
+<img src="https://github.com/josiahg/hwx-hackathon-2018/blob/master/CLOUBREAK_CUISINE_LOGO.png" width="500" height="500" align="middle">
 
 # Overview
 
