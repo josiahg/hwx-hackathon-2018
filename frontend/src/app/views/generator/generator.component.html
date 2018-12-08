@@ -8,10 +8,10 @@
   </div>
   <div class="row animated fadeIn" *ngIf="showClusterTypes">
       <div class="col-sm-6 col-md-4" *ngFor="let type of clusterTypes">
-          <div class="card" (click)="clusterTypeSelect()">
+          <div class="card" (click)="clusterTypeSelect(type.id)">
             <a href='#/generator'>
               <div class="card-body">
-                  <img src={{type}} width=100%>
+                  <img src={{type.img}} width=100%>
               </div>
             </a>
           </div>
@@ -32,24 +32,27 @@
     </div>
     <button class="btn btn-block btn-primary" (click)="setSize()">Set size</button>
   </div>
-  <div class="row animated fadeIn" *ngIf="showRecipes">
-      <h1>Select Service</h1> <!-- mandatory components will not be selectable-->
-      <div class="col-sm-6 col-md-4" *ngFor="let recipe of recipes">
+  <div class="row animated fadeIn" *ngIf="showServices">
+      <!-- <h1>Select Services</h1> mandatory components will not be selectable-->
+      <div class="col-sm-6 col-md-4" *ngFor="let service of services">
           <div class="card">
               <div class="card-header">
-                  {{ recipe.name }}
-                  <label class="switch switch-pill switch-success float-right">
-                      <input type="checkbox" class="switch-input">
+                  {{ service.service_description }}
+                  <label class="switch switch-pill switch-success float-right" *ngIf="!service.mandatory">
+                      <input type="checkbox" class="switch-input"  (click)="updateServiceSelected(service.id)">
+                      <span class="switch-slider"></span>
+                  </label>
+                  <label class="switch switch-pill switch-success float-right" *ngIf="service.mandatory">
+                      <input [attr.disabled]="true" type="checkbox" class="switch-input" checked>
                       <span class="switch-slider"></span>
                   </label>
               </div>
-              <div class="card-body">
-                  {{ recipe.description }}
-                  <i class="cui-code float-right"></i>
-              </div>
+              <!--<div class="card-body">
+                  Should we add a description?
+              </div>-->
           </div>
       </div>
-      <button class="btn btn-block btn-primary" (click)="addRecipes()">Add Selected</button>
+      <button class="btn btn-block btn-primary" (click)="addServices()">Add Selected</button>
   </div>
   <div class="row animated fadeIn" *ngIf="showOptions">
       <h1>Additional Options</h1>

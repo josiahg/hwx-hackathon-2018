@@ -13,6 +13,7 @@ services:
       - 4000:4000
     links:
       - mongo
+      - db
   mongo:
     image: mongo
     volumes:

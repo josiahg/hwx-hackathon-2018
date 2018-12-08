@@ -10,13 +10,13 @@ export const navItems = [
     icon: 'icon-puzzle'
   },
   {
+    name: 'Add Extras',
+    url: '/create',
+    icon: 'cui-pencil'
+  },
+  {
     name: 'Settings',
     url: '/settings',
     icon: 'icon-settings'
-  },
-  {
-    name: 'Add Recipe',
-    url: '/create',
-    icon: 'cui-pencil'
   }
 ];
