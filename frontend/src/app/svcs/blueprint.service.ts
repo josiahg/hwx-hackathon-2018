@@ -5,9 +5,22 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class BlueprintService {
-  uri = 'http://localhost:4000';
+  //uri = 'http://backend:4000';
 
   constructor(private http: HttpClient) { }
+
+  getAbsoluteDomainUrl(): string {
+    if (window
+        && "location" in window
+        && "protocol" in window.location
+        && "host" in window.location) {
+          console.log("HOSTNAME ", window.location.hostname);
+        return window.location.protocol + "//" + window.location.hostname;
+    }
+    return null;
+  }
+
+  uri = this.getAbsoluteDomainUrl() + ':4000';
 
   getBlueprints() {
     return this.http.get(`${this.uri}/components_blueprints`);
