@@ -10,6 +10,10 @@ const router = express.Router();
 app.use(cors());
 app.use(bodyParser.json());
 
+var pgp = require('pg-promise')({});
+var db = pgp('postgres://postgres:pg_pass123!@db:5432/postgres');
+    
+
 const connection = mongoose.connection;
 
 function connectWithRetry(url) {
@@ -26,6 +30,85 @@ function connectWithRetry(url) {
 
 connectWithRetry('mongodb://mongo/recipes');
 
+router.route('/cluster').get((req,res) => {
+    db.any('select * from cloudbreak_cuisine.clusters')
+    .then(data => {
+        res.json(data);
+    })
+    .catch(error => {
+        console.log('ERROR:', error)
+    })
+});
+
+router.route('/cluster/:id').get((req,res) => {
+    db.any('select * from cloudbreak_cuisine.clusters where id = ' + req.params.id)
+    .then(data => {
+        res.json(data);
+    })
+    .catch(error => {
+        console.log('ERROR:', error)
+    })
+});
+
+router.route('/services').get((req, res) => {
+    db.any('select * from cloudbreak_cuisine.services')
+    .then(data => {
+        res.json(data);
+    })
+    .catch(error => {
+        console.log('ERROR:', error)
+    })
+});
+
+router.route('/services/:id').get((req, res) => {
+    db.any('select * from cloudbreak_cuisine.services where associated_cluster = ' + req.params.id + ' order by mandatory, service_description')
+    .then(data => {
+        res.json(data);
+    })
+    .catch(error => {
+        console.log('ERROR:', error)
+    })
+});
+
+router.route('/services/:id/mandatory').get((req, res) => {
+    db.any('select * from cloudbreak_cuisine.services where associated_cluster = ' + req.params.id + ' and mandatory = 1')
+    .then(data => {
+        res.json(data);
+    })
+    .catch(error => {
+        console.log('ERROR:', error)
+    })
+});
+
+router.route('/components_blueprints').get((req, res) => {
+    db.any('select * from cloudbreak_cuisine.components_blueprints')
+    .then(data => {
+        res.json(data);
+    })
+    .catch(error => {
+        console.log('ERROR:', error)
+    })
+});
+
+router.route('/components_blueprints/:id').get((req, res) => {
+    db.any('select * from cloudbreak_cuisine.components_blueprints where id = ' + req.params.id)
+    .then(data => {
+        res.json(data);
+    })
+    .catch(error => {
+        console.log('ERROR:', error)
+    })
+});
+
+router.route('/components_blueprints/service/:id').get((req, res) => {
+    db.any('select * from cloudbreak_cuisine.components_blueprints where service_id = ' + req.params.id)
+    .then(data => {
+        res.json(data);
+    })
+    .catch(error => {
+        console.log('ERROR:', error)
+    })
+});
 
 router.route('/recipes').get((req, res) => {
     Recipe.find((err, recipes) => {

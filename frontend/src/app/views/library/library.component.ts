@@ -36,6 +36,7 @@ export class LibraryComponent implements OnInit {
   selectedRecipeCode = "some code"
 
   selectedRecipe: any = {};
+  rec: Recipe;
 
   displayLibrary() {
     this.showLibraryItems = true;
@@ -48,7 +49,8 @@ export class LibraryComponent implements OnInit {
     console.log('Clicked item ' + id);
     this.recipeService.getRecipeById(id).subscribe(res => {
       this.selectedRecipe = res;
-      console.log(res.code);
+      this.rec = (res as Recipe);
+      console.log(this.rec.code);
       //this.selectedRecipeCode = res.code;
     })
   }

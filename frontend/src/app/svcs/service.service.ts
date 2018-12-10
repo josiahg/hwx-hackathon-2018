@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class RecipeService {
+export class ServiceService {
 
   //uri = 'http://backend:4000';
 
@@ -22,20 +22,11 @@ export class RecipeService {
 
   uri = this.getAbsoluteDomainUrl() + ':4000';
 
-  getRecipes() {
-    return this.http.get(`${this.uri}/recipes`);
+  getServices() {
+    return this.http.get(`${this.uri}/services`);
   }
 
-  getRecipeById(id) {
-    return this.http.get(`${this.uri}/recipes/${id}`);
-  }
-
-  addRecipe(name, description, code){
-    const recipe = {
-      name: name,
-      description: description,
-      code: code
-    };
-    return this.http.post(`${this.uri}/recipes/add`, recipe);
+  getServiceById(id) {
+    return this.http.get(`${this.uri}/services/${id}`);
   }
 }

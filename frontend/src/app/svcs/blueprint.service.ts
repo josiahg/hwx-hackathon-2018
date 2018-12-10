@@ -4,8 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class RecipeService {
-
+export class BlueprintService {
   //uri = 'http://backend:4000';
 
   constructor(private http: HttpClient) { }
@@ -15,6 +14,7 @@ export class RecipeService {
         && "location" in window
         && "protocol" in window.location
         && "host" in window.location) {
+          console.log("HOSTNAME ", window.location.hostname);
         return window.location.protocol + "//" + window.location.hostname;
     }
     return null;
@@ -22,20 +22,15 @@ export class RecipeService {
 
   uri = this.getAbsoluteDomainUrl() + ':4000';
 
-  getRecipes() {
-    return this.http.get(`${this.uri}/recipes`);
+  getBlueprints() {
+    return this.http.get(`${this.uri}/components_blueprints`);
   }
 
-  getRecipeById(id) {
-    return this.http.get(`${this.uri}/recipes/${id}`);
+  getBlueprintById(id) {
+    return this.http.get(`${this.uri}/components_blueprints/${id}`);
   }
 
-  addRecipe(name, description, code){
-    const recipe = {
-      name: name,
-      description: description,
-      code: code
-    };
-    return this.http.post(`${this.uri}/recipes/add`, recipe);
+  getBlueprintsForService(id) {
+    return this.http.get(`${this.uri}/components_blueprints/service/${id}`);
   }
 }
