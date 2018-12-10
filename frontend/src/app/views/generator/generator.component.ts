@@ -12,9 +12,29 @@ import { BlueprintService } from '../../svcs/blueprint.service';
 import { Service } from '../../svcs/service.model';
 import { ServiceService } from '../../svcs/service.service';
 
+import * as GenBlueprint from '../../svcs/generated-blueprint.model';
+
 interface ClusterType {
   id: String;
   img: String;
+};
+
+interface HostGroup {
+  name: string;
+  configurations: any[];
+  components: any[];
+  cardinality: string;
+};
+
+interface Configuration {
+  config: String;
+}
+
+interface GenBlueprint {
+  Blueprints: any;
+  //settings: Setting[];
+  configurations: Configuration[];
+  host_groups: HostGroup[];
 };
 
 @Component({
@@ -46,15 +66,29 @@ export class GeneratorComponent implements OnInit {
               private serviceService: ServiceService) {};
 
 
-  public blueprints: Blueprint[];
+  public blueprints: Blueprint[] = [];
   public services: Service[];
 
+  public generated: any[] = [];
+
   selectedServices = new Map<number, boolean>();
+
+  // remove this
+  public host_groups: HostGroup[] = [];
+  public hg_master: HostGroup = {} as HostGroup;
+  public gen_bp: GenBlueprint = {} as GenBlueprint;
+  // /remove this
 
   ngOnInit(): void {
     //this.fetchRecipes();
     this.fetchBlueprintsForService(1);
     console.log(this.blueprints);
+    this.gen_bp.Blueprints = {'blueprint_name': 'test_gen_1', 'stack_name':'HDP', 'stack_version':'3.0'};
+    this.gen_bp.configurations = [];
+    this.hg_master.name = 'master';
+    this.hg_master.cardinality = '1';
+    this.hg_master.components = [];
+    this.gen_bp.host_groups = this.host_groups;
   }
 
   fetchServicesForClusterType(id) {
@@ -71,20 +105,42 @@ export class GeneratorComponent implements OnInit {
     this.blueprintService
     .getBlueprintsForService(id)
     .subscribe((data: Blueprint[]) => {
-      this.blueprints = data;
       console.log('Blueprint data requested ... ');
-      console.log(this.blueprints);
+      //console.log('Data', data);
+      data.forEach(bp => {
+        this.generated.push(bp)
+        this.hg_master.components.push(bp.master_blueprint)
+      })
+      //console.log('generated: ', this.generated)
+
+      this.hg_master.components = this.hg_master.components.filter((el, i, a) => i === a.indexOf(el)); //dedupe the array
     })
   }
+
+  genBlueprint() {
+    this.host_groups.push(this.hg_master);
+    this.gen_bp.host_groups = this.host_groups;
+    console.log(this.gen_bp);
+    console.log(JSON.stringify(this.gen_bp))
+  }
+
+  /*parseMasterBlueprints() {
+    this.hg_master.name = "master";
+    this.hg_master.components = [];
+    this.blueprints.forEach((value: Blueprint) => {
+      console.log("master_blu: ", value.master_blueprint);
+      this.hg_master.components.push(value.master_blueprint);
+    })
+    console.log(JSON.stringify(this.host_groups));
+  }*/
 
   fetchNeededBlueprints() {
     console.log("Fetching blueprints...");
     Object.keys(this.selectedServices).forEach(svc => {
-      console.log(svc, this.selectedServices[svc])
       if(this.selectedServices[svc]) {
-        this.fetchBlueprintsForService(svc)
+        this.fetchBlueprintsForService(svc);
       }
-    })
+    });
   }
 
   fetchRecipes(){
@@ -114,7 +170,7 @@ export class GeneratorComponent implements OnInit {
 
   updateServiceSelected(id) {
     this.selectedServices[id] = !this.selectedServices[id];
-    console.log("Servics: ", JSON.stringify(this.selectedServices));
+    //console.log("Servics: ", JSON.stringify(this.selectedServices));
   }
 
   setSize() {
@@ -141,5 +197,6 @@ export class GeneratorComponent implements OnInit {
     this.showGenerate = false;
     this.showClusterTypes = true;
     this.dynamic = 1;
+    this.genBlueprint();
   }
 }

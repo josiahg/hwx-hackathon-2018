@@ -50,6 +50,10 @@ router.route('/cluster/:id').get((req,res) => {
     })
 });
 
+router.route('/call_cloudbreak').get((req, res) => {
+    res.json('Hi paul');
+});
+
 router.route('/services').get((req, res) => {
     db.any('select * from cloudbreak_cuisine.services')
     .then(data => {

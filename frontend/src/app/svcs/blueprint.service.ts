@@ -33,4 +33,10 @@ export class BlueprintService {
   getBlueprintsForService(id) {
     return this.http.get(`${this.uri}/components_blueprints/service/${id}`);
   }
+
+  generateBlueprintForServices(ids: any[]) {
+    ids.forEach(value => {
+      console.log(value);
+    })
+  }
 }
