@@ -1,4 +1,5 @@
 import { Component, OnInit, NgModule } from '@angular/core';
+import { JsonPipe } from '@angular/common'
 import { Router } from '@angular/router'
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
@@ -13,10 +14,15 @@ import { Service } from '../../svcs/service.model';
 import { ServiceService } from '../../svcs/service.service';
 
 import * as GenBlueprint from '../../svcs/generated-blueprint.model';
+import { BsComponentRef } from 'ngx-bootstrap/component-loader/public_api';
 
 interface ClusterType {
   id: String;
   img: String;
+};
+
+interface BPComp {
+  name: string;
 };
 
 interface HostGroup {
@@ -75,7 +81,9 @@ export class GeneratorComponent implements OnInit {
 
   // remove this
   public host_groups: HostGroup[] = [];
-  public hg_master: HostGroup = {} as HostGroup;
+  public hg_master: HostGroup = { 'name':'master', 'cardinality':'1', 'components':[] } as HostGroup;
+  public hg_worker: HostGroup = { 'name':'worker', 'cardinality':'1+', 'components':[] } as HostGroup;
+  public hg_compute: HostGroup = { 'name':'compute', 'cardinality':'1+', 'components':[] } as HostGroup;
   public gen_bp: GenBlueprint = {} as GenBlueprint;
   // /remove this
 
@@ -85,9 +93,9 @@ export class GeneratorComponent implements OnInit {
     console.log(this.blueprints);
     this.gen_bp.Blueprints = {'blueprint_name': 'test_gen_1', 'stack_name':'HDP', 'stack_version':'3.0'};
     this.gen_bp.configurations = [];
-    this.hg_master.name = 'master';
+    /*this.hg_master.name = 'master';
     this.hg_master.cardinality = '1';
-    this.hg_master.components = [];
+    this.hg_master.components = [];*/
     this.gen_bp.host_groups = this.host_groups;
   }
 
@@ -101,6 +109,11 @@ export class GeneratorComponent implements OnInit {
     })
   }
 
+  stringToBPComp(str): BPComp {
+    let obj = JSON.parse(str);
+    return obj as BPComp;
+  }
+
   fetchBlueprintsForService(id) {
     this.blueprintService
     .getBlueprintsForService(id)
@@ -109,16 +122,42 @@ export class GeneratorComponent implements OnInit {
       //console.log('Data', data);
       data.forEach(bp => {
         this.generated.push(bp)
-        this.hg_master.components.push(bp.master_blueprint)
+        if(bp.master_blueprint.length > 0) {
+          // console.log('BPComp:',this.stringToBPComp(bp.master_blueprint));
+          this.hg_master.components.push(this.stringToBPComp(bp.master_blueprint))
+        }
+        if(bp.worker_blueprint.length > 0) {
+          // console.log('BPComp:',this.stringToBPComp(bp.worker_blueprint));
+          this.hg_worker.components.push(this.stringToBPComp(bp.worker_blueprint))
+        }
+        if(bp.compute_blueprint.length > 0) {
+          // console.log('BPComp:',this.stringToBPComp(bp.compute_blueprint));
+          this.hg_compute.components.push(this.stringToBPComp(bp.compute_blueprint))
+        }
       })
-      //console.log('generated: ', this.generated)
-
-      this.hg_master.components = this.hg_master.components.filter((el, i, a) => i === a.indexOf(el)); //dedupe the array
+      // Dedupe the lists of components
+      this.hg_master.components = this.hg_master.components.filter((thing, index, self) =>
+        index === self.findIndex((t) => (
+          t.name === thing.name && t.name === thing.name
+        ))
+      )
+      this.hg_worker.components = this.hg_worker.components.filter((thing, index, self) =>
+        index === self.findIndex((t) => (
+          t.name === thing.name && t.name === thing.name
+        ))
+      )
+      this.hg_compute.components = this.hg_compute.components.filter((thing, index, self) =>
+        index === self.findIndex((t) => (
+          t.name === thing.name && t.name === thing.name
+        ))
+      )
     })
   }
 
   genBlueprint() {
     this.host_groups.push(this.hg_master);
+    this.host_groups.push(this.hg_worker);
+    this.host_groups.push(this.hg_compute);
     this.gen_bp.host_groups = this.host_groups;
     console.log(this.gen_bp);
     console.log(JSON.stringify(this.gen_bp))
