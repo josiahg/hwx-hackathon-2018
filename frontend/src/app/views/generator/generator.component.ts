@@ -32,14 +32,14 @@ interface HostGroup {
   cardinality: string;
 };
 
-interface Configuration {
-  config: String;
+interface BPConfiguration {
+  config: object;
 }
 
 interface GenBlueprint {
   Blueprints: any;
   //settings: Setting[];
-  configurations: Configuration[];
+  configurations: BPConfiguration[];
   host_groups: HostGroup[];
 };
 
@@ -79,13 +79,12 @@ export class GeneratorComponent implements OnInit {
 
   selectedServices = new Map<number, boolean>();
 
-  // remove this
   public host_groups: HostGroup[] = [];
   public hg_master: HostGroup = { 'name':'master', 'cardinality':'1', 'components':[] } as HostGroup;
   public hg_worker: HostGroup = { 'name':'worker', 'cardinality':'1+', 'components':[] } as HostGroup;
   public hg_compute: HostGroup = { 'name':'compute', 'cardinality':'1+', 'components':[] } as HostGroup;
   public gen_bp: GenBlueprint = {} as GenBlueprint;
-  // /remove this
+  public configurations: BPConfiguration[] = [];
 
   ngOnInit(): void {
     //this.fetchRecipes();
@@ -93,9 +92,6 @@ export class GeneratorComponent implements OnInit {
     console.log(this.blueprints);
     this.gen_bp.Blueprints = {'blueprint_name': 'test_gen_1', 'stack_name':'HDP', 'stack_version':'3.0'};
     this.gen_bp.configurations = [];
-    /*this.hg_master.name = 'master';
-    this.hg_master.cardinality = '1';
-    this.hg_master.components = [];*/
     this.gen_bp.host_groups = this.host_groups;
   }
 
@@ -134,6 +130,10 @@ export class GeneratorComponent implements OnInit {
           // console.log('BPComp:',this.stringToBPComp(bp.compute_blueprint));
           this.hg_compute.components.push(this.stringToBPComp(bp.compute_blueprint))
         }
+        if(bp.config.length > 0) {
+          // console.log('BPComp:',this.stringToBPComp(bp.master_blueprint));
+          //this.configurations.push(bp.config);
+        }
       })
       // Dedupe the lists of components
       this.hg_master.components = this.hg_master.components.filter((thing, index, self) =>
@@ -162,16 +162,6 @@ export class GeneratorComponent implements OnInit {
     console.log(this.gen_bp);
     console.log(JSON.stringify(this.gen_bp))
   }
-
-  /*parseMasterBlueprints() {
-    this.hg_master.name = "master";
-    this.hg_master.components = [];
-    this.blueprints.forEach((value: Blueprint) => {
-      console.log("master_blu: ", value.master_blueprint);
-      this.hg_master.components.push(value.master_blueprint);
-    })
-    console.log(JSON.stringify(this.host_groups));
-  }*/
 
   fetchNeededBlueprints() {
     console.log("Fetching blueprints...");
