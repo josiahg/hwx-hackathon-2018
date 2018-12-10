@@ -16,6 +16,9 @@ import { ServiceService } from '../../svcs/service.service';
 import * as GenBlueprint from '../../svcs/generated-blueprint.model';
 import { BsComponentRef } from 'ngx-bootstrap/component-loader/public_api';
 
+import { Cluster } from '../../svcs/cluster.model';
+import { ClusterService } from '../../svcs/cluster.service';
+
 interface ClusterType {
   id: String;
   img: String;
@@ -48,6 +51,11 @@ interface GenBlueprint {
 })
 export class GeneratorComponent implements OnInit {
 
+  constructor(private recipeService: RecipeService,
+    private blueprintService: BlueprintService,
+    private serviceService: ServiceService,
+    private clusterService: ClusterService) {};
+
   max: number = 5;
   dynamic: number = 1;
 
@@ -67,11 +75,6 @@ export class GeneratorComponent implements OnInit {
 
   nodeTypes = ['Master', 'Worker'];
 
-  constructor(private recipeService: RecipeService,
-              private blueprintService: BlueprintService,
-              private serviceService: ServiceService) {};
-
-
   public blueprints: Blueprint[] = [];
   public services: Service[];
 
@@ -89,7 +92,7 @@ export class GeneratorComponent implements OnInit {
   ngOnInit(): void {
     //this.fetchRecipes();
     this.fetchBlueprintsForService(1);
-    console.log(this.blueprints);
+    //console.log(this.blueprints);
     this.gen_bp.Blueprints = {'blueprint_name': 'test_gen_1', 'stack_name':'HDP', 'stack_version':'3.0'};
     this.gen_bp.configurations = [];
     this.gen_bp.host_groups = this.host_groups;
@@ -114,7 +117,7 @@ export class GeneratorComponent implements OnInit {
     this.blueprintService
     .getBlueprintsForService(id)
     .subscribe((data: Blueprint[]) => {
-      console.log('Blueprint data requested ... ');
+      //console.log('Blueprint data requested ... ');
       //console.log('Data', data);
       data.forEach(bp => {
         this.generated.push(bp)
@@ -183,9 +186,15 @@ export class GeneratorComponent implements OnInit {
   }
 
   clusterTypeSelect(id) {
-    console.log('Type is ' + id)
+    //console.log('Type is ' + id)
     this.fetchServicesForClusterType(id);
     this.clusterType = id;
+    this.clusterService
+    .getClusterById(id)
+    .subscribe((data: Cluster[]) => {
+      this.gen_bp.Blueprints.stack_version = data[0].version;
+      this.gen_bp.Blueprints.stack_name = data[0].cluster_type;
+    })
     this.showClusterTypes = false;
     this.showSize = true;
     this.dynamic++;

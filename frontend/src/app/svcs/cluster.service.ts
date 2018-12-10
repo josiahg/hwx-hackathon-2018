@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class BlueprintService {
+export class ClusterService {
+
   constructor(private http: HttpClient) { }
 
   getAbsoluteDomainUrl(): string {
@@ -12,7 +13,6 @@ export class BlueprintService {
         && "location" in window
         && "protocol" in window.location
         && "host" in window.location) {
-          //console.log("HOSTNAME ", window.location.hostname);
         return window.location.protocol + "//" + window.location.hostname;
     }
     return null;
@@ -20,21 +20,11 @@ export class BlueprintService {
 
   uri = this.getAbsoluteDomainUrl() + ':4000';
 
-  getBlueprints() {
-    return this.http.get(`${this.uri}/components_blueprints`);
+  getClusters() {
+    return this.http.get(`${this.uri}/cluster`);
   }
 
-  getBlueprintById(id) {
-    return this.http.get(`${this.uri}/components_blueprints/${id}`);
-  }
-
-  getBlueprintsForService(id) {
-    return this.http.get(`${this.uri}/components_blueprints/service/${id}`);
-  }
-
-  generateBlueprintForServices(ids: any[]) {
-    ids.forEach(value => {
-      console.log(value);
-    })
+  getClusterById(id) {
+    return this.http.get(`${this.uri}/cluster/${id}`);
   }
 }
