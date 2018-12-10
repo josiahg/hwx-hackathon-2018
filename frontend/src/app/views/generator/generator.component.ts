@@ -160,7 +160,7 @@ export class GeneratorComponent implements OnInit {
     })
   }
 
-  genBlueprint() {
+  genBlueprint(name) {
     this.host_groups.push(this.hg_master);
     this.host_groups.push(this.hg_worker);
     this.host_groups.push(this.hg_compute);
@@ -168,7 +168,7 @@ export class GeneratorComponent implements OnInit {
     console.log(this.gen_bp);
     console.log(JSON.stringify(this.gen_bp))
     this.filewriterService
-    .writeFile('bp-cluster_name',btoa(JSON.stringify(this.gen_bp)))
+    .writeFile('bp-' + name,btoa(JSON.stringify(this.gen_bp)))
     .subscribe(data => {
       console.log('Write result: ',data);
     });
@@ -239,10 +239,10 @@ export class GeneratorComponent implements OnInit {
     this.dynamic++;
   }
 
-  genBundle() {
+  genBundle(name) {
     this.showGenerate = false;
     this.showClusterTypes = true;
     this.dynamic = 1;
-    this.genBlueprint();
+    this.genBlueprint(name);
   }
 }

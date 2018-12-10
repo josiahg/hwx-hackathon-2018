@@ -5,6 +5,7 @@
 /dist-server
 /tmp
 /out-tsc
+bp-*.json
 
 # dependencies
 /node_modules
