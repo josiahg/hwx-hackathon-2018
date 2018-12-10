@@ -1,6 +1,6 @@
 -- CREATE DB
 
-CREATE SCHEMA cloudbreak_cuisine;
+--CREATE SCHEMA cloudbreak_cuisine;
 
 -- CREATE TABLES
 DROP TABLE IF EXISTS cloudbreak_cuisine.clusters;
