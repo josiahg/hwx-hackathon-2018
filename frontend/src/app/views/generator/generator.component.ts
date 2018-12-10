@@ -76,7 +76,7 @@ export class GeneratorComponent implements OnInit {
   public recipes: Recipe[];
   displayedColumns = ['name', 'description'];
 
-  nodeTypes = ['Master', 'Worker'];
+  nodeTypes = ['Master', 'Worker', 'Compute'];
 
   public blueprints: Blueprint[] = [];
   public services: Service[];
