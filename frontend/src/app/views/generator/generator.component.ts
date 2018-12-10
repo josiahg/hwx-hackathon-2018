@@ -19,6 +19,8 @@ import { BsComponentRef } from 'ngx-bootstrap/component-loader/public_api';
 import { Cluster } from '../../svcs/cluster.model';
 import { ClusterService } from '../../svcs/cluster.service';
 
+import { FilewriterService } from '../../svcs/filewriter.service'
+
 interface ClusterType {
   id: String;
   img: String;
@@ -54,7 +56,8 @@ export class GeneratorComponent implements OnInit {
   constructor(private recipeService: RecipeService,
     private blueprintService: BlueprintService,
     private serviceService: ServiceService,
-    private clusterService: ClusterService) {};
+    private clusterService: ClusterService,
+    private filewriterService: FilewriterService) {};
 
   max: number = 5;
   dynamic: number = 1;
@@ -164,6 +167,11 @@ export class GeneratorComponent implements OnInit {
     this.gen_bp.host_groups = this.host_groups;
     console.log(this.gen_bp);
     console.log(JSON.stringify(this.gen_bp))
+    this.filewriterService
+    .writeFile('bp-cluster_name',btoa(JSON.stringify(this.gen_bp)))
+    .subscribe(data => {
+      console.log('Write result: ',data);
+    });
   }
 
   fetchNeededBlueprints() {

@@ -14,7 +14,6 @@ var pgp = require('pg-promise')({});
 var db = pgp('postgres://postgres:pg_pass123!@db:5432/postgres');
 var request = require('request');
 
-
 const connection = mongoose.connection;
 
 function connectWithRetry(url) {
@@ -204,6 +203,18 @@ router.route('/recipes/delete/:id').get((req, res) => {
             res.json(err);
         else
             res.json('Removed successfully');
+    });
+});
+
+router.route('/filewriter/:filename/:contents').get((req, res) => {
+    var fs = require("fs");
+    var fileContent = Buffer.from(req.params.contents,'base64').toString();//atob(req.params.contents);
+    
+    fs.writeFile('./' + req.params.filename + '.json',fileContent, (err) => {
+        if (err) 
+            res.json(err);
+        else
+            res.json('File created');
     });
 });
 
