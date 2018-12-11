@@ -208,7 +208,7 @@ router.route('/recipes/delete/:id').get((req, res) => {
 
 router.route('/filewriter/:filename/:contents').get((req, res) => {
     var fs = require("fs");
-    var fileContent = Buffer.from(req.params.contents,'base64').toString();//atob(req.params.contents);
+    var fileContent = Buffer.from(req.params.contents,'base64').toString();
     
     fs.writeFile('./' + req.params.filename + '.json',fileContent, (err) => {
         if (err) 
