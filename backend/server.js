@@ -53,7 +53,81 @@ router.route('/cluster/:id').get((req, res) => {
 });
 
 
-router.get('/load_blueprint/:cb_url/:cluster_name/:bp_base64/:token', function (req, res) {
+router.get('/get_token/:username/:password/:cb_url', function(req, res){ 
+
+    // process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0; 
+
+    // var request = require("request");
+
+    // var options = { method: 'POST',
+    //   url: 'https://192.168.56.100/identity/oauth/authorize',
+    //   qs: 
+    //    { 'response_type': 'token',
+    //      'client_id': 'cloudbreak_shell',
+    //      'scope.0': 'openid',
+    //      'source': 'login',
+    //      'redirect_uri': 'http://cloudbreak.shell' },
+    //   headers: 
+    //    { 'accept': 'application/x-www-form-urlencoded' },
+    //   data: 'credentials={"username":"pvidal@hortonworks.com","password":"HWseftw33#"}' };
+    
+    // request(options, function (error, response, body) {
+    //   if (error) throw new Error(error);
+    //   //res.send(body);
+    //   var token = JSON.stringify(response);
+    //   res.send(token);
+    // });
+
+    var exec = require('child_process').exec;
+
+    function puts(error, stdout, stderr) { sys.puts(stdout) }
+    exec("curl -k -iX POST -H \"accept: application/x-www-form-urlencoded\" -d 'credentials={\"username\":\""+req.params.username +"\",\"password\":\""+req.params.password +"\"}' \"https://"+req.params.cb_url +"/identity/oauth/authorize?response_type=token&client_id=cloudbreak_shell&scope.0=openid&source=login&redirect_uri=http://cloudbreak.shell\" | grep location | cut -d'=' -f 3 | cut -d'&' -f 1", function(error, stdout, stderr) {
+        if (!error) {
+            res.send(stdout);
+        } else {
+            res.send('ERROR: ' + stderr);
+        }
+    });
+    
+})
+
+
+
+router.get('/load_recipe/:cb_url/:recipe_name/:recipe_type/:recipe_base64/:token', function(req, res){ 
+
+    process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+
+    var request = require("request");
+
+    var options = {
+        method: 'POST',
+        url: 'https://' + req.params.cb_url + '/cb/api/v1/recipes/user',
+        headers:
+        {
+            'cache-control': 'no-cache',
+            Authorization: 'Bearer ' + req.params.token,
+            'Content-Type': 'application/json'
+        },
+        body:
+        {
+            name: '' + req.params.recipe_name,
+            description: '' + req.params.recipe_type + 'recipe: ' + req.params.cluster_name,
+            recipeType: '' + req.params.recipe_type,
+            content: ''+ req.params.recipe_base64,
+            uri: ''
+        },
+        json: true
+    };
+
+    request(options, function (error, response, body) {
+        if (error) throw new Error(error);
+
+        res.send(body)
+    });
+
+})
+
+router.get('/load_blueprint/:cb_url/:cluster_name/:bp_base64/:token', function(req, res){ 
 
     process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
@@ -87,6 +161,7 @@ router.get('/load_blueprint/:cb_url/:cluster_name/:bp_base64/:token', function (
 
         res.send(body)
     });
+
 
 })
 
