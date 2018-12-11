@@ -37,14 +37,10 @@ interface HostGroup {
   cardinality: string;
 };
 
-interface BPConfiguration {
-  config: object;
-}
-
 interface GenBlueprint {
   Blueprints: any;
   //settings: Setting[];
-  configurations: BPConfiguration[];
+  configurations: any;
   host_groups: HostGroup[];
 };
 
@@ -90,7 +86,6 @@ export class GeneratorComponent implements OnInit {
   public hg_worker: HostGroup = { 'name':'worker', 'cardinality':'1+', 'components':[] } as HostGroup;
   public hg_compute: HostGroup = { 'name':'compute', 'cardinality':'1+', 'components':[] } as HostGroup;
   public gen_bp: GenBlueprint = {} as GenBlueprint;
-  public configurations: BPConfiguration[] = [];
 
   ngOnInit(): void {
     //this.fetchRecipes();
@@ -116,6 +111,8 @@ export class GeneratorComponent implements OnInit {
     return obj as BPComp;
   }
 
+  public oneBigConf: string[] = [];
+
   fetchBlueprintsForService(id) {
     this.blueprintService
     .getBlueprintsForService(id)
@@ -137,8 +134,8 @@ export class GeneratorComponent implements OnInit {
           this.hg_compute.components.push(this.stringToBPComp(bp.compute_blueprint))
         }
         if(bp.config.length > 0) {
-          // console.log('BPComp:',this.stringToBPComp(bp.master_blueprint));
-          //this.configurations.push(bp.config);
+          //console.log('Bpconfig: ',bp.config)
+          this.oneBigConf.push(bp.config as string)
         }
       })
       // Dedupe the lists of components
@@ -165,7 +162,9 @@ export class GeneratorComponent implements OnInit {
     this.host_groups.push(this.hg_worker);
     this.host_groups.push(this.hg_compute);
     this.gen_bp.host_groups = this.host_groups;
-    console.log(this.gen_bp);
+    this.gen_bp.Blueprints.blueprint_name = name;
+    this.addConfigsToBP();
+    //console.log(this.gen_bp);
     console.log(JSON.stringify(this.gen_bp))
     this.filewriterService
     .writeFile('bp-' + name,btoa(JSON.stringify(this.gen_bp)))
@@ -231,6 +230,18 @@ export class GeneratorComponent implements OnInit {
     this.showOptions = true;
     this.dynamic++;
     this.fetchNeededBlueprints();
+  }
+
+  addConfigsToBP() {
+    // One big, ugly, non-typesafe hack, do not recommend
+    //console.log('final bigconf', this.oneBigConf)
+    let confStr = '{"configurations": [' + this.oneBigConf.join(',') + ']}'
+    //console.log('confStr', confStr)
+    let obj = JSON.parse(confStr)
+    //console.log('obj',obj)
+    obj.configurations.forEach(i => {
+      this.gen_bp.configurations.push(i);
+    })
   }
 
   addOptions() {
