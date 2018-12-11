@@ -69,6 +69,7 @@ DROP TABLE IF EXISTS cloudbreak_cuisine.external_bundles;
 CREATE TABLE cloudbreak_cuisine.external_bundles
 (
   id integer unique NOT NULL PRIMARY KEY,
+  name text,
   description text,
   is_deployment_ready integer,
   image_url text,
@@ -293,6 +294,6 @@ insert into cloudbreak_cuisine.components_recipes values(10,37,'SAM Metastore My
 
 insert into cloudbreak_cuisine.management_packs values(1,3,'HDF MPACK FOR HDP+HDF','http://public-repo-1.hortonworks.com/HDF/amazonlinux2/3.x/updates/3.2.0.0/tars/hdf_ambari_mp/hdf-ambari-mpack-3.2.0.0-520.tar.gz');
 
-
-insert into cloudbreak_cuisine.external_bundles values(1,'Bundle creating a single node HDP cluster with pre-loaded Data Science Workshop Notebooks',0,'https://raw.githubusercontent.com/paulvid/hwx-data-science-workshop/master/HWX_LOGO.png','https://github.com/paulvid/hwx-data-science-workshop.git');
-insert into cloudbreak_cuisine.external_bundles values(2,'Bundle creating a 3 node HDP & HDF Cluster for personality recognition demo',0,'https://raw.githubusercontent.com/paulvid/perso-detection-demo/master/PERSO_RECOG_DEMO.png','https://github.com/paulvid/perso-detection-demo.git');
+insert into cloudbreak_cuisine.external_bundles values(1,'Data Science Workshop','Bundle creating a single node HDP cluster with pre-loaded Data Science Workshop Notebooks',0,'https://raw.githubusercontent.com/paulvid/hwx-data-science-workshop/master/HWX_LOGO.png','https://github.com/paulvid/hwx-data-science-workshop.git','https://github.com/paulvid/hwx-data-science-workshop/archive/master.zip');
+insert into cloudbreak_cuisine.external_bundles values(2,'Personality Detection','Bundle creating a 3 node HDP & HDF Cluster for personality recognition demo',0,'https://raw.githubusercontent.com/paulvid/perso-detection-demo/master/PERSO_RECOG_DEMO.png','https://github.com/paulvid/perso-detection-demo.git','https://github.com/paulvid/perso-detection-demo/archive/master.zip');
+insert into cloudbreak_cuisine.external_bundles values(3,'HCP (Metron) Cluster','Bundle creating a fully kerberized Metron environment',0,'http://metron.apache.org/img/logo.png','https://github.com/simonellistonball/cloudbreak-hcp/archive/master.zip','https://github.com/simonellistonball/cloudbreak-hcp/archive/master.zip');

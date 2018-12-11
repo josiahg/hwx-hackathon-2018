@@ -1,19 +1,26 @@
 <div class="row animated fadeIn" *ngIf="showLibraryItems">
-  <div class="col-sm-6 col-md-4" *ngFor="let recipe of recipes">
-      <div class="brand-card" (click)="displayItem(recipe._id)">
+  <div class="col-sm-6 col-md-4" *ngFor="let libraryItem of libraryContent">
+      <div class="brand-card" (click)="displayItem(libraryContent._id)">
           <div class="brand-card-header">
-              <img src='../../../assets/img/hwx/metron-logo.png' height=90% >
+                <h3>{{ libraryItem.name }}</h3>
           </div>
-          <div class="card-body">
-              {{ recipe.description }}
+          <div class="card-body" align="middle">
+            <img src="{{libraryItem.image_url}}" style="max-height: 200px; max-width: 200px; width:auto; height:auto">
+            <p></p>
+            <p></p>
+            <p></p>
           </div>
+          <div class="card-footer">
+               
+                  <p>{{ libraryItem.description }}</p>
+                  <a target="_blank" href="{{ libraryItem.image_url }}"><button class="btn btn-block btn-primary" (click)="displayLibrary()">Download Bundle</button></a>
+                  <p></p>
+                  <a target="_blank" href="../../../assets/perso-detection-blueprint.json"><button class="btn btn-block btn-primary" (click)="displayLibrary()" [attr.disabled]="true">Deploy Bundle</button></a>
+                  <p></p>
+                  <a target="_blank" href="../../../assets/perso-detection-blueprint.json"><button class="btn btn-block btn-primary" (click)="displayLibrary()" [attr.disabled]="true">Deploy & Launch Bundle</button></a>
+           
       </div>
   </div>
   <!--<button class="btn btn-block btn-primary" (click)="addRecipes()">Add Selected</button>-->
 </div>
 
-<div class="row animated fadeIn" *ngIf="showItemDetails">
-  <div>{{ selectedRecipeCode }}</div>&nbsp;
-  <div width="500px"><button class="btn btn-block btn-primary" (click)="displayLibrary()">Back to Library</button></div>
-  &nbsp;&nbsp;<div width="500px"><a target="_blank" href="../../../assets/perso-detection-blueprint.json"><button class="btn btn-block btn-primary" (click)="displayLibrary()">Download Bundle</button></a></div>
-</div>

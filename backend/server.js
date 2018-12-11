@@ -226,6 +226,17 @@ router.route('/components_blueprints/service/:id').get((req, res) => {
         })
 });
 
+router.route('/library').get((req, res) => {
+    db.any('select * from cloudbreak_cuisine.external_bundles')
+        .then(data => {
+            res.json(data);
+        })
+        .catch(error => {
+            console.log('ERROR:', error)
+        })
+});
+
+
 router.route('/recipes').get((req, res) => {
     Recipe.find((err, recipes) => {
         if (err)
