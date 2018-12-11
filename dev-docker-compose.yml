@@ -1,0 +1,38 @@
+version: '3.1'
+
+services:
+  #frontend:
+   #image: 'josiahgoodson/hackathon-frontend'
+    #ports:
+     # - 3000:80
+    #links:
+     # - backend
+  backend:
+    image: 'josiahgoodson/hackathon-backend'
+    volumes:
+      - /Users/jgoodson/projects/hwx-hackathon-2018/backend:/usr/src/app
+    ports:
+      - 4000:4000
+    links:
+      - mongo
+      - db
+  mongo:
+    image: mongo
+    volumes:
+      - /data/db:/data/db
+    ports:
+      - 27017:27017
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: pg_pass123!
+    volumes:
+      - /data/pg:/var/lib/postgresql/data
+    ports:
+      - 5432:5432    
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
