@@ -38,7 +38,6 @@ router.route('/cbcreds/set').post((req, res) => {
         })
 });
 
-
 router.route('/cbcreds/delete').post((req, res) => {
     console.log('Trying to delete : ', req.body.cred_id)
     res.json("Done")
