@@ -28,10 +28,11 @@ export class FilewriterService {
   uri = this.getAbsoluteDomainUrl() + ':4000';
 
   writeFile(filename,content) {
-    //console.log('Writer recieved: ', content)
+    console.log('Writer recieved: ', content)
     //return this.http.get(`${this.uri}/filewriter/${filename}/${content}`);
 
-    return this.http.post(`${this.uri}/filewriter`, '{"test":"something"}', httpOptions).subscribe(
+    //return
+    this.http.post(`${this.uri}/filewriter`, content, httpOptions).subscribe(
       (val) => {
         console.log("POST call successful value returned in body",
           val);

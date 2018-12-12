@@ -52,7 +52,7 @@ export class GeneratorComponent implements OnInit {
     private clusterService: ClusterService,
     private filewriterService: FilewriterService) {};
 
-  max: number = 4;
+  max: number = 5;
   dynamic: number = 1;
 
   clusterTypes: ClusterType[] = [{'id':'1','img':'../../../assets/img/hwx/icon-hdp.png', 'description': 'HDP boiiii'},
@@ -162,10 +162,10 @@ export class GeneratorComponent implements OnInit {
     //console.log(this.gen_bp);
     console.log(JSON.stringify(this.gen_bp))
     this.filewriterService
-    .writeFile('bp-' + name,btoa(JSON.stringify(this.gen_bp)))
+    .writeFile('bp-' + name,JSON.stringify(this.gen_bp))//btoa(JSON.stringify(this.gen_bp)))
     /*.subscribe(data => {
       console.log('Write result: ',data);
-    })*/;
+    })*/
   }
 
   fetchNeededBlueprints() {
