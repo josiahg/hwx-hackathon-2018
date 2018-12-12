@@ -159,10 +159,9 @@ export class GeneratorComponent implements OnInit {
     this.gen_bp.host_groups = this.host_groups;
     this.gen_bp.Blueprints.blueprint_name = name;
     this.addConfigsToBP();
-    //console.log(this.gen_bp);
     console.log(JSON.stringify(this.gen_bp))
     this.filewriterService
-    .writeFile('bp-' + name,JSON.stringify(this.gen_bp))//btoa(JSON.stringify(this.gen_bp)))
+    .writeFile(name,JSON.stringify(this.gen_bp))//btoa(JSON.stringify(this.gen_bp)))
     /*.subscribe(data => {
       console.log('Write result: ',data);
     })*/
@@ -234,9 +233,9 @@ export class GeneratorComponent implements OnInit {
   }
 
   genBundle(name) {
-    this.showGenerate = false;
+    /*this.showGenerate = false;
     this.showClusterTypes = true;
-    this.dynamic = 1;
+    this.dynamic = 1;*/
     this.genBlueprint(name);
   }
 }

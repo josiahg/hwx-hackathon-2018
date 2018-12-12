@@ -59,7 +59,8 @@
   <div class="row animated fadeIn" *ngIf="showGenerate">
       <h1>Generate Bundle</h1>
       <input class="form-control" type="text" placeholder="Enter bundle name..." #nameInput>
-      <button class="btn btn-block btn-primary" (click)="genBundle(nameInput.value)">Download Bundle</button>
+      <button class="btn btn-block btn-primary" (click)="genBundle(nameInput.value)">Generate Bundle</button>
+      <button class="btn btn-block btn-primary" (click)="genBundle()" [attr.disabled]="true">Download Bundle</button>
       <button class="btn btn-block btn-primary" (click)="genBundle()" [attr.disabled]="true">Push Bundle</button>
       <button class="btn btn-block btn-primary" (click)="genBundle()" [attr.disabled]="true">Push Bundle & Launch</button>
   </div>

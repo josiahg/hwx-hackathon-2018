@@ -32,7 +32,7 @@ export class FilewriterService {
     //return this.http.get(`${this.uri}/filewriter/${filename}/${content}`);
 
     //return
-    this.http.post(`${this.uri}/filewriter`, content, httpOptions).subscribe(
+    this.http.post(`${this.uri}/filewriter/${filename}`, content, httpOptions).subscribe(
       (val) => {
         console.log("POST call successful value returned in body",
           val);
