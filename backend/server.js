@@ -39,16 +39,15 @@ router.route('/cbcreds/set').post((req, res) => {
 });
 
 router.route('/cbcreds/delete').post((req, res) => {
-    console.log('Trying to delete : ', req.body.cred_id)
-    res.json("Done")
+  
     
-    // db.any('delete from cloudbreak_cuisine.cb_credentials where id='+ req.body.cred_id)
-    //     .then(data => {
-    //         res.json(data);
-    //     })
-    //     .catch(error => {
-    //         console.log('ERROR:', error)
-    //     })
+    db.any('delete from cloudbreak_cuisine.cb_credentials where id='+ req.body.cred_id)
+        .then(data => {
+            res.json("Credential with ID " + req.body.cred_id +" succesfully deleted.");
+        })
+        .catch(error => {
+            console.log('ERROR:', error)
+        })
 });
 
 

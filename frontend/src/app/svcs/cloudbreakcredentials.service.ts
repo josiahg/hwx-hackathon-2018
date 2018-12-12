@@ -38,7 +38,17 @@ export class CloudbreakCredentialsService {
   }
 
   deleteCredentials(body) {
-    console.log(body + ' ' + httpOptions);
-    return this.http.post(`${this.uri}/cbcreds/delete`, body, httpOptions);
+    return this.http.post(`${this.uri}/cbcreds/delete`,body,httpOptions).subscribe(
+      (val) => {
+          console.log("POST call successful value returned in body", 
+                      val);
+                      window.location.reload();
+      },
+      response => {
+          console.log("POST call in error", response);
+      },
+      () => {
+          console.log("The POST observable is now completed.");
+});
   }
 }

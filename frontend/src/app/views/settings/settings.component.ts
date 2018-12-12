@@ -43,8 +43,9 @@ export class SettingsComponent implements OnInit {
 
   deleteCredential(cred_id){
     
-    this.cloudbreakCredentialsService
+    var test = this.cloudbreakCredentialsService
     .deleteCredentials('{ "cred_id": "'+ cred_id +'" }');
+    
+    
   }
-
 }

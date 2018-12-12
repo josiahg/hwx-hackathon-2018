@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '',
     component: SettingsComponent,
     data: {
-      title: 'Settings'
+      title: 'Credentials'
     }
   }
 ];
