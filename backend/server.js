@@ -15,15 +15,17 @@ var request = require('request');
 
 router.route('/cbcreds/read').get((req, res) => {
     db.any('select * from cloudbreak_cuisine.cb_credentials')
-        .then(data => {
-            res.json(data);
-        })
-        .catch(error => {
-            console.log('ERROR:', error)
-        })
+    .then(data => {
+        res.json(data);
+    })
+    .catch(error => {
+        console.log('ERROR:', error)
+    })
+
 });
 
-router.route('/cbcreds/set').post((req, res) => {
+
+router.route('/cbcreds/set').get((req, res) => {
     
     
     

@@ -1,25 +1,25 @@
 <div class="animated fadeIn">
     <div class="card">
         <div class="card-header">
-            <i class="fa fa-align-justify"></i> Configured Recipes
-            <span class="float-right"><a routerLink="/create"><button type="button" class="btn btn-block btn-primary">Add Recipe</button></a></span>
+            <i class="fa fa-align-justify"></i> Configured Clusters
+            <span class="float-right"><a routerLink="/create"><button type="button" class="btn btn-block btn-primary">Add Credentials</button></a></span>
         </div>
         <div class="card-body">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <!--<th>Status</th>-->
-                        <th>Actions</th>
+                        <th>Instance Name</th>
+                        <th>URL</th>
+                        <th>Username</th>
+                        <th>Password</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let recipe of recipes">
-                        <td>{{recipe.name}}</td>
-                        <td>{{recipe.description}}</td>
-                        <!--<td><span class="badge badge-success">Active</span></td>-->
-                        <td><h5><i class="cui-pencil"></i>&nbsp;&nbsp;<i class="text-danger cui-trash"></i></h5></td>
+                    <tr *ngFor="let cloudbreakCredential of cloudbreakCredentials">
+                        <td>{{cloudbreakCredential.instance_name}}</td>
+                        <td>{{cloudbreakCredential.cb_url}}</td>
+                        <td>{{cloudbreakCredential.cb_username}}</td>
+                        <td>{{cloudbreakCredential.cb_password}}</td>
                     </tr>
                 </tbody>
             </table>
