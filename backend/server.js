@@ -286,6 +286,7 @@ router.route('/filewriter').post((req, res) => {
             res.json('File created');
     });
 });
+
 router.route('/filewriter/:filename').post((req, res) => {
     var fs = require("fs");
     var fileContent = JSON.stringify(req.body);
@@ -296,6 +297,16 @@ router.route('/filewriter/:filename').post((req, res) => {
         else
             res.json('File created');
     });
+});
+
+router.route('/blueprint_recipes/:id').get((req, res) => {
+    db.any('select * from cloudbreak_cuisine.services where associated_cluster = ' + req.params.id + ' order by mandatory, service_description')
+        .then(data => {
+            res.json(data);
+        })
+        .catch(error => {
+            console.log('ERROR:', error)
+        })
 });
 
 app.use('/', router);

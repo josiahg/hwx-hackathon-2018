@@ -66,8 +66,6 @@ export class GeneratorComponent implements OnInit {
   showGenerate = false;
   clusterType = 0;
 
-  displayedColumns = ['name', 'description'];
-
   nodeTypes = ['Master', 'Worker', 'Compute'];
 
   public blueprints: Blueprint[] = [];
@@ -82,6 +80,8 @@ export class GeneratorComponent implements OnInit {
   public hg_worker: HostGroup = { 'name':'worker', 'cardinality':'1+', 'components':[] } as HostGroup;
   public hg_compute: HostGroup = { 'name':'compute', 'cardinality':'1+', 'components':[] } as HostGroup;
   public gen_bp: GenBlueprint = {} as GenBlueprint;
+  public shRecipes: string[] = [];
+  public oneBigConf: string[] = [];
 
   ngOnInit(): void {
     this.fetchBlueprintsForService(1);
@@ -105,8 +105,6 @@ export class GeneratorComponent implements OnInit {
     let obj = JSON.parse(str);
     return obj as BPComp;
   }
-
-  public oneBigConf: string[] = [];
 
   fetchBlueprintsForService(id) {
     this.blueprintService
