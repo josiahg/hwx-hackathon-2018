@@ -152,6 +152,11 @@ export class GeneratorComponent implements OnInit {
     })
   }
 
+  fwTest() {
+    this.filewriterService
+    .writeFile('bp-fw-test','{"test":"testing"}')
+  }
+
   genBlueprint(name) {
     this.host_groups.push(this.hg_master);
     this.host_groups.push(this.hg_worker);
@@ -162,10 +167,10 @@ export class GeneratorComponent implements OnInit {
     //console.log(this.gen_bp);
     console.log(JSON.stringify(this.gen_bp))
     this.filewriterService
-    .writeFile('bp-' + name,btoa(JSON.stringify(this.gen_bp)))
+    .writeFile('bp-' + name,JSON.stringify(this.gen_bp))//btoa(JSON.stringify(this.gen_bp)))
     /*.subscribe(data => {
       console.log('Write result: ',data);
-    })*/;
+    })*/
   }
 
   fetchNeededBlueprints() {

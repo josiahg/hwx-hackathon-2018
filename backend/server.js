@@ -277,9 +277,20 @@ router.route('/filewriter/:filename/:contents').get((req, res) => {
 
 router.route('/filewriter').post((req, res) => {
     var fs = require("fs");
-    var fileContent = "hello";//Buffer.from(req.body, 'base64').toString();
+    var fileContent = JSON.stringify(req.body);   
 
     fs.writeFile('./' + 'bp-temp-name' + '.json', fileContent, (err) => {
+        if (err)
+            res.json(err);
+        else
+            res.json('File created');
+    });
+});
+router.route('/filewriter/:filename').post((req, res) => {
+    var fs = require("fs");
+    var fileContent = JSON.stringify(req.body);
+
+    fs.writeFile('./bp-' + req.params.filename + '.json', fileContent, (err) => {
         if (err)
             res.json(err);
         else
