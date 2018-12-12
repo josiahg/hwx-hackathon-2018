@@ -48,8 +48,8 @@ export const routes: Routes = [
         loadChildren: './views/settings/settings.module#SettingsModule'
       },
       {
-        path: 'create',
-        loadChildren: './views/create/create.module#CreateModule'
+        path: 'addextras',
+        loadChildren: './views/add-extras/add-extras.module#AddExtrasModule'
       }
     ]
   }
