@@ -1,5 +1,4 @@
 <div class="animated fadeIn">
-<<<<<<< HEAD
     <div class="card">
         <div class="card-header">
             <i class="fa fa-align-justify"></i> Configured Clusters
@@ -29,40 +28,5 @@
                 </tbody>
             </table>
         </div>
-=======
-  <div class="card">
-    <div class="card-header">
-      <i class="fa fa-align-justify"></i> Configured Clusters
-      <span class="float-right"><a routerLink="/create"><button type="button" class="btn btn-block btn-primary">Add
-            Credentials</button></a></span>
->>>>>>> 124eb6e17717fed2f74c886dde007af528189876
     </div>
-    <div class="card-body">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Instance Name</th>
-            <th>URL</th>
-            <th>Username</th>
-            <th>Password</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let cloudbreakCredential of cloudbreakCredentials">
-            <td>{{cloudbreakCredential.instance_name}}</td>
-            <td>{{cloudbreakCredential.cb_url}}</td>
-            <td>{{cloudbreakCredential.cb_username}}</td>
-            <td>{{cloudbreakCredential.cb_password}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="form-group">
-      <label>Cloudbreak Password</label>
-      <input type="password" class="form-control" id="cbCredPass" placeholder="hunter2">
-    </div>
-    <div>
-      <button type="submit" class="btn btn-primary mb-2">Save Credentials</button>
-    </div>
-  </div>
 </div>
