@@ -14,14 +14,7 @@ services:
     ports:
       - 4000:4000
     links:
-      - mongo
       - db
-  mongo:
-    image: mongo
-    volumes:
-      - /tmp/data:/data/db
-    ports:
-      - 27017:27017
   db:
     image: postgres
     restart: always

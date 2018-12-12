@@ -4,9 +4,6 @@ import { Router } from '@angular/router'
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 
-import { Recipe } from '../../recipe.model';
-import { RecipeService } from '../../recipe.service';
-
 import { Blueprint } from '../../svcs/blueprint.model';
 import { BlueprintService } from '../../svcs/blueprint.service';
 
@@ -50,8 +47,7 @@ interface GenBlueprint {
 })
 export class GeneratorComponent implements OnInit {
 
-  constructor(private recipeService: RecipeService,
-    private blueprintService: BlueprintService,
+  constructor(private blueprintService: BlueprintService,
     private serviceService: ServiceService,
     private clusterService: ClusterService,
     private filewriterService: FilewriterService) {};
@@ -70,7 +66,6 @@ export class GeneratorComponent implements OnInit {
   showGenerate = false;
   clusterType = 0;
 
-  public recipes: Recipe[];
   displayedColumns = ['name', 'description'];
 
   nodeTypes = ['Master', 'Worker', 'Compute'];
@@ -89,7 +84,6 @@ export class GeneratorComponent implements OnInit {
   public gen_bp: GenBlueprint = {} as GenBlueprint;
 
   ngOnInit(): void {
-    //this.fetchRecipes();
     this.fetchBlueprintsForService(1);
     //console.log(this.blueprints);
     this.gen_bp.Blueprints = {'blueprint_name': 'test_gen_1', 'stack_name':'HDP', 'stack_version':'3.0'};
@@ -180,16 +174,6 @@ export class GeneratorComponent implements OnInit {
       if(this.selectedServices[svc]) {
         this.fetchBlueprintsForService(svc);
       }
-    });
-  }
-
-  fetchRecipes(){
-    this.recipeService
-    .getRecipes()
-    .subscribe((data: Recipe[]) => {
-      this.recipes = data;
-      console.log('Data requested ... ');
-      console.log(this.recipes);
     });
   }
 
