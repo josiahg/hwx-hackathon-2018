@@ -81,8 +81,9 @@ DROP TABLE IF EXISTS cloudbreak_cuisine.cb_credentials;
 CREATE TABLE cloudbreak_cuisine.cb_credentials
 (
   id integer unique NOT NULL PRIMARY KEY,
-  type text,
-  value text
+  url text,
+  username text,
+  password text
 );
 
 -- LOAD TABLES
@@ -305,7 +306,3 @@ insert into cloudbreak_cuisine.management_packs values(1,3,'HDF MPACK FOR HDP+HD
 insert into cloudbreak_cuisine.external_bundles values(1,'Data Science Workshop','Bundle creating a single node HDP cluster with pre-loaded Data Science Workshop Notebooks',0,'https://raw.githubusercontent.com/paulvid/hwx-data-science-workshop/master/HWX_LOGO.png','https://github.com/paulvid/hwx-data-science-workshop.git','https://github.com/paulvid/hwx-data-science-workshop/archive/master.zip');
 insert into cloudbreak_cuisine.external_bundles values(2,'Personality Detection','Bundle creating a 3 node HDP & HDF Cluster for personality recognition demo',0,'https://raw.githubusercontent.com/paulvid/perso-detection-demo/master/PERSO_RECOG_DEMO.png','https://github.com/paulvid/perso-detection-demo.git','https://github.com/paulvid/perso-detection-demo/archive/master.zip');
 insert into cloudbreak_cuisine.external_bundles values(3,'HCP (Metron) Cluster','Bundle creating a fully kerberized Metron environment',0,'https://raw.githubusercontent.com/josiahg/hwx-hackathon-2018/master/default-recipes/METRON_LOGO.png','https://github.com/simonellistonball/cloudbreak-hcp/archive/master.zip','https://github.com/simonellistonball/cloudbreak-hcp/archive/master.zip');
-
-insert into cloudbreak_cuisine.cb_credentials values(1,'URL','');
-insert into cloudbreak_cuisine.cb_credentials values(2,'User','');
-insert into cloudbreak_cuisine.cb_credentials values(3,'Password','');
