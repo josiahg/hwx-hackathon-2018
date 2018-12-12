@@ -47,20 +47,20 @@ export class AddExtrasComponent implements OnInit {
     console.log(value)
   }
   addNifiTemplate(form){
-    console.log('{ "cluster_type": "'+ form.form.value.cluster_type +'",  "template": "'+ form.form.value.code +'" }');
+    console.log('{ name": "'+ form.form.value.name +'", cluster_type": "'+ form.form.value.cluster_type +'",  "template": "'+ form.form.value.code +'" }');
     //this.addExtraService.setCustomRecipe('{ "recipe_type": "'+ form.form.value.recipe_type + '", "cluster_type": "'+ form.form.value.cluster_type +'",  "service_type": "'+ form.form.value.service_type +'", "code": "'+ form.form.value.code +'" }');
   }
 
   addZeppelinNote(form){
-    console.log('{ "cluster_type": "'+ form.form.value.cluster_type +'",  "template": "'+ form.form.value.code +'" }');
+    console.log('{ name": "'+ form.form.value.name +'", "cluster_type": "'+ form.form.value.cluster_type +'",  "template": "'+ form.form.value.code +'" }');
     //this.addExtraService.setCustomRecipe('{ "recipe_type": "'+ form.form.value.recipe_type + '", "cluster_type": "'+ form.form.value.cluster_type +'",  "service_type": "'+ form.form.value.service_type +'", "code": "'+ form.form.value.code +'" }');
   }
   addCustomRecipe(form){
-    console.log('{ "recipe_type": "'+ form.form.value.recipe_type + '", "cluster_type": "'+ form.form.value.cluster_type +'",  "service_type": "'+ form.form.value.service_type +'", "code": "'+ form.form.value.code +'" }');
+    console.log('{ name": "'+ form.form.value.name +'", "recipe_type": "'+ form.form.value.recipe_type + '", "cluster_type": "'+ form.form.value.cluster_type +'",  "service_type": "'+ form.form.value.service_type +'", "code": "'+ form.form.value.code +'" }');
     //this.addExtraService.setCustomRecipe('{ "recipe_type": "'+ form.form.value.recipe_type + '", "cluster_type": "'+ form.form.value.cluster_type +'",  "service_type": "'+ form.form.value.service_type +'", "code": "'+ form.form.value.code +'" }');
   }
   addSQLScript(form){
-    console.log('{ cluster_type": "'+ form.form.value.cluster_type +'",  "service_type": "'+ form.form.value.service_type +'", "code": "'+ form.form.value.code +'" }');
+    console.log('{ name": "'+ form.form.value.name +'", cluster_type": "'+ form.form.value.cluster_type +'",  "service_type": "'+ form.form.value.service_type +'", "code": "'+ form.form.value.code +'" }');
     //this.addExtraService.setCustomRecipe('{ "recipe_type": "'+ form.form.value.recipe_type + '", "cluster_type": "'+ form.form.value.cluster_type +'",  "service_type": "'+ form.form.value.service_type +'", "code": "'+ form.form.value.code +'" }');
   }
 
