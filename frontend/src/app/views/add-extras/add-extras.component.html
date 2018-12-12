@@ -1,26 +1,29 @@
-<!--<div class="card">
+<div class="card" *ngIf="showExtras">
   <div class="card-header">
     <strong>Select Extra</strong>
   </div>
+  <form #extraFrom="ngForm" (ngSubmit)="selectExtra(extraFrom)" novalidate class="form-horizontal">
   <div class="card-body">
+    
     <p width=50px>
-      <select name="select" class="form-control">
-        <option *ngFor="let type of types">{{type}}</option>
+      <select name="extraSelected" class="form-control" ngModel>
+        <option *ngFor="let type of extraTypes">{{type}}</option>
       </select>
     </p>
-    <p width=200px><button type="submit" class="btn btn-sm btn-primary" (click)="selectExtra(select.value)">Add Extra</button></p>
+    <p width=200px><button type="submit" class="btn btn-sm btn-primary">Add Extra</button></p>
   </div>
-</div>-->
+</form>
+</div>
 <div class="card" *ngIf="showRecipe">
   <div class="card-header">
-    <strong>Add Recipe</strong>
+    <strong>Add Recipe</strong><span class="float-right"><button type="button" class="btn btn-block btn-primary" (click)="cancelAdd()">Cancel</button></span>
   </div>
   <div class="card-body">
-    <form #f="ngForm" (ngSubmit)="addExtra(f)" novalidate class="form-horizontal">
+    <form #f="ngForm" (ngSubmit)="addCustomRecipe(f)" novalidate class="form-horizontal">
       <div class="form-group row">
         <label class="col-md-3 col-form-label" for="description">Recipe Type</label>
         <div class="col-md-9">
-          <select class="form-control">
+          <select class="form-control" name="recipe_type" ngModel>
             <option *ngFor="let type of recipeTypes">{{type}}</option>
           </select>
         </div>
@@ -28,7 +31,7 @@
       <div class="form-group row">
         <label class="col-md-3 col-form-label" for="clusterType">Cluster Type</label>
         <div class="col-md-9">
-          <select class="form-control">
+          <select class="form-control" name="cluster_type" ngModel>
             <option *ngFor="let type of clusterTypes">{{type}}</option>
           </select>
         </div>
@@ -40,10 +43,10 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-md-3 col-form-label" for="service">Service</label>
+        <label class="col-md-3 col-form-label" for="serviceTypes">Service</label>
         <div class="col-md-9">
-          <select class="form-control">
-            <option *ngFor="let type of serviceTypes">{{type}}</option>
+          <select class="form-control" name="service_type" ngModel>
+            <option *ngFor="let type of serviceTypes">{{type.service_description}}</option>
           </select>
         </div>
       </div>
@@ -53,100 +56,109 @@
           <textarea class="form-control" rows="9" name="code" ngModel></textarea>
         </div>
       </div>
-      <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>Submit</button>
+      <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
     </form>
   </div>
 </div>
 
 <div class="card" *ngIf="showNifi">
   <div class="card-header">
-    <strong>Add NiFi Template</strong>
+    <strong>Add NiFi Template</strong><span class="float-right"><button type="button" class="btn btn-block btn-primary" (click)="cancelAdd()">Cancel</button></span>
   </div>
   <div class="card-body">
-    <form #f="ngForm" (ngSubmit)="addExtra(f)" novalidate class="form-horizontal">
+    <form #f="ngForm" (ngSubmit)="addNifiTemplate(f)" novalidate class="form-horizontal">
       <div class="form-group row">
-        <label class="col-md-3 col-form-label" for="clusterType">Cluster Type</label>
-        <div class="col-md-9">
-          <input name="clusterType" class="form-control" ngModel>
-        </div>
-      </div>
+            <label class="col-md-3 col-form-label" for="clusterType">Cluster Type</label>
+            <div class="col-md-9">
+              <select class="form-control" name="cluster_type" ngModel>
+                <option *ngFor="let type of clusterTypes">{{type}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="clusterVersion">Cluster Version</label>
+              <div class="col-md-9">
+                <input name="clusterVersion" class="form-control" ngModel [attr.disabled]="true">
+              </div>
+            </div>
       <div class="form-group row">
-        <label class="col-md-3 col-form-label" for="clusterVersion">Cluster Version</label>
-        <div class="col-md-9">
-          <input name="clusterVersion" class="form-control" ngModel>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label" for="service">Service</label>
-        <div class="col-md-9">
-          <input name="service" class="form-control" ngModel>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label" for="code">Code</label>
+        <label class="col-md-3 col-form-label" for="code">Nifi Template</label>
         <div class="col-md-9">
           <textarea class="form-control" rows="9" name="code" ngModel></textarea>
         </div>
       </div>
-      <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>Submit</button>
+      <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
     </form>
   </div>
 </div>
 
 <div class="card" *ngIf="showZep">
   <div class="card-header">
-    <strong>Add Zeppelin Notebook</strong>
+    <strong>Add Zeppelin Note</strong><span class="float-right"><button type="button" class="btn btn-block btn-primary" (click)="cancelAdd()">Cancel</button></span>
   </div>
   <div class="card-body">
-    <form #f="ngForm" (ngSubmit)="addExtra(f)" novalidate class="form-horizontal">
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label" for="clusterType">Cluster Type</label>
-        <div class="col-md-9">
-          <input name="clusterType" class="form-control" ngModel>
+      <form #f="ngForm" (ngSubmit)="addZeppelinNote(f)" novalidate class="form-horizontal">
+        <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="clusterType">Cluster Type</label>
+              <div class="col-md-9">
+                <select class="form-control" name="cluster_type" ngModel>
+                  <option *ngFor="let type of clusterTypes">{{type}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="clusterVersion">Cluster Version</label>
+                <div class="col-md-9">
+                  <input name="clusterVersion" class="form-control" ngModel [attr.disabled]="true">
+                </div>
+              </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="code">Zeppelin Note</label>
+          <div class="col-md-9">
+            <textarea class="form-control" rows="9" name="code" ngModel></textarea>
+          </div>
         </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label" for="clusterVersion">Cluster Version</label>
-        <div class="col-md-9">
-          <input name="clusterVersion" class="form-control" ngModel>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label" for="service">Service</label>
-        <div class="col-md-9">
-          <input name="service" class="form-control" ngModel>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label" for="code">Code</label>
-        <div class="col-md-9">
-          <textarea class="form-control" rows="9" name="code" ngModel></textarea>
-        </div>
-      </div>
-      <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>Submit</button>
-    </form>
-  </div>
+        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+      </form>
+    </div>
+
 </div>
 
 <div class="card" *ngIf="showSQL">
   <div class="card-header">
-    <strong>Add SQL</strong>
+    <strong>Add SQL Script</strong><span class="float-right"><button type="button" class="btn btn-block btn-primary" (click)="cancelAdd()">Cancel</button></span>
   </div>
   <div class="card-body">
-    <form #f="ngForm" (ngSubmit)="addExtra(f)" novalidate class="form-horizontal">
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label" for="description">Service</label>
-        <div class="col-md-9">
-          <input name="service" class="form-control" ngModel>
+      <form #f="ngForm" (ngSubmit)="addSQLScript(f)" novalidate class="form-horizontal">
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="clusterType">Cluster Type</label>
+          <div class="col-md-9">
+            <select class="form-control" name="cluster_type" ngModel>
+              <option *ngFor="let type of clusterTypes">{{type}}</option>
+            </select>
+          </div>
         </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label" for="code">Code</label>
-        <div class="col-md-9">
-          <textarea class="form-control" rows="9" name="code" ngModel></textarea>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="clusterVersion">Cluster Version</label>
+          <div class="col-md-9">
+            <input name="clusterVersion" class="form-control" ngModel [attr.disabled]="true">
+          </div>
         </div>
-      </div>
-      <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>Submit</button>
-    </form>
-  </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="serviceTypes">Service</label>
+          <div class="col-md-9">
+            <select class="form-control" name="service_type" ngModel>
+              <option *ngFor="let type of sqlServiceTypes">{{type}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="code">SQL Script</label>
+          <div class="col-md-9">
+            <textarea class="form-control" rows="9" name="code" ngModel></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+      </form>
+    </div>
 </div>
