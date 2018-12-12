@@ -1,28 +1,28 @@
 <div class="animated fadeIn">
-    <div class="card">
-        <div class="card-header">
-            <i class="fa fa-align-justify"></i> Configured Recipes
-            <span class="float-right"><a routerLink="/create"><button type="button" class="btn btn-block btn-primary">Add Recipe</button></a></span>
+  <div class="card">
+    <div class="card-header">Cloudbreak Credentials</div>
+    <div class="card-body">
+      <form (ngSubmit)="saveCbCreds(cred)">
+        <div class="form-group">
+          <label>Instance Name</label>
+          <input type="text" class="form-control" [(ngModel)]="cred.instance_name" name="name" placeholder="Cloudbreak Instance Name">
+        </div><!--
+        <div class="form-group">
+          <label>Cloudbreak URL</label>
+          <input type="text" class="form-control" id="cbCredURL" placeholder="Cloudbreak Instance URL">
         </div>
-        <div class="card-body">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <!--<th>Status</th>-->
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let recipe of recipes">
-                        <td>{{recipe.name}}</td>
-                        <td>{{recipe.description}}</td>
-                        <!--<td><span class="badge badge-success">Active</span></td>-->
-                        <td><h5><i class="cui-pencil"></i>&nbsp;&nbsp;<i class="text-danger cui-trash"></i></h5></td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="form-group">
+          <label>Cloudbreak Username</label>
+          <input type="email" class="form-control" id="cbCredUser" placeholder="admin@example.com">
         </div>
+        <div class="form-group">
+          <label>Cloudbreak Password</label>
+          <input type="password" class="form-control" id="cbCredPass" placeholder="hunter2">
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary mb-2">Save Credentials</button>
+        </div>-->
+      </form>
     </div>
+  </div>
 </div>

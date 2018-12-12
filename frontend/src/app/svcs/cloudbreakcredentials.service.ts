@@ -14,11 +14,8 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-
 export class CloudbreakCredentialsService {
   constructor(private http: HttpClient) { }
-
-
 
   getAbsoluteDomainUrl(): string {
     if (window

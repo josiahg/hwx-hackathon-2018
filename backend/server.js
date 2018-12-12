@@ -24,10 +24,7 @@ router.route('/cbcreds/read').get((req, res) => {
 });
 
 router.route('/cbcreds/set').post((req, res) => {
-    
-    
-    
-    db.any('insert into cloudbreak_cuisine.cb_credentials (instance_name, cb_url, cb_username, cb_password) values (\''+ req.body.instance_name + '\',\'' + req.body.cb_url + '\',\'' + req.body.cb_username + '\',\'' + req.body.cb_password + '\')')
+    db.any('insert into cloudbreak_cuisine.cb_credentials (instance_name, cb_url, cb_username, cb_password) values (\'' + req.body.instance_name + '\',\'' + req.body.cb_url + '\',\'' + req.body.cb_username + '\',\'' + req.body.cb_password + '\')')
         .then(data => {
             res.json(data);
         })
@@ -35,8 +32,6 @@ router.route('/cbcreds/set').post((req, res) => {
             console.log('ERROR:', error)
         })
 });
-
-
 
 router.route('/cluster').get((req, res) => {
     db.any('select * from cloudbreak_cuisine.clusters')
@@ -59,7 +54,7 @@ router.route('/cluster/:id').get((req, res) => {
 });
 
 
-router.route('/get_token/:username/:password/:cb_url', function(req, res){ 
+router.route('/get_token/:username/:password/:cb_url', function (req, res) {
 
     // process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0; 
 
@@ -76,7 +71,7 @@ router.route('/get_token/:username/:password/:cb_url', function(req, res){
     //   headers: 
     //    { 'accept': 'application/x-www-form-urlencoded' },
     //   data: 'credentials={"username":"pvidal@hortonworks.com","password":"HWseftw33#"}' };
-    
+
     // request(options, function (error, response, body) {
     //   if (error) throw new Error(error);
     //   //res.send(body);
@@ -87,17 +82,17 @@ router.route('/get_token/:username/:password/:cb_url', function(req, res){
     var exec = require('child_process').exec;
 
     function puts(error, stdout, stderr) { sys.puts(stdout) }
-    exec("curl -k -iX POST -H \"accept: application/x-www-form-urlencoded\" -d 'credentials={\"username\":\""+req.params.username +"\",\"password\":\""+req.params.password +"\"}' \"https://"+req.params.cb_url +"/identity/oauth/authorize?response_type=token&client_id=cloudbreak_shell&scope.0=openid&source=login&redirect_uri=http://cloudbreak.shell\" | grep location | cut -d'=' -f 3 | cut -d'&' -f 1", function(error, stdout, stderr) {
+    exec("curl -k -iX POST -H \"accept: application/x-www-form-urlencoded\" -d 'credentials={\"username\":\"" + req.params.username + "\",\"password\":\"" + req.params.password + "\"}' \"https://" + req.params.cb_url + "/identity/oauth/authorize?response_type=token&client_id=cloudbreak_shell&scope.0=openid&source=login&redirect_uri=http://cloudbreak.shell\" | grep location | cut -d'=' -f 3 | cut -d'&' -f 1", function (error, stdout, stderr) {
         if (!error) {
             res.send(stdout);
         } else {
             res.send('ERROR: ' + stderr);
         }
     });
-    
+
 })
 
-router.get('/load_recipe/:cb_url/:recipe_name/:recipe_type/:recipe_base64/:token', function(req, res){ 
+router.get('/load_recipe/:cb_url/:recipe_name/:recipe_type/:recipe_base64/:token', function (req, res) {
 
     process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
@@ -117,7 +112,7 @@ router.get('/load_recipe/:cb_url/:recipe_name/:recipe_type/:recipe_base64/:token
             name: '' + req.params.recipe_name,
             description: '' + req.params.recipe_type + 'recipe: ' + req.params.cluster_name,
             recipeType: '' + req.params.recipe_type,
-            content: ''+ req.params.recipe_base64,
+            content: '' + req.params.recipe_base64,
             uri: ''
         },
         json: true
@@ -131,7 +126,7 @@ router.get('/load_recipe/:cb_url/:recipe_name/:recipe_type/:recipe_base64/:token
 
 })
 
-router.get('/load_blueprint/:cb_url/:cluster_name/:bp_base64/:token', function(req, res){ 
+router.get('/load_blueprint/:cb_url/:cluster_name/:bp_base64/:token', function (req, res) {
 
     process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
@@ -242,10 +237,10 @@ router.route('/library').get((req, res) => {
 
 router.route('/filewriter/:filename/:contents').get((req, res) => {
     var fs = require("fs");
-    var fileContent = Buffer.from(req.params.contents,'base64').toString();
-    
-    fs.writeFile('./' + req.params.filename + '.json',fileContent, (err) => {
-        if (err) 
+    var fileContent = Buffer.from(req.params.contents, 'base64').toString();
+
+    fs.writeFile('./' + req.params.filename + '.json', fileContent, (err) => {
+        if (err)
             res.json(err);
         else
             res.json('File created');
