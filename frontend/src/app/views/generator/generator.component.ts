@@ -52,7 +52,7 @@ export class GeneratorComponent implements OnInit {
     private clusterService: ClusterService,
     private filewriterService: FilewriterService) {};
 
-  max: number = 4;
+  max: number = 5;
   dynamic: number = 1;
 
   clusterTypes: ClusterType[] = [{'id':'1','img':'../../../assets/img/hwx/icon-hdp.png', 'description': 'HDP boiiii'},
