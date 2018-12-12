@@ -13,7 +13,7 @@
           <div class="card-footer">
                
                   <p>{{ libraryItem.description }}</p>
-                  <a target="_blank" href="{{ libraryItem.image_url }}"><button class="btn btn-block btn-primary" (click)="displayLibrary()">Download Bundle</button></a>
+                  <a target="_blank" href="{{ libraryItem.zip_url }}"><button class="btn btn-block btn-primary" (click)="displayLibrary()">Download Bundle</button></a>
                   <p></p>
                   <a target="_blank" href="../../../assets/perso-detection-blueprint.json"><button class="btn btn-block btn-primary" (click)="displayLibrary()" [attr.disabled]="true">Deploy Bundle</button></a>
                   <p></p>
