@@ -220,11 +220,8 @@ export class GeneratorComponent implements OnInit {
 
   addConfigsToBP() {
     // One big, ugly, non-typesafe hack, do not recommend
-    //console.log('final bigconf', this.oneBigConf)
     let confStr = '{"configurations": [' + this.oneBigConf.join(',') + ']}'
-    //console.log('confStr', confStr)
     let obj = JSON.parse(confStr)
-    //console.log('obj',obj)
     obj.configurations.forEach(i => {
       this.gen_bp.configurations.push(i);
     })

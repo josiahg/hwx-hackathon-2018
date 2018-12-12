@@ -12,10 +12,10 @@ export class AddExtrasComponent implements OnInit {
 
   types: String[] = ['Recipe','NiFi Template', 'Zeppelin Notebook', 'SQL']
 
-  private showRecipe = true;
-  private showNifi = true;
-  private showZep = true;
-  private showSQL = true;
+  public showRecipe = true;
+  public showNifi = true;
+  public showZep = true;
+  public showSQL = true;
 
   addExtra(form) {
 
