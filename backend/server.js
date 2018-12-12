@@ -266,6 +266,18 @@ router.route('/filewriter/:filename/:contents').get((req, res) => {
     });
 });
 
+router.route('/filewriter/:filename').post((req, res) => {
+    var fs = require("fs");
+    var fileContent = Buffer.from(req.body, 'base64').toString();
+
+    fs.writeFile('./' + req.params.filename + '.json', fileContent, (err) => {
+        if (err)
+            res.json(err);
+        else
+            res.json('File created');
+    });
+});
+
 app.use('/', router);
 
 app.listen(4000, () => console.log(`Express server running on port 4000`));
