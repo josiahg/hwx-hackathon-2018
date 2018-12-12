@@ -213,6 +213,16 @@ router.route('/services/:id/mandatory').get((req, res) => {
         })
 });
 
+router.route('/services_distinct').get((req, res) => {
+    db.any('select distinct services.service_description from cloudbreak_cuisine.services')
+        .then(data => {
+            res.json(data);
+        })
+        .catch(error => {
+            console.log('ERROR:', error)
+        })
+});
+
 router.route('/components_blueprints').get((req, res) => {
     db.any('select * from cloudbreak_cuisine.components_blueprints')
         .then(data => {
@@ -265,11 +275,11 @@ router.route('/filewriter/:filename/:contents').get((req, res) => {
     });
 });
 
-router.route('/filewriter/:filename').post((req, res) => {
+router.route('/filewriter').post((req, res) => {
     var fs = require("fs");
-    var fileContent = Buffer.from(req.body, 'base64').toString();
+    var fileContent = "hello";//Buffer.from(req.body, 'base64').toString();
 
-    fs.writeFile('./' + req.params.filename + '.json', fileContent, (err) => {
+    fs.writeFile('./' + 'bp-temp-name' + '.json', fileContent, (err) => {
         if (err)
             res.json(err);
         else

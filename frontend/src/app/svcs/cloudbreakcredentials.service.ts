@@ -4,11 +4,11 @@ import { HttpHeaders } from '@angular/common/http';
 
 
 const httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': 'my-auth-token'
-    })
-  };
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': 'my-auth-token'
+  })
+};
 
 
 @Injectable({
@@ -19,10 +19,10 @@ export class CloudbreakCredentialsService {
 
   getAbsoluteDomainUrl(): string {
     if (window
-        && "location" in window
-        && "protocol" in window.location
-        && "host" in window.location) {
-        return window.location.protocol + "//" + window.location.hostname;
+      && "location" in window
+      && "protocol" in window.location
+      && "host" in window.location) {
+      return window.location.protocol + "//" + window.location.hostname;
     }
     return null;
   }
@@ -36,30 +36,30 @@ export class CloudbreakCredentialsService {
   setCredentials(body) {
     return this.http.post(`${this.uri}/cbcreds/set`, body, httpOptions).subscribe(
       (val) => {
-          console.log("POST call successful value returned in body", 
-                      val);
-                      window.location.reload();
+        console.log("POST call successful value returned in body",
+          val);
+        window.location.reload();
       },
       response => {
-          console.log("POST call in error", response);
+        console.log("POST call in error", response);
       },
       () => {
-          console.log("The POST observable is now completed.");
-});
+        console.log("The POST observable is now completed.");
+      });
   }
 
   deleteCredentials(body) {
-    return this.http.post(`${this.uri}/cbcreds/delete`,body,httpOptions).subscribe(
+    return this.http.post(`${this.uri}/cbcreds/delete`, body, httpOptions).subscribe(
       (val) => {
-          console.log("POST call successful value returned in body", 
-                      val);
-                      window.location.reload();
+        console.log("POST call successful value returned in body",
+          val);
+        window.location.reload();
       },
       response => {
-          console.log("POST call in error", response);
+        console.log("POST call in error", response);
       },
       () => {
-          console.log("The POST observable is now completed.");
-});
+        console.log("The POST observable is now completed.");
+      });
   }
 }

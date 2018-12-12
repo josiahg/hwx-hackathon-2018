@@ -163,9 +163,9 @@ export class GeneratorComponent implements OnInit {
     console.log(JSON.stringify(this.gen_bp))
     this.filewriterService
     .writeFile('bp-' + name,btoa(JSON.stringify(this.gen_bp)))
-    .subscribe(data => {
+    /*.subscribe(data => {
       console.log('Write result: ',data);
-    });
+    })*/;
   }
 
   fetchNeededBlueprints() {
