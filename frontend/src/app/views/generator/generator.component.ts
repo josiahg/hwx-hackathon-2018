@@ -24,6 +24,7 @@ import { FilewriterService } from '../../svcs/filewriter.service'
 interface ClusterType {
   id: String;
   img: String;
+  description: String;
 };
 
 interface BPComp {
@@ -55,17 +56,17 @@ export class GeneratorComponent implements OnInit {
     private clusterService: ClusterService,
     private filewriterService: FilewriterService) {};
 
-  max: number = 5;
+  max: number = 4;
   dynamic: number = 1;
 
-  clusterTypes: ClusterType[] = [{'id':'1','img':'../../../assets/img/hwx/icon-hdp.png'},
-                  {'id':'2','img':'../../../assets/img/hwx/icon-dataflow.png'},
-                  {'id':'3','img':'../../../assets/img/hwx/hdf-hdp-connected-sq2.png'}
+  clusterTypes: ClusterType[] = [{'id':'1','img':'../../../assets/img/hwx/icon-hdp.png', 'description': 'HDP boiiii'},
+                  {'id':'2','img':'../../../assets/img/hwx/icon-dataflow.png', 'description':'HDF is for nerds'},
+                  {'id':'3','img':'../../../assets/img/hwx/hdf-hdp-connected-sq2.png','description':'All the things'}
   ];
   showClusterTypes = true;
   showServices = false;
   showOptions = false;
-  showSize = false;
+  showVersion = false;
   showGenerate = false;
   clusterType = 0;
 
@@ -203,7 +204,8 @@ export class GeneratorComponent implements OnInit {
       this.gen_bp.Blueprints.stack_name = data[0].cluster_type;
     })
     this.showClusterTypes = false;
-    this.showSize = true;
+    this.showVersion = true;
+    //this.showServices = true;
     this.dynamic++;
   }
 
@@ -219,7 +221,7 @@ export class GeneratorComponent implements OnInit {
   }
 
   setSize() {
-    this.showSize = false;
+    this.showVersion = false;
     this.showServices = true;
     this.dynamic++;
     this.addServicesToMap();
