@@ -50,7 +50,7 @@ CREATE TABLE cloudbreak_cuisine.components_recipes
   id integer unique NOT NULL PRIMARY KEY,
   service_id integer NOT NULL,
   recipe_description VARCHAR(50) NOT NULL,
-  extra_type integer NOT NULL,
+  extra_type text,
   pre_ambari_start text,
   post_ambari_start text,
   post_cluster_install text,
