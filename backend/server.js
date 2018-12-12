@@ -24,8 +24,12 @@ router.route('/cbcreds/read').get((req, res) => {
 
 });
 
+
 router.route('/cbcreds/set').post((req, res) => {
-    db.any('insert into cloudbreak_cuisine.cb_credentials (instance_name, cb_url, cb_username, cb_password) values (\'' + req.body.instance_name + '\',\'' + req.body.cb_url + '\',\'' + req.body.cb_username + '\',\'' + req.body.cb_password + '\')')
+    
+    
+    
+    db.any('insert into cloudbreak_cuisine.cb_credentials (instance_name, cb_url, cb_username, cb_password) values (\''+ req.body.instance_name + '\',\'' + req.body.cb_url + '\',\'' + req.body.cb_username + '\',\'' + req.body.cb_password + '\')')
         .then(data => {
             res.json(data);
         })
@@ -33,6 +37,20 @@ router.route('/cbcreds/set').post((req, res) => {
             console.log('ERROR:', error)
         })
 });
+
+router.route('/cbcreds/delete').post((req, res) => {
+    console.log('Trying to delete : ', req.body.cred_id)
+    res.json("Done")
+    
+    // db.any('delete from cloudbreak_cuisine.cb_credentials where id='+ req.body.cred_id)
+    //     .then(data => {
+    //         res.json(data);
+    //     })
+    //     .catch(error => {
+    //         console.log('ERROR:', error)
+    //     })
+});
+
 
 router.route('/cluster').get((req, res) => {
     db.any('select * from cloudbreak_cuisine.clusters')

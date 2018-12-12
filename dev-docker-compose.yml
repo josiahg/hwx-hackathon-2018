@@ -10,7 +10,7 @@ services:
   backend:
     image: 'josiahgoodson/hackathon-backend'
     volumes:
-      - ~/projects/hwx-hackathon-2018/backend:/usr/src/app
+      - /Users/pvidal/Documents/Playground/hackathon/hwx-hackathon-2018/backend:/usr/src/app
     ports:
       - 4000:4000
     links:

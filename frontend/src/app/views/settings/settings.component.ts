@@ -15,6 +15,12 @@ export class SettingsComponent implements OnInit {
 
   public cloudbreakCredentials: CloudbreakCredentials[];
 
+  showListCredentials = true;
+  showAddCredentials = false;
+  showModifyCredentials = false;
+
+
+
   constructor(private cloudbreakCredentialsService: CloudbreakCredentialsService) {}
   ngOnInit(): void {
     this.getCredentials();
@@ -30,10 +36,15 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  public cred: CloudbreakCredentials;
+  addCredentials(instance_name, cb_url, cb_username, cb_password){
+    this.cloudbreakCredentialsService
+    .setCredentials('{ "instance_name": "'+ instance_name +'", "cb_url": "'+ cb_url +'",  "cb_username": "'+ cb_username +'", "cb_password": "'+ cb_password +'" }');
+  }
 
-  saveCbCreds(form) {
-    console.log(form);
+  deleteCredential(cred_id){
+    
+    this.cloudbreakCredentialsService
+    .deleteCredentials('{ "cred_id": "'+ cred_id +'" }');
   }
 
 }

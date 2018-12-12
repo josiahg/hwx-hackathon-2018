@@ -37,4 +37,8 @@ export class CloudbreakCredentialsService {
     return this.http.post(`${this.uri}/cbcreds/set`, body, httpOptions);
   }
 
+  deleteCredentials(body) {
+    console.log(body + ' ' + httpOptions);
+    return this.http.post(`${this.uri}/cbcreds/delete`, body, httpOptions);
+  }
 }
