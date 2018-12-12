@@ -36,9 +36,9 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  addCredentials(instance_name, cb_url, cb_username, cb_password){
-    this.cloudbreakCredentialsService
-    .setCredentials('{ "instance_name": "'+ instance_name +'", "cb_url": "'+ cb_url +'",  "cb_username": "'+ cb_username +'", "cb_password": "'+ cb_password +'" }');
+  addCredentials(form){
+    
+    this.cloudbreakCredentialsService.setCredentials('{ "instance_name": "'+ form.form.value.instance_name +'", "cb_url": "'+ form.form.value.cb_url +'",  "cb_username": "'+ form.form.value.cb_username +'", "cb_password": "'+ form.form.value.cb_password +'" }');
   }
 
   deleteCredential(cred_id){
@@ -48,4 +48,11 @@ export class SettingsComponent implements OnInit {
     
     
   }
+
+  toggleAdd(){
+  
+    this.showAddCredentials = !this.showAddCredentials;
+    
+  }
+
 }

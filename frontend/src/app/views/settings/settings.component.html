@@ -2,18 +2,18 @@
     <div class="card">
         <div class="card-header">
             <i class="fa fa-align-justify"></i> Configured Clusters
-            <span class="float-right"><a routerLink="/settings/add"><button type="button" class="btn btn-block btn-primary">Add Credentials</button></a></span>
+            <span class="float-right" *ngIf="!showAddCredentials"><button type="button" class="btn btn-block btn-primary" (click)="toggleAdd()">Add Credentials</button></span>
+            <span class="float-right" *ngIf="showAddCredentials"><button type="button" class="btn btn-block btn-primary" (click)="toggleAdd()">Discard Changes</button></span>
         </div>
         <div class="card-body">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Instance Name</th>
-                        <th>URL</th>
-                        <th>Username</th>
-                        <th>Password</th>
-                        <th></th>
-                        <th></th>
+                        <th width="20%">Instance Name</th>
+                        <th width="20%">URL</th>
+                        <th width="20%">Username</th>
+                        <th width="20%">Password</th>
+                        <th width="20%"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,11 +22,25 @@
                         <td>{{cloudbreakCredential.cb_url}}</td>
                         <td>{{cloudbreakCredential.cb_username}}</td>
                         <td>***********</td>
-                        <td><a routerLink="/settings/modify"><button type="button" class="btn btn-block btn-primary">Modify</button></a></td>
                         <td><button type="button" class="btn btn-block btn-primary" (click)="deleteCredential(cloudbreakCredential.id)">Delete</button></td>
                     </tr>
                 </tbody>
             </table>
+            <form #f="ngForm" (ngSubmit)="addCredentials(f)" id="addForm">
+            <table class="table" >
+                
+                        <tr *ngIf="showAddCredentials" border="0">
+                         
+                                <td width="20%"><input type="text" name="instance_name" ngModel></td>
+                                <td width="20%"><input form="addForm" type="text" name="cb_url" ngModel></td>
+                                <td width="20%"><input form="addForm" type="text" name="cb_username" ngModel></td>
+                                <td width="20%"><input form="addForm" type="text" name="cb_password" ngModel></td>
+                                <td width="20%"><button form="addForm" type="submit" class="btn btn-block btn-primary">Save</button></td>
+                     
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
         </div>
     </div>
 </div>
