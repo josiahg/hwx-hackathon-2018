@@ -106,6 +106,15 @@ export class GeneratorComponent implements OnInit {
     return obj as BPComp;
   }
 
+  fetchRecipesForService(id) {
+    this.blueprintService
+    .getRecipesForBlueprint(id)
+    .subscribe((data: {'id','service_id','recipe_description','extra_type','pre_ambari_start','post_ambari_start','post_cluster_install','on_termination'}) => {
+      if(typeof data[0] !== 'undefined')
+        this.shRecipes.push(data[0].pre_ambari_start);
+    });
+  }
+
   fetchBlueprintsForService(id) {
     this.blueprintService
     .getBlueprintsForService(id)
@@ -170,6 +179,7 @@ export class GeneratorComponent implements OnInit {
     Object.keys(this.selectedServices).forEach(svc => {
       if(this.selectedServices[svc]) {
         this.fetchBlueprintsForService(svc);
+        this.fetchRecipesForService(svc);
       }
     });
   }
@@ -235,5 +245,6 @@ export class GeneratorComponent implements OnInit {
     this.showClusterTypes = true;
     this.dynamic = 1;*/
     this.genBlueprint(name);
+    console.log(this.shRecipes)
   }
 }

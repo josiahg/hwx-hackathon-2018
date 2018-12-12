@@ -28,7 +28,7 @@ export class FilewriterService {
   uri = this.getAbsoluteDomainUrl() + ':4000';
 
   writeFile(filename,content) {
-    console.log('Writer recieved: ', content)
+    //console.log('Writer recieved: ', content)
     //return this.http.get(`${this.uri}/filewriter/${filename}/${content}`);
 
     //return
