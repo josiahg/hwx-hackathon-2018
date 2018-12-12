@@ -17,20 +17,18 @@
           </div>
       </div>
   </div>
-  <div class="row animated fadeIn" *ngIf="showSize">
-    <div class="col-sm-6 col-md-4" *ngFor="let nodeType of nodeTypes">
+  <div class="row animated fadeIn" *ngIf="showVersion">
+    <div class="col-sm-6 col-md-4">
         <div class="card">
             <div class="card-header">
-                {{ nodeType }} Nodes
+              <h3>Select Stack Version</h3>
             </div>
             <div class="card-body" align="center">
-              <a href="#"><i class="cui-chevron-top font-2xl"></i></a>
-              <h1>1</h1>
-              <a href="#"><i class="cui-chevron-bottom font-2xl"></i></a>
+              3.0.1
             </div>
         </div>
     </div>
-    <button class="btn btn-block btn-primary" (click)="setSize()">Set size</button>
+    <button class="btn btn-block btn-primary" (click)="setSize()">Select Version</button>
   </div>
   <div class="row animated fadeIn" *ngIf="showServices">
       <!-- <h1>Select Services</h1> mandatory components will not be selectable-->
