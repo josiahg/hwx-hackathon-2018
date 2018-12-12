@@ -25,7 +25,7 @@ router.route('/cbcreds/read').get((req, res) => {
 });
 
 
-router.route('/cbcreds/set').get((req, res) => {
+router.route('/cbcreds/set').post((req, res) => {
     
     
     
@@ -38,6 +38,23 @@ router.route('/cbcreds/set').get((req, res) => {
         })
 });
 
+// router.post('/cbcreds/delete', function (req, res) {
+//     console.log('Trying to delete : ', req.body.cred_id)
+//   });
+
+
+router.route('/cbcreds/delete').post((req, res) => {
+    console.log('Trying to delete : ', req.body.cred_id)
+    res.json("Done")
+    
+    // db.any('delete from cloudbreak_cuisine.cb_credentials where id='+ req.body.cred_id)
+    //     .then(data => {
+    //         res.json(data);
+    //     })
+    //     .catch(error => {
+    //         console.log('ERROR:', error)
+    //     })
+});
 
 
 router.route('/cluster').get((req, res) => {

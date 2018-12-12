@@ -23,7 +23,7 @@
                         <td>{{cloudbreakCredential.cb_username}}</td>
                         <td>***********</td>
                         <td><a routerLink="/settings/modify"><button type="button" class="btn btn-block btn-primary">Modify</button></a></td>
-                        <td><a routerLink="/settings/delete"><button type="button" class="btn btn-block btn-primary">Delete</button></a></td>
+                        <td><button type="button" class="btn btn-block btn-primary" (click)="deleteCredential(cloudbreakCredential.id)">Delete</button></td>
                     </tr>
                 </tbody>
             </table>
