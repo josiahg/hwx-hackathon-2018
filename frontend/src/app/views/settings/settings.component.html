@@ -1,19 +1,28 @@
 <div class="animated fadeIn">
-  <div class="card">
-    <div class="card-header">Cloudbreak Credentials</div>
-    <div class="card-body">
-      <form (ngSubmit)="saveCbCreds(cred)">
-        <div class="form-group">
-          <label>Instance Name</label>
-          <input type="text" class="form-control" [(ngModel)]="cred.instance_name" name="name" placeholder="Cloudbreak Instance Name">
-        </div><!--
-        <div class="form-group">
-          <label>Cloudbreak URL</label>
-          <input type="text" class="form-control" id="cbCredURL" placeholder="Cloudbreak Instance URL">
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-align-justify"></i> Configured Clusters
+            <span class="float-right"><a routerLink="/create"><button type="button" class="btn btn-block btn-primary">Add Credentials</button></a></span>
         </div>
-        <div class="form-group">
-          <label>Cloudbreak Username</label>
-          <input type="email" class="form-control" id="cbCredUser" placeholder="admin@example.com">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Instance Name</th>
+                        <th>URL</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cloudbreakCredential of cloudbreakCredentials">
+                        <td>{{cloudbreakCredential.instance_name}}</td>
+                        <td>{{cloudbreakCredential.cb_url}}</td>
+                        <td>{{cloudbreakCredential.cb_username}}</td>
+                        <td>{{cloudbreakCredential.cb_password}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div class="form-group">
           <label>Cloudbreak Password</label>

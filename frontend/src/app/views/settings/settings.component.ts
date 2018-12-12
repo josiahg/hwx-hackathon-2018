@@ -12,9 +12,22 @@ import { CloudbreakCredentialsService } from '../../svcs/cloudbreakcredentials.s
 })
 export class SettingsComponent implements OnInit {
 
-  constructor(private router: Router, private credService: CloudbreakCredentialsService) {}
 
+  public cloudbreakCredentials: CloudbreakCredentials[];
+
+  constructor(private cloudbreakCredentialsService: CloudbreakCredentialsService) {}
   ngOnInit(): void {
+    this.getCredentials();
+  }
+
+  getCredentials(){
+    this.cloudbreakCredentialsService
+    .getAllCredentials()
+    .subscribe((data: CloudbreakCredentials[]) => {
+      this.cloudbreakCredentials = data;
+      console.log('Data requested ... ');
+      console.log(this.cloudbreakCredentials);
+    });
   }
 
   public cred: CloudbreakCredentials;
