@@ -9,4 +9,13 @@ export class AddExtrasComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  private showRecipe = true;
+  private showNifi = true;
+  private showZep = true;
+  private showSQL = true;
+
+  addExtra(form) {
+
+  }
 }
