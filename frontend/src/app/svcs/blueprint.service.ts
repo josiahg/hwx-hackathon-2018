@@ -33,7 +33,7 @@ export class BlueprintService {
   }
 
   getRecipesForBlueprint(id) {
-
+    return this.http.get(`${this.uri}/blueprint_recipes/${id}`);
   }
 
   generateBlueprintForServices(ids: any[]) {

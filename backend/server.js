@@ -299,8 +299,9 @@ router.route('/filewriter/:filename').post((req, res) => {
 });
 
 router.route('/blueprint_recipes/:id').get((req, res) => {
-    db.any('select * from cloudbreak_cuisine.services where associated_cluster = ' + req.params.id + ' order by mandatory, service_description')
+    db.any('select * from cloudbreak_cuisine.components_recipes where service_id = ' + req.params.id)
         .then(data => {
+            console.log('Service data: ' + JSON.stringify(data))
             res.json(data);
         })
         .catch(error => {
