@@ -144,28 +144,29 @@ router.get('/load_recipe/:cb_url/:recipe_name/:recipe_type/:recipe_base64/:token
 
 })
 
-router.get('/load_blueprint/:cb_url/:cluster_name/:bp_base64/:token', function (req, res) {
+router.route('/load_blueprint').post((req, res) => {
+    
 
+    // Expects the following in body: cb_url, token, bp_base64, cluster_name
     process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
-
     var request = require("request");
 
     var options = {
         method: 'POST',
-        url: 'https://' + req.params.cb_url + '/cb/api/v1/blueprints/user',
+        url: 'https://' + req.body.cb_url + '/cb/api/v1/blueprints/user',
         headers:
         {
             'cache-control': 'no-cache',
-            Authorization: 'Bearer ' + req.params.token,
+            Authorization: 'Bearer ' + req.body.token,
             'Content-Type': 'application/json'
         },
         body:
         {
-            ambariBlueprint: '' + req.params.bp_base64,
-            description: 'Blueprint for ' + req.params.cluster_name,
+            ambariBlueprint: '' + req.body.bp_base64,
+            description: 'Blueprint for ' + req.body.cluster_name,
             inputs: [],
             tags: {},
-            name: '' + req.params.cluster_name,
+            name: '' + req.body.cluster_name,
             hostGroupCount: 1,
             status: 'USER_MANAGED',
             public: true
@@ -179,8 +180,7 @@ router.get('/load_blueprint/:cb_url/:cluster_name/:bp_base64/:token', function (
         res.send(body)
     });
 
-
-})
+});
 
 
 router.route('/services').get((req, res) => {
