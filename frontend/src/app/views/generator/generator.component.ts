@@ -152,11 +152,6 @@ export class GeneratorComponent implements OnInit {
     })
   }
 
-  fwTest() {
-    this.filewriterService
-    .writeFile('bp-fw-test','{"test":"testing"}')
-  }
-
   genBlueprint(name) {
     this.host_groups.push(this.hg_master);
     this.host_groups.push(this.hg_worker);
