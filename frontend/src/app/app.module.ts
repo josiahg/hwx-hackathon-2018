@@ -17,8 +17,6 @@ import { DefaultLayoutComponent } from './containers';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
-
-import { RecipeService } from './recipe.service';
 import { HttpClientModule } from '@angular/common/http'
 
 const APP_CONTAINERS = [
@@ -91,8 +89,7 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
-  },
-  RecipeService],
+  }],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
