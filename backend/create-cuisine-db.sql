@@ -80,10 +80,11 @@ CREATE TABLE cloudbreak_cuisine.external_bundles
 DROP TABLE IF EXISTS cloudbreak_cuisine.cb_credentials;
 CREATE TABLE cloudbreak_cuisine.cb_credentials
 (
-  id integer unique NOT NULL PRIMARY KEY,
-  url text,
-  username text,
-  password text
+  id SERIAL PRIMARY KEY,
+  instance_name text,
+  cb_url text,
+  cb_username text,
+  cb_password text
 );
 
 -- LOAD TABLES

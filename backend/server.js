@@ -12,6 +12,32 @@ var pgp = require('pg-promise')({});
 var db = pgp('postgres://postgres:pg_pass123!@db:5432/postgres');
 var request = require('request');
 
+
+router.route('/cbcreds/read').get((req, res) => {
+    db.any('select * from cloudbreak_cuisine.cb_credentials')
+        .then(data => {
+            res.json(data);
+        })
+        .catch(error => {
+            console.log('ERROR:', error)
+        })
+});
+
+router.route('/cbcreds/set').post((req, res) => {
+    
+    
+    
+    db.any('insert into cloudbreak_cuisine.cb_credentials (instance_name, cb_url, cb_username, cb_password) values (\''+ req.body.instance_name + '\',\'' + req.body.cb_url + '\',\'' + req.body.cb_username + '\',\'' + req.body.cb_password + '\')')
+        .then(data => {
+            res.json(data);
+        })
+        .catch(error => {
+            console.log('ERROR:', error)
+        })
+});
+
+
+
 router.route('/cluster').get((req, res) => {
     db.any('select * from cloudbreak_cuisine.clusters')
         .then(data => {
@@ -33,7 +59,7 @@ router.route('/cluster/:id').get((req, res) => {
 });
 
 
-router.get('/get_token/:username/:password/:cb_url', function(req, res){ 
+router.route('/get_token/:username/:password/:cb_url', function(req, res){ 
 
     // process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0; 
 

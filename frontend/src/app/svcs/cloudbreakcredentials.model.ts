@@ -1,6 +1,7 @@
 export interface CloudbreakCredentials {
   id: number;
-  url: String;
-  user: String;
-  password: String;
+  instance_name: String;
+  cb_url: String;
+  cb_username: String;
+  cb_password: String;
 }
