@@ -1,0 +1,140 @@
+<div class="card">
+  <button class="btn btn-sm btn-primary">Add Recipe</button>
+  <button class="btn btn-sm btn-primary">Add NiFi Template</button>
+  <button class="btn btn-sm btn-primary">Add Zeppelin Notebook</button>
+  <button class="btn btn-sm btn-primary">Add SQL</button>
+</div>
+<div class="card" *ngIf="showRecipe">
+    <div class="card-header">
+        <strong>Add Recipe</strong>
+    </div>
+    <div class="card-body">
+        <form #f="ngForm" (ngSubmit)="addExtra(f)" novalidate class="form-horizontal">
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="description">Recipe Type</label>
+                <div class="col-md-9">
+                    <input name="recipeType" class="form-control" ngModel>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="clusterType">Cluster Type</label>
+                <div class="col-md-9">
+                    <input name="clusterType" class="form-control" ngModel>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="clusterVersion">Cluster Version</label>
+                <div class="col-md-9">
+                    <input name="clusterVersion" class="form-control" ngModel>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="service">Service</label>
+                <div class="col-md-9">
+                    <input name="service" class="form-control" ngModel>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="code">Code</label>
+                <div class="col-md-9">
+                    <textarea class="form-control" rows="9" name="code" ngModel></textarea>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>Submit</button>
+        </form>
+    </div>
+</div>
+
+<div class="card" *ngIf="showNifi">
+  <div class="card-header">
+      <strong>Add NiFi Template</strong>
+  </div>
+  <div class="card-body">
+      <form #f="ngForm" (ngSubmit)="addExtra(f)" novalidate class="form-horizontal">
+          <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="clusterType">Cluster Type</label>
+              <div class="col-md-9">
+                  <input name="clusterType" class="form-control" ngModel>
+              </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="clusterVersion">Cluster Version</label>
+              <div class="col-md-9">
+                  <input name="clusterVersion" class="form-control" ngModel>
+              </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="service">Service</label>
+              <div class="col-md-9">
+                  <input name="service" class="form-control" ngModel>
+              </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="code">Code</label>
+              <div class="col-md-9">
+                  <textarea class="form-control" rows="9" name="code" ngModel></textarea>
+              </div>
+          </div>
+          <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>Submit</button>
+      </form>
+  </div>
+</div>
+
+<div class="card" *ngIf="showZep">
+  <div class="card-header">
+      <strong>Add Zeppelin Notebook</strong>
+  </div>
+  <div class="card-body">
+      <form #f="ngForm" (ngSubmit)="addExtra(f)" novalidate class="form-horizontal">
+          <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="clusterType">Cluster Type</label>
+              <div class="col-md-9">
+                  <input name="clusterType" class="form-control" ngModel>
+              </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="clusterVersion">Cluster Version</label>
+              <div class="col-md-9">
+                  <input name="clusterVersion" class="form-control" ngModel>
+              </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="service">Service</label>
+              <div class="col-md-9">
+                  <input name="service" class="form-control" ngModel>
+              </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="code">Code</label>
+              <div class="col-md-9">
+                  <textarea class="form-control" rows="9" name="code" ngModel></textarea>
+              </div>
+          </div>
+          <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>Submit</button>
+      </form>
+  </div>
+</div>
+
+<div class="card" *ngIf="showSQL">
+  <div class="card-header">
+      <strong>Add SQL</strong>
+  </div>
+  <div class="card-body">
+      <form #f="ngForm" (ngSubmit)="addExtra(f)" novalidate class="form-horizontal">
+          <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="description">Service</label>
+              <div class="col-md-9">
+                  <input name="service" class="form-control" ngModel>
+              </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="code">Code</label>
+              <div class="col-md-9">
+                  <textarea class="form-control" rows="9" name="code" ngModel></textarea>
+              </div>
+          </div>
+          <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>Submit</button>
+      </form>
+  </div>
+</div>
+

@@ -4,8 +4,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
-import { CreateComponent } from './create.component';
-import { CreateRoutingModule } from './create-routing.module';
+import {  AddExtrasComponent } from './add-extras.component';
+import { AddExtrasRoutingModule } from './add-extras-routing.module';
 
 import { CommonModule } from '@angular/common';
 
@@ -13,11 +13,11 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     FormsModule,
-    CreateRoutingModule,
+    AddExtrasRoutingModule,
     ChartsModule,
     BsDropdownModule,
     ButtonsModule.forRoot()
   ],
-  declarations: [ CreateComponent ]
+  declarations: [ AddExtrasComponent ]
 })
-export class CreateModule { }
+export class AddExtrasModule { }

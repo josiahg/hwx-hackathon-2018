@@ -36,6 +36,7 @@ export class SettingsComponent implements OnInit {
     });
   }
 
+<<<<<<< HEAD
   addCredentials(instance_name, cb_url, cb_username, cb_password){
     this.cloudbreakCredentialsService
     .setCredentials('{ "instance_name": "'+ instance_name +'", "cb_url": "'+ cb_url +'",  "cb_username": "'+ cb_username +'", "cb_password": "'+ cb_password +'" }');
@@ -45,6 +46,12 @@ export class SettingsComponent implements OnInit {
     
     this.cloudbreakCredentialsService
     .deleteCredentials('{ "cred_id": "'+ cred_id +'" }');
+=======
+  public cred: CloudbreakCredentials;
+
+  saveCbCreds(form) {
+    console.log(form);
+>>>>>>> 124eb6e17717fed2f74c886dde007af528189876
   }
 
 }

@@ -11,7 +11,7 @@ export const navItems = [
   },
   {
     name: 'Add Extras',
-    url: '/create',
+    url: '/addextras',
     icon: 'cui-pencil'
   },
   {
