@@ -1,8 +1,8 @@
 <div class="card">
-  <button class="btn btn-sm btn-primary">Add Recipe</button>
-  <button class="btn btn-sm btn-primary">Add NiFi Template</button>
-  <button class="btn btn-sm btn-primary">Add Zeppelin Notebook</button>
-  <button class="btn btn-sm btn-primary">Add SQL</button>
+    <select class="form-control">
+        <option  *ngFor="let type of types">{{type}}</option>
+      </select>
+  <button type="submit" class="btn btn-sm btn-primary">Add SQL</button>
 </div>
 <div class="card" *ngIf="showRecipe">
     <div class="card-header">

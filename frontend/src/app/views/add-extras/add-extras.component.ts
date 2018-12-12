@@ -10,6 +10,8 @@ export class AddExtrasComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  types: String[] = ['Recipe','NiFi Template', 'Zeppelin Notebook', 'SQL']
+
   private showRecipe = true;
   private showNifi = true;
   private showZep = true;
