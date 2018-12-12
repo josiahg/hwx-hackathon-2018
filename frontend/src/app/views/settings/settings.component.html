@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-header">
             <i class="fa fa-align-justify"></i> Configured Clusters
-            <span class="float-right"><a routerLink="/create"><button type="button" class="btn btn-block btn-primary">Add Credentials</button></a></span>
+            <span class="float-right"><a routerLink="/settings/add"><button type="button" class="btn btn-block btn-primary">Add Credentials</button></a></span>
         </div>
         <div class="card-body">
             <table class="table table-striped">
@@ -12,6 +12,8 @@
                         <th>URL</th>
                         <th>Username</th>
                         <th>Password</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,7 +21,9 @@
                         <td>{{cloudbreakCredential.instance_name}}</td>
                         <td>{{cloudbreakCredential.cb_url}}</td>
                         <td>{{cloudbreakCredential.cb_username}}</td>
-                        <td>{{cloudbreakCredential.cb_password}}</td>
+                        <td>***********</td>
+                        <td><a routerLink="/settings/modify"><button type="button" class="btn btn-block btn-primary">Modify</button></a></td>
+                        <td><a routerLink="/settings/delete"><button type="button" class="btn btn-block btn-primary">Delete</button></a></td>
                     </tr>
                 </tbody>
             </table>
