@@ -202,6 +202,16 @@ router.route('/services/:id').get((req, res) => {
         })
 });
 
+router.route('/custom_extras').get((req, res) => {
+    db.any("select recipe_description, extra_type, case when pre_ambari_start is not null then 'Pre Ambari Start' when post_ambari_start is not null then 'Post Ambari Start' when post_cluster_install is not null then 'Post Cluster Install' else 'Pre Termination' end as recipe_type, case when pre_ambari_start is not null then pre_ambari_start when post_ambari_start is not null then post_ambari_start when post_cluster_install is not null then post_cluster_install else on_termination end as recipe_code from cloudbreak_cuisine.components_recipes where extra_type != 'Standard'")
+        .then(data => {
+            res.json(data);
+        })
+        .catch(error => {
+            console.log('ERROR:', error)
+        })
+});
+
 router.route('/services/:cluster_type/:description').get((req, res) => {
     db.any('select services.* from cloudbreak_cuisine.services services, cloudbreak_cuisine.clusters clusters where services.associated_cluster = clusters.id and clusters.cluster_type =\''+req.params.cluster_type+'\' and services.service_description = \''+req.params.description+'\'')
         .then(data => {
@@ -331,30 +341,23 @@ router.route('/blueprint_recipes/:id').get((req, res) => {
         })
 });
 
-router.route('/createsh').post((req, res) => {
+router.route('/createsh/:filename').post((req, res) => {
     var fs = require("fs");
-    var body = JSON.stringify(req.body);
     var exec = require('child_process').exec;
 
-    var filename = 'one-file.sh';
-    var files = ['pas-utilities.sh', 'pas-druid.sh'];
+    var fn = req.params.filename + '.sh';
+    console.log(req.body)
+    var files = req.body;
 
     files.forEach(file => {
-        /*exec("pwd", function(error, stdout,stderr) {
-            if(!error) {
-                console.log(stdout)
-            } else {
-                console.log(stderr)
-            }
-        })*/
-        exec("cat ./scripts/" + file + " >> ./generated/" + filename, function (error, stdout, stderr) {
+        console.log(file)
+        exec("cat ./scripts/" + file + " >> ./generated/" + fn, function (error, stdout, stderr) {
             if (!error) {
-                console.log("Success!")
+                res.json("Success!")
             } else {
-                console.log(stderr)
+                res.json(stderr)
             }
         })
-
     })
 });
 
@@ -375,8 +378,8 @@ router.route('/create_bundle/:name').get((req, res) => {
     });
     
     archive.pipe(output);
-    archive.glob('./generated/*.sh');
-    archive.glob('./generated/*.json');
+    archive.glob('./generated/*name*.sh');
+    archive.glob('./generated/*name*.json');
     archive.finalize();
 
     res.json("Bundle " + req.params.name + " created");

@@ -180,8 +180,12 @@ export class GeneratorComponent implements OnInit {
     .writeFile(name,JSON.stringify(this.gen_bp));
   }
 
-  genSh(name) {
-    console.log("TODO: Fix genSH")
+  async genSh(name) {
+    //console.log("TODO: Fix genSH")
+    let arr = Array.from(this.shRecipes.values())
+    let json = JSON.stringify(arr)
+    console.log(json);
+    await this.filewriterService.generateSh(name,json);
   }
 
   fetchNeededBlueprints() {
@@ -252,6 +256,7 @@ export class GeneratorComponent implements OnInit {
 
   public createResult: any;
   async genBundle(name) {
+
     /*this.showGenerate = false;
     this.showClusterTypes = true;
     this.dynamic = 1;*/

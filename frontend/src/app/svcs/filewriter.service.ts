@@ -42,7 +42,8 @@ export class FilewriterService {
   }
 
   generateSh(filename, content) {
-    this.http.post(`${this.uri}/createsh/${filename}`, content, httpOptions).subscribe(
+    return this.http.post(`${this.uri}/createsh/${filename}`, content, httpOptions).toPromise();
+    /*.subscribe(
       (val) => {
         console.log("POST call successful value returned in body",
           val);
@@ -52,7 +53,7 @@ export class FilewriterService {
       },
       () => {
         console.log("The POST observable is now completed.");
-      });
+      });*/
   }
 }
 
