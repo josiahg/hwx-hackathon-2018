@@ -18,6 +18,8 @@ import { ClusterService } from '../../svcs/cluster.service';
 
 import { FilewriterService } from '../../svcs/filewriter.service'
 
+import { DownloadService } from '../../svcs/download.service'
+
 interface ClusterType {
   id: String;
   img: String;
@@ -50,7 +52,8 @@ export class GeneratorComponent implements OnInit {
   constructor(private blueprintService: BlueprintService,
     private serviceService: ServiceService,
     private clusterService: ClusterService,
-    private filewriterService: FilewriterService) {};
+    private filewriterService: FilewriterService,
+    private downloadService: DownloadService) {};
 
   max: number = 5;
   dynamic: number = 1;
@@ -251,5 +254,10 @@ export class GeneratorComponent implements OnInit {
     this.dynamic = 1;*/
     this.genBlueprint(name);
     console.log(this.shRecipes)
+  }
+
+  downloadBundle(name) {
+    console.log('about to download',name)
+    this.downloadService.downloadBundle(name);
   }
 }

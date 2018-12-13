@@ -12,7 +12,7 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class FilewriterService {
+export class DownloadService {
   constructor(private http: HttpClient) { }
 
   getAbsoluteDomainUrl(): string {
@@ -46,18 +46,9 @@ export class FilewriterService {
     //return this.http.post(`${this.uri}/filewriter`,content,httpOptions);
   }
 
-  generateSh(filename, content) {
-    this.http.post(`${this.uri}/createsh/${filename}`, content, httpOptions).subscribe(
-      (val) => {
-        console.log("POST call successful value returned in body",
-          val);
-      },
-      response => {
-        console.log("POST call in error", response);
-      },
-      () => {
-        console.log("The POST observable is now completed.");
-      });
+  downloadBundle(name) {
+    console.log('about to call ', `${this.uri}/download/${name}`);
+    return this.http.get(`${this.uri}/download/${name}`);
   }
 }
 
