@@ -292,16 +292,16 @@ insert into cloudbreak_cuisine.components_blueprints values(130,37,'SAM_SERVER',
 insert into cloudbreak_cuisine.components_blueprints values(131,38,'SAM_GENERAL','{"streamline-common":{"jar.storage.type":"local","streamline.storage.type":"mysql","streamline.storage.connector.connectURI":"jdbc:mysql://localhost:3306/streamline","registry.url":"http://localhost:7788/api/v1","streamline.dashboard.url":"http://localhost:9089","streamline.storage.connector.password":"streamline"}}','','','');
 insert into cloudbreak_cuisine.components_blueprints values(132,38,'SAM_SERVER','','{"name":"STREAMLINE_SERVER"}','','');
 
-insert into cloudbreak_cuisine.components_recipes values(1,1,'Utills Install','Standard','pas-utilities.sh','','','');
-insert into cloudbreak_cuisine.components_recipes values(2,2,'Utills Install','Standard','pas-utilities.sh','','','');
-insert into cloudbreak_cuisine.components_recipes values(3,3,'Utills Install','Standard','pas-utilities.sh','','','');
-insert into cloudbreak_cuisine.components_recipes values(4,25,'Ranger metastore PG','Standard','pas-ranger.sh','','','');
-insert into cloudbreak_cuisine.components_recipes values(5,26,'Ranger metastore PG','Standard','pas-ranger.sh','','','');
-insert into cloudbreak_cuisine.components_recipes values(6,14,'Druid Metastore PG','Standard','pas-druid.sh','','','');
-insert into cloudbreak_cuisine.components_recipes values(7,15,'Druid Metastore PG','Standard','pas-druid.sh','','','');
-insert into cloudbreak_cuisine.components_recipes values(8,33,'Registry Metastore MySQL','Standard','pas-registry.sh','','','');
-insert into cloudbreak_cuisine.components_recipes values(9,34,'Registry Metastore MySQL','Standard','pas-registry.sh','','','');
-insert into cloudbreak_cuisine.components_recipes values(10,37,'SAM Metastore MySQL','Standard','pas-sam.sh','','','');
+insert into cloudbreak_cuisine.components_recipes (service_id, recipe_description, extra_type, pre_ambari_start) values(1,'Utills Install','Standard','pas-utilities.sh');
+insert into cloudbreak_cuisine.components_recipes (service_id, recipe_description, extra_type, pre_ambari_start) values(2,'Utills Install','Standard','pas-utilities.sh');
+insert into cloudbreak_cuisine.components_recipes (service_id, recipe_description, extra_type, pre_ambari_start) values(3,'Utills Install','Standard','pas-utilities.sh');
+insert into cloudbreak_cuisine.components_recipes (service_id, recipe_description, extra_type, pre_ambari_start) values(25,'Ranger metastore PG','Standard','pas-ranger.sh');
+insert into cloudbreak_cuisine.components_recipes (service_id, recipe_description, extra_type, pre_ambari_start) values(26,'Ranger metastore PG','Standard','pas-ranger.sh');
+insert into cloudbreak_cuisine.components_recipes (service_id, recipe_description, extra_type, pre_ambari_start) values(14,'Druid Metastore PG','Standard','pas-druid.sh');
+insert into cloudbreak_cuisine.components_recipes (service_id, recipe_description, extra_type, pre_ambari_start) values(15,'Druid Metastore PG','Standard','pas-druid.sh');
+insert into cloudbreak_cuisine.components_recipes (service_id, recipe_description, extra_type, pre_ambari_start) values(33,'Registry Metastore MySQL','Standard','pas-registry.sh');
+insert into cloudbreak_cuisine.components_recipes (service_id, recipe_description, extra_type, pre_ambari_start) values(34,'Registry Metastore MySQL','Standard','pas-registry.sh');
+insert into cloudbreak_cuisine.components_recipes (service_id, recipe_description, extra_type, pre_ambari_start) values(37,'SAM Metastore MySQL','Standard','pas-sam.sh');
 
 insert into cloudbreak_cuisine.management_packs values(1,3,'HDF MPACK FOR HDP+HDF','http://public-repo-1.hortonworks.com/HDF/amazonlinux2/3.x/updates/3.2.0.0/tars/hdf_ambari_mp/hdf-ambari-mpack-3.2.0.0-520.tar.gz');
 

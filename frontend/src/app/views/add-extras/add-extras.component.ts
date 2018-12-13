@@ -4,6 +4,8 @@ import { AddExtra } from '../../svcs/add-extras.model';
 import { AddExtraService } from '../../svcs/add-extras.service';
 import { Service } from '../../svcs/service.model';
 import { ServiceService } from '../../svcs/service.service';
+import { CustomExtras } from '../../svcs/custom-extras.model';
+import { CustomExtrasService } from '../../svcs/custom-extras.service';
 
 import { HttpHeaders } from '@angular/common/http';
 
@@ -28,13 +30,17 @@ interface Recipe {
 })
 export class AddExtrasComponent implements OnInit {
   constructor(private addExtraService: AddExtraService,
-    private serviceService: ServiceService) { }
+    private serviceService: ServiceService,
+    private customExtrasService: CustomExtrasService,) { }
 
   ngOnInit(): void {
     this.getAllServicesTypes();
+
+    this.getCustomExtras();
   }
 
   public serviceTypes: AddExtra[];
+  public customExtras: CustomExtras[];
   getAllServicesTypes() {
 
     this.addExtraService
@@ -44,6 +50,19 @@ export class AddExtrasComponent implements OnInit {
         console.log('Data requested ... ');
         console.log(this.serviceTypes);
       });
+
+
+  }
+  getCustomExtras() {
+    
+    this.customExtrasService
+      .getCustomExtras()
+      .subscribe((data: CustomExtras[]) => {
+        this.customExtras = data;
+        console.log('Data requested ... ');
+        console.log(this.customExtras);
+      });
+
 
   }
   extraTypes: String[] = ['Recipe', 'NiFi Template', 'Zeppelin Note', 'SQL']
@@ -55,7 +74,8 @@ export class AddExtrasComponent implements OnInit {
   public showNifi = false;
   public showZep = false;
   public showSQL = false;
-  public showExtras = true;
+  public showExtras = false;
+  public showList = true;
   public services: Service[] = [];
 
   addExtra({ value, valid }: { value: Recipe, valid: boolean }) {
@@ -130,13 +150,23 @@ export class AddExtrasComponent implements OnInit {
 
 
   }
+  toggleAdd() {
+    this.showRecipe = false;
+    this.showNifi = false;
+    this.showZep = false;
+    this.showSQL = false;
+    this.showExtras = true;
+    this.showList = false;
+
+  }
 
   cancelAdd() {
     this.showRecipe = false;
     this.showNifi = false;
     this.showZep = false;
     this.showSQL = false;
-    this.showExtras = true;
+    this.showExtras = false;
+    this.showList = true;
 
   }
 }

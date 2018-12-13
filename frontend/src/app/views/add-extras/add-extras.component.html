@@ -1,6 +1,37 @@
+<div class="animated fadeIn" *ngIf="showList">
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-align-justify"></i> Custom Extras
+            <span class="float-right" *ngIf="!showAddCredentials"><button type="button" class="btn btn-block btn-primary" (click)="toggleAdd()">Add Custom Recipe</button></span>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th width="20%">Name</th>
+                        <th width="20%">Extra Type</th>
+                        <th width="20%">Recipe Type</th>
+                        <th width="40%">Code</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let customExtra of customExtras">
+                        <td>{{customExtra.name}}</td>
+                        <td>{{customExtra.extra_type}}</td>
+                        <td>{{customExtra.recipe_type}}</td>
+                        <td>{{customExtra.code}}</td>
+                    </tr>
+                </tbody>
+            </table>
+  
+        </div>
+    </div>
+</div>
+
+
 <div class="card" *ngIf="showExtras">
   <div class="card-header">
-    <strong>Select Extra</strong>
+    <strong>Select Extra</strong><span class="float-right"><button type="button" class="btn btn-block btn-primary" (click)="cancelAdd()">Cancel</button></span>
   </div>
   <form #extraFrom="ngForm" (ngSubmit)="selectExtra(extraFrom)" novalidate class="form-horizontal">
   <div class="card-body">
