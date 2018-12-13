@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 import { HttpHeaders } from '@angular/common/http';
 
 const httpOptions = {
@@ -11,7 +12,7 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class FilewriterService {
+export class DownloadService {
   constructor(private http: HttpClient) { }
 
   getAbsoluteDomainUrl(): string {
@@ -27,21 +28,11 @@ export class FilewriterService {
   uri = this.getAbsoluteDomainUrl() + ':4000';
 
   writeFile(filename, content) {
-    return this.http.post(`${this.uri}/filewriter/${filename}`, content, httpOptions)
-    .subscribe(
-      (val) => {
-        console.log("POST call successful value returned in body", val);
-      },
-      response => {
-        console.log("POST call in error", response);
-      },
-      () => {
-        console.log("The POST observable is now completed.");
-      });
-  }
+    //console.log('Writer recieved: ', content)
+    //return this.http.get(`${this.uri}/filewriter/${filename}/${content}`);
 
-  generateSh(filename, content) {
-    this.http.post(`${this.uri}/createsh/${filename}`, content, httpOptions).subscribe(
+    //return
+    this.http.post(`${this.uri}/filewriter/${filename}`, content, httpOptions).subscribe(
       (val) => {
         console.log("POST call successful value returned in body",
           val);
@@ -52,6 +43,15 @@ export class FilewriterService {
       () => {
         console.log("The POST observable is now completed.");
       });
+    //return this.http.post(`${this.uri}/filewriter`,content,httpOptions);
+  }
+
+  createBundle(name) {
+    return this.http.get(`${this.uri}/create_bundle/${name}`);
+  }
+
+  downloadBundle(name) {
+    return this.http.get(`${this.uri}/download/${name}`);
   }
 }
 
