@@ -123,7 +123,6 @@ router.route('/load_blueprint').post((req, res) => {
     // Expects the following in body: cb_url, token, bp_base64, cluster_name
     process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
     var request = require("request");
-    console.log("Token",req.body.token)
     var options = {
         method: 'POST',
         url: ''+ req.body.cb_url + '/cb/api/v1/blueprints/user',
