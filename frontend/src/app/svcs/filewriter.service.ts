@@ -27,7 +27,8 @@ export class FilewriterService {
   uri = this.getAbsoluteDomainUrl() + ':4000';
 
   writeFile(filename, content) {
-    return this.http.post(`${this.uri}/filewriter/${filename}`, content, httpOptions)
+    return this.http.post(`${this.uri}/filewriter/${filename}`, content, httpOptions).toPromise();
+    /*
     .subscribe(
       (val) => {
         console.log("POST call successful value returned in body", val);
@@ -37,7 +38,7 @@ export class FilewriterService {
       },
       () => {
         console.log("The POST observable is now completed.");
-      });
+      });*/
   }
 
   generateSh(filename, content) {
