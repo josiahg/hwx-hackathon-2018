@@ -53,10 +53,10 @@
     <button class="btn btn-block btn-primary" (click)="addOptions()">Add Selected</button>
   </div>
   <div class="row animated fadeIn" *ngIf="showGenerate">
-    <div class="row">
+    <div>
       <h1>Generate Bundle</h1>
     </div>
-    <div class="row">
+    <div>
       <input class="form-control" type="text" placeholder="Enter bundle name..." #nameInput>
       <button class="btn btn-block btn-primary" (click)="genBundle(nameInput.value)">Generate Bundle</button>
     </div>

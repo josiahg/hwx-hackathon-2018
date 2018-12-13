@@ -348,18 +348,18 @@ router.route('/createsh/:filename').post((req, res) => {
     var fn = req.params.filename + '.sh';
     var files = req.body;
 
-    var resultStr = [];
+    var execStr = "";
     files.forEach(file => {
         console.log(file)
-        exec("cat ./scripts/" + file + " >> ./generated/" + fn, function (error, stdout, stderr) {
-            if (!error) {
-                resultStr.push("Success!");
-            } else {
-                resultStr.push(stderr)
-            }
-        })
+        execStr += "cat ./scripts/" + file + " >> ./generated/" + fn + "; ";
+    });
+    exec(execStr, function (error, stdout, stderr) {
+        if (!error) {
+            res.json("Success!");
+        } else {
+            res.json(stderr)
+        }
     })
-    res.json(resultStr);
 });
 
 
