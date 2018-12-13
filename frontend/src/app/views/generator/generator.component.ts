@@ -80,7 +80,7 @@ export class GeneratorComponent implements OnInit {
   public hg_worker: HostGroup = { 'name':'worker', 'cardinality':'1+', 'components':[] } as HostGroup;
   public hg_compute: HostGroup = { 'name':'compute', 'cardinality':'1+', 'components':[] } as HostGroup;
   public gen_bp: GenBlueprint = {} as GenBlueprint;
-  public shRecipes: string[] = [];
+  public shRecipes = new Set();
   public oneBigConf: string[] = [];
 
   ngOnInit(): void {
@@ -111,7 +111,7 @@ export class GeneratorComponent implements OnInit {
     .getRecipesForBlueprint(id)
     .subscribe((data: {'id','service_id','recipe_description','extra_type','pre_ambari_start','post_ambari_start','post_cluster_install','on_termination'}) => {
       if(typeof data[0] !== 'undefined')
-        this.shRecipes.push(data[0].pre_ambari_start);
+        this.shRecipes.add(data[0].pre_ambari_start);
     });
   }
 
@@ -172,6 +172,11 @@ export class GeneratorComponent implements OnInit {
     /*.subscribe(data => {
       console.log('Write result: ',data);
     })*/
+  }
+
+  genSh() {
+
+
   }
 
   fetchNeededBlueprints() {
