@@ -37,7 +37,7 @@ export class ServiceService {
   getServiceById(id) {
     return this.http.get(`${this.uri}/services/${id}`);
   }
-  /*getServiceByClusterTypeAndDescription(cluster_type, description) {
+  getServiceByClusterTypeAndDescription(cluster_type, description) {
     return this.http.get(`${this.uri}/services/${cluster_type}/${description}`);
   }
   setCustomRecipe(body) {
@@ -53,5 +53,5 @@ export class ServiceService {
       () => {
         console.log("The POST observable is now completed.");
       });
-  }*/
+  }
 }
