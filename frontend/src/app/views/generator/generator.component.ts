@@ -166,8 +166,9 @@ export class GeneratorComponent implements OnInit {
       )
     })
   }
+  public asyncResult: any;
 
-  genBlueprint(name) {
+  async genBlueprint(name) {
     this.host_groups.push(this.hg_master);
     this.host_groups.push(this.hg_worker);
     this.host_groups.push(this.hg_compute);
@@ -175,8 +176,8 @@ export class GeneratorComponent implements OnInit {
     this.gen_bp.Blueprints.blueprint_name = name;
     this.addConfigsToBP();
     console.log(JSON.stringify(this.gen_bp))
-    this.filewriterService
-    .writeFile(name,JSON.stringify(this.gen_bp))
+    this.asyncResult = await this.filewriterService
+    .writeFile(name,JSON.stringify(this.gen_bp));
   }
 
   genSh(name) {
@@ -249,14 +250,15 @@ export class GeneratorComponent implements OnInit {
     this.dynamic++;
   }
 
-  genBundle(name) {
+  public createResult: any;
+  async genBundle(name) {
     /*this.showGenerate = false;
     this.showClusterTypes = true;
     this.dynamic = 1;*/
 
     this.genBlueprint(name);
     this.genSh(name);
-    this.downloadService.createBundle(name);
+    this.createResult = await this.downloadService.createBundle(name);
     this.downloadLink = this.uriService.getUri() + '/download/' + name;
     this.readyForDownload = true;
   }

@@ -47,7 +47,7 @@ export class DownloadService {
   }
 
   createBundle(name) {
-    return this.http.get(`${this.uri}/create_bundle/${name}`);
+    return this.http.get(`${this.uri}/create_bundle/${name}`).toPromise();
   }
 
   downloadBundle(name) {
