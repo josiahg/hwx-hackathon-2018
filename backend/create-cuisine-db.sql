@@ -90,9 +90,9 @@ CREATE TABLE cloudbreak_cuisine.cb_credentials
 
 -- LOAD TABLES
 
-insert into cloudbreak_cuisine.clusters values(1,'3.0.1','HDP','');
+insert into cloudbreak_cuisine.clusters values(1,'3.0','HDP','');
 insert into cloudbreak_cuisine.clusters values(2,'3.2','HDF','');
-insert into cloudbreak_cuisine.clusters values(3,'3.2-3.0.1','HDP+HDF','');
+insert into cloudbreak_cuisine.clusters values(3,'3.0','HDP+HDF','');
 
 
 insert into cloudbreak_cuisine.services values(1,'UTILITIES',1,1,0);
