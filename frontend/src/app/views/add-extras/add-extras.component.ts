@@ -92,24 +92,12 @@ export class AddExtrasComponent implements OnInit {
       this.services.forEach(function(value, key) {
         console.log('{ serviceId": "'+ value.id +'", "recipe_description": "'+ form.form.value.name + '", "extra_type": "'+ extraType +'",  "recType": "'+ recType +'", "recipe": "'+ form.form.value.code +'" }');
         var body = '{ serviceId": "'+ value.id +'", "recipe_description": "'+ form.form.value.name + '", "extra_type": "'+ extraType +'",  "recType": "'+ recType +'", "recipe": "'+ form.form.value.code +'" }';
-
-        return this.http.post(`${this.uri}/set_custom_recipe`, body, httpOptions).subscribe(
-          (val) => {
-            console.log("POST call successful value returned in body",
-              val);
-            window.location.reload();
-          },
-          response => {
-            console.log("POST call in error", response);
-          },
-          () => {
-            console.log("The POST observable is now completed.");
-          });
-      
       })
     })
-
-  
+    this.services.forEach(function(value, key) {
+      console.log('{ serviceId": "'+ value.id +'", "recipe_description": "'+ form.form.value.name + '", "extra_type": "'+ extraType +'",  "recType": "'+ recType +'", "recipe": "'+ form.form.value.code +'" }');
+      var body = '{ serviceId": "'+ value.id +'", "recipe_description": "'+ form.form.value.name + '", "extra_type": "'+ extraType +'",  "recType": "'+ recType +'", "recipe": "'+ form.form.value.code +'" }';
+    })
 
     console.log('{ name": "'+ form.form.value.name +'", "recType": "'+ recType + '", "cluster_type": "'+ form.form.value.cluster_type +'",  "service_type": "'+ form.form.value.service_type +'", "code": "'+ form.form.value.code +'" }');
     //this.addExtraService.setCustomRecipe('{ "recipe_type": "'+ form.form.value.recipe_type + '", "cluster_type": "'+ form.form.value.cluster_type +'",  "service_type": "'+ form.form.value.service_type +'", "code": "'+ form.form.value.code +'" }');
