@@ -346,18 +346,19 @@ router.route('/createsh/:filename').post((req, res) => {
     var exec = require('child_process').exec;
 
     var fn = req.params.filename + '.sh';
-    console.log(req.body)
     var files = req.body;
 
+    var execStr = "";
     files.forEach(file => {
         console.log(file)
-        exec("cat ./scripts/" + file + " >> ./generated/" + fn, function (error, stdout, stderr) {
-            if (!error) {
-                res.json("Success!")
-            } else {
-                res.json(stderr)
-            }
-        })
+        execStr += "cat ./scripts/" + file + " >> ./generated/" + fn + "; ";
+    });
+    exec(execStr, function (error, stdout, stderr) {
+        if (!error) {
+            res.json("Success!");
+        } else {
+            res.json(stderr)
+        }
     })
 });
 
@@ -378,8 +379,8 @@ router.route('/create_bundle/:name').get((req, res) => {
     });
     
     archive.pipe(output);
-    archive.glob('./generated/*name*.sh');
-    archive.glob('./generated/*name*.json');
+    archive.glob('./generated/*.sh');
+    archive.glob('./generated/*.json');
     archive.finalize();
 
     res.json("Bundle " + req.params.name + " created");

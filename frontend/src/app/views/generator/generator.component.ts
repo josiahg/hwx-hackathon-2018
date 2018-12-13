@@ -182,10 +182,10 @@ export class GeneratorComponent implements OnInit {
 
   async genSh(name) {
     //console.log("TODO: Fix genSH")
-    let arr = Array.from(this.shRecipes.values())
+    let arr = JSON.stringify(Array.from(this.shRecipes.values()))
     let json = JSON.stringify(arr)
     console.log(json);
-    await this.filewriterService.generateSh(name,json);
+    await this.filewriterService.generateSh(name,JSON.stringify(Array.from(this.shRecipes.values())));
   }
 
   fetchNeededBlueprints() {
@@ -255,6 +255,7 @@ export class GeneratorComponent implements OnInit {
   }
 
   public createResult: any;
+  public shResult: any;
   async genBundle(name) {
 
     /*this.showGenerate = false;
@@ -262,8 +263,12 @@ export class GeneratorComponent implements OnInit {
     this.dynamic = 1;*/
 
     this.genBlueprint(name);
-    this.genSh(name);
-    this.createResult = await this.downloadService.createBundle(name);
+    //this.genSh(name);
+    await this.filewriterService
+      .generateSh(name,JSON.stringify(Array.from(this.shRecipes.values())))
+      .then(await this.downloadService.createBundle(name) as any)
+    //this.shResult = await this.filewriterService.generateSh(name,JSON.stringify(Array.from(this.shRecipes.values())));
+
     this.downloadLink = this.uriService.getUri() + '/download/' + name;
     this.readyForDownload = true;
   }

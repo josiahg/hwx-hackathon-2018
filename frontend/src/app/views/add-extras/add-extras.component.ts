@@ -54,7 +54,7 @@ export class AddExtrasComponent implements OnInit {
 
   }
   getCustomExtras() {
-    
+
     this.customExtrasService
       .getCustomExtras()
       .subscribe((data: CustomExtras[]) => {
@@ -104,7 +104,7 @@ export class AddExtrasComponent implements OnInit {
     var extraType = "Custom Recipe";
 
     // TO-DO Implement Service ID
-    this.services = await this.serviceService.getServiceByClusterTypeAndDescription(form.form.value.cluster_type, form.form.value.service_type) as Service[];
+    //this.services = await this.serviceService.getServiceByClusterTypeAndDescription(form.form.value.cluster_type, form.form.value.service_type) as Service[];
 
     // .subscribe((data: Service[]) => {
     //   this.services = data;
