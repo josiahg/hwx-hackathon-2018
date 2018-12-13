@@ -38,7 +38,7 @@ export class ServiceService {
     return this.http.get(`${this.uri}/services/${id}`);
   }
   getServiceByClusterTypeAndDescription(cluster_type, description) {
-    return this.http.get(`${this.uri}/services/${cluster_type}/${description}`);
+    return this.http.get(`${this.uri}/services/${cluster_type}/${description}`).toPromise();
   }
   setCustomRecipe(body) {
     return this.http.post(`${this.uri}/set_custom_recipe`, body, httpOptions).subscribe(

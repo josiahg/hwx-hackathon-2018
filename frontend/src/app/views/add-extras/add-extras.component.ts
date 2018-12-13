@@ -36,6 +36,7 @@ export class AddExtrasComponent implements OnInit {
 
   public serviceTypes: AddExtra[];
   getAllServicesTypes() {
+    
     this.addExtraService
       .getDistinctServices()
       .subscribe((data: AddExtra[]) => {
@@ -69,7 +70,7 @@ export class AddExtrasComponent implements OnInit {
     console.log('{ name": "' + form.form.value.name + '", "cluster_type": "' + form.form.value.cluster_type + '",  "template": "' + form.form.value.code + '" }');
     //this.addExtraService.setCustomRecipe('{ "recipe_type": "'+ form.form.value.recipe_type + '", "cluster_type": "'+ form.form.value.cluster_type +'",  "service_type": "'+ form.form.value.service_type +'", "code": "'+ form.form.value.code +'" }');
   }
-  addCustomRecipe(form) {
+  async addCustomRecipe(form) {
     var recType = "";
     if (form.form.value.recipe_type == "Pre-Ambari") {
       recType = "pre_ambari_start";
@@ -83,55 +84,25 @@ export class AddExtrasComponent implements OnInit {
     var extraType = "Custom Recipe";
 
     // TO-DO Implement Service ID
-<<<<<<< HEAD
-    this.serviceService
-    .getServiceByClusterTypeAndDescription(form.form.value.cluster_type, form.form.value.service_type)
-    .subscribe((data: Service[]) => {
-      this.services = data;
-      console.log('Service data requested...');
-      console.log(this.services);
-      this.services.forEach(function(value, key) {
-        console.log('{ serviceId": "'+ value.id +'", "recipe_description": "'+ form.form.value.name + '", "extra_type": "'+ extraType +'",  "recType": "'+ recType +'", "recipe": "'+ form.form.value.code +'" }');
-        var body = '{ serviceId": "'+ value.id +'", "recipe_description": "'+ form.form.value.name + '", "extra_type": "'+ extraType +'",  "recType": "'+ recType +'", "recipe": "'+ form.form.value.code +'" }';
-      })
-    })
+    this.services = await this.serviceService.getServiceByClusterTypeAndDescription(form.form.value.cluster_type, form.form.value.service_type) as Service[];
+
+    // .subscribe((data: Service[]) => {
+    //   this.services = data;
+    //   console.log('Service data requested...');
+    //   console.log(this.services);
+      
+    // })
+
+    var serviceId;
     this.services.forEach(function(value, key) {
       console.log('{ serviceId": "'+ value.id +'", "recipe_description": "'+ form.form.value.name + '", "extra_type": "'+ extraType +'",  "recType": "'+ recType +'", "recipe": "'+ form.form.value.code +'" }');
-      var body = '{ serviceId": "'+ value.id +'", "recipe_description": "'+ form.form.value.name + '", "extra_type": "'+ extraType +'",  "recType": "'+ recType +'", "recipe": "'+ form.form.value.code +'" }';
+       serviceId = value.id ;
     })
-
-    console.log('{ name": "'+ form.form.value.name +'", "recType": "'+ recType + '", "cluster_type": "'+ form.form.value.cluster_type +'",  "service_type": "'+ form.form.value.service_type +'", "code": "'+ form.form.value.code +'" }');
-=======
-    // this.serviceService
-    //   .getServiceByClusterTypeAndDescription(form.form.value.cluster_type, form.form.value.service_type)
-    //   .subscribe((data: Service[]) => {
-    //     this.services = data;
-    //     console.log('Service data requested...');
-    //     console.log(this.services);
-    //     this.services.forEach(function (value, key) {
-    //       console.log('{ serviceId": "' + value.id + '", "recipe_description": "' + form.form.value.name + '", "extra_type": "' + extraType + '",  "recType": "' + recType + '", "recipe": "' + form.form.value.code + '" }');
-    //       var body = '{ serviceId": "' + value.id + '", "recipe_description": "' + form.form.value.name + '", "extra_type": "' + extraType + '",  "recType": "' + recType + '", "recipe": "' + form.form.value.code + '" }';
-
-    //       return this.http.post(`${this.uri}/set_custom_recipe`, body, httpOptions).subscribe(
-    //         (val) => {
-    //           console.log("POST call successful value returned in body",
-    //             val);
-    //           window.location.reload();
-    //         },
-    //         response => {
-    //           console.log("POST call in error", response);
-    //         },
-    //         () => {
-    //           console.log("The POST observable is now completed.");
-    //         });
-
-    //     })
-    //   })
-
-
-
-    console.log('{ name": "' + form.form.value.name + '", "recType": "' + recType + '", "cluster_type": "' + form.form.value.cluster_type + '",  "service_type": "' + form.form.value.service_type + '", "code": "' + form.form.value.code + '" }');
->>>>>>> 4f42528bc5f54d8cd0588787327d6b8717a1cfcb
+    console.log('{ serviceId": "'+ serviceId +'", "recipe_description": "'+ form.form.value.name + '", "extra_type": "'+ extraType +'",  "recType": "'+ recType +'", "recipe": "'+ form.form.value.code +'" }');
+      
+    this.addExtraService.setCustomRecipe('{ "service_id": "'+ serviceId +'", "recipe_description": "'+ form.form.value.name + '", "extra_type": "'+ extraType +'",  "recType": "'+ recType +'", "recipe": "'+ form.form.value.code +'" }');
+    
+    //console.log('{ name": "'+ form.form.value.name +'", "recType": "'+ recType + '", "cluster_type": "'+ form.form.value.cluster_type +'",  "service_type": "'+ form.form.value.service_type +'", "code": "'+ form.form.value.code +'" }');
     //this.addExtraService.setCustomRecipe('{ "recipe_type": "'+ form.form.value.recipe_type + '", "cluster_type": "'+ form.form.value.cluster_type +'",  "service_type": "'+ form.form.value.service_type +'", "code": "'+ form.form.value.code +'" }');
   }
   addSQLScript(form) {
