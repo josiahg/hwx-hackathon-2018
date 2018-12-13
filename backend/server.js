@@ -202,6 +202,29 @@ router.route('/services/:id').get((req, res) => {
         })
 });
 
+router.route('/services/:cluster_type/:description').get((req, res) => {
+    db.any('select services.* from cloudbreak_cuisine.services services, cloudbreak_cuisine.clusters clusters where services.associated_cluster = clusters.id and clusters.cluster_type =\''+req.params.cluster_type+'\' and services.service_description = \''+req.params.description+'\'')
+        .then(data => {
+            res.json(data);
+        })
+        .catch(error => {
+            console.log('ERROR:', error)
+        })
+});
+router.route('/set_custom_recipe').post((req, res) => {
+    
+
+    
+    db.any('insert into cloudbreak_cuisine.components_recipes (service_id, recipe_description, extra_type, '+req.body.recType+') values (\''+ req.body.service_id + '\',\'' + req.body.recipe_description + '\',\'' + req.body.extra_type + '\',\'' + req.body.recipe + '\')')
+        .then(data => {
+            res.json(data);
+        })
+        .catch(error => {
+            console.log('ERROR:', error)
+        })
+});
+
+
 router.route('/services/:id/mandatory').get((req, res) => {
     db.any('select * from cloudbreak_cuisine.services where associated_cluster = ' + req.params.id + ' and mandatory = 1')
         .then(data => {
