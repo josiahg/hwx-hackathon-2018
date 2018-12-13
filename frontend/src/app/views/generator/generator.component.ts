@@ -253,6 +253,7 @@ export class GeneratorComponent implements OnInit {
     /*this.showGenerate = false;
     this.showClusterTypes = true;
     this.dynamic = 1;*/
+
     this.genBlueprint(name);
     this.genSh(name);
     this.downloadService.createBundle(name);
