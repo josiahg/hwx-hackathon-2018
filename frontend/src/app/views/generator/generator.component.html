@@ -54,17 +54,22 @@
     <button class="btn btn-block btn-primary" (click)="addOptions()">Add Selected</button>
   </div>
   <div class="row animated fadeIn" *ngIf="showGenerate">
-    <div>
-      <h1>Generate Bundle</h1>
-    </div>
-    <div>
-      <input class="form-control" type="text" placeholder="Enter bundle name..." #nameInput>
-      <button class="btn btn-block btn-primary" (click)="genBundle(nameInput.value)">Generate Bundle</button>
-    </div>
-    <div *ngIf="readyForDownload">
-      <a [attr.href]="downloadLink"><button class="btn btn-block btn-primary">Download Bundle</button></a>
-      <button class="btn btn-block btn-primary" (click)="genBundle()" [attr.disabled]="true">Push Bundle</button>
-      <button class="btn btn-block btn-primary" (click)="genBundle()" [attr.disabled]="true">Push Bundle & Launch</button>
-    </div>
-  </div>
+      <div class="container">
+          <div class="row">
+            <div class="col-sm">
+                <h1>Generate Bundle</h1>
+            </div>
+            <div class="col-sm">
+                <input class="form-control" type="text" placeholder="Enter bundle name..." #nameInput *ngIf="!readyForDownload">
+                <button class="btn btn-block btn-primary" (click)="genBundle(nameInput.value)" *ngIf="!readyForDownload">Generate Bundle</button>
+                
+            </div>
+            <div class="col-sm" *ngIf="readyForDownload">
+                <a [attr.href]="downloadLink"><button class="btn btn-block btn-primary">Download Bundle</button></a>
+                <button class="btn btn-block btn-primary" (click)="genBundle()" [attr.disabled]="true">Push Bundle</button>
+                <button class="btn btn-block btn-primary" (click)="genBundle()" [attr.disabled]="true">Push Bundle & Launch</button>
+            </div>
+          </div>
+        </div>
+      </div>
 </div>
