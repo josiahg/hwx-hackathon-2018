@@ -33,6 +33,10 @@ export class CloudbreakCredentialsService {
     return this.http.get(`${this.uri}/cbcreds/read`);
   }
 
+  getAllCredentialsP() {
+    return this.http.get(`${this.uri}/cbcreds/read`).toPromise();
+  }
+
   setCredentials(body) {
     return this.http.post(`${this.uri}/cbcreds/set`, body, httpOptions).subscribe(
       (val) => {
