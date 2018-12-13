@@ -46,8 +46,11 @@ export class DownloadService {
     //return this.http.post(`${this.uri}/filewriter`,content,httpOptions);
   }
 
+  createBundle(name) {
+    return this.http.get(`${this.uri}/create_bundle/${name}`);
+  }
+
   downloadBundle(name) {
-    console.log('about to call ', `${this.uri}/download/${name}`);
     return this.http.get(`${this.uri}/download/${name}`);
   }
 }

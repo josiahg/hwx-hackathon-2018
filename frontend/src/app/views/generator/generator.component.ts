@@ -20,6 +20,8 @@ import { FilewriterService } from '../../svcs/filewriter.service'
 
 import { DownloadService } from '../../svcs/download.service'
 
+import { UriService } from '../../svcs/uri.service'
+
 interface ClusterType {
   id: String;
   img: String;
@@ -53,7 +55,8 @@ export class GeneratorComponent implements OnInit {
     private serviceService: ServiceService,
     private clusterService: ClusterService,
     private filewriterService: FilewriterService,
-    private downloadService: DownloadService) {};
+    private downloadService: DownloadService,
+    private uriService: UriService) {};
 
   max: number = 5;
   dynamic: number = 1;
@@ -67,6 +70,8 @@ export class GeneratorComponent implements OnInit {
   showOptions = false;
   showVersion = false;
   showGenerate = false;
+  public readyForDownload = false;
+  downloadLink = "";
   clusterType = 0;
 
   nodeTypes = ['Master', 'Worker', 'Compute'];
@@ -171,15 +176,11 @@ export class GeneratorComponent implements OnInit {
     this.addConfigsToBP();
     console.log(JSON.stringify(this.gen_bp))
     this.filewriterService
-    .writeFile(name,JSON.stringify(this.gen_bp))//btoa(JSON.stringify(this.gen_bp)))
-    /*.subscribe(data => {
-      console.log('Write result: ',data);
-    })*/
+    .writeFile(name,JSON.stringify(this.gen_bp))
   }
 
-  genSh() {
-
-
+  genSh(name) {
+    console.log("TODO: Fix genSH")
   }
 
   fetchNeededBlueprints() {
@@ -253,7 +254,10 @@ export class GeneratorComponent implements OnInit {
     this.showClusterTypes = true;
     this.dynamic = 1;*/
     this.genBlueprint(name);
-    console.log(this.shRecipes)
+    this.genSh(name);
+    this.downloadService.createBundle(name);
+    this.downloadLink = this.uriService.getUri() + '/download/' + name;
+    this.readyForDownload = true;
   }
 
   downloadBundle(name) {

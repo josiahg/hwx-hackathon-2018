@@ -358,7 +358,8 @@ router.route('/createsh').post((req, res) => {
     })
 });
 
-router.route('/download/:name').get((req, res) => {
+
+router.route('/create_bundle/:name').get((req, res) => {
     var fs = require('fs');
     var archiver = require('archiver');
     var output = fs.createWriteStream('./generated/bundle/'+req.params.name+'.zip');
@@ -378,6 +379,10 @@ router.route('/download/:name').get((req, res) => {
     archive.glob('./generated/*.json');
     archive.finalize();
 
+    res.json("Bundle " + req.params.name + " created");
+});
+
+router.route('/download/:name').get((req, res) => {
     res.download('./generated/bundle/'+req.params.name+'.zip');
 });
 

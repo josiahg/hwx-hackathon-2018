@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable, Subscription } from 'rxjs/Rx';
 
 import { HttpHeaders } from '@angular/common/http';
 
@@ -28,14 +29,10 @@ export class FilewriterService {
   uri = this.getAbsoluteDomainUrl() + ':4000';
 
   writeFile(filename, content) {
-    //console.log('Writer recieved: ', content)
-    //return this.http.get(`${this.uri}/filewriter/${filename}/${content}`);
-
-    //return
-    this.http.post(`${this.uri}/filewriter/${filename}`, content, httpOptions).subscribe(
+    return this.http.post(`${this.uri}/filewriter/${filename}`, content, httpOptions)
+    .subscribe(
       (val) => {
-        console.log("POST call successful value returned in body",
-          val);
+        console.log("POST call successful value returned in body", val);
       },
       response => {
         console.log("POST call in error", response);
@@ -43,7 +40,6 @@ export class FilewriterService {
       () => {
         console.log("The POST observable is now completed.");
       });
-    //return this.http.post(`${this.uri}/filewriter`,content,httpOptions);
   }
 
   generateSh(filename, content) {

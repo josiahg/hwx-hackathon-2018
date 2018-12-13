@@ -1,67 +1,69 @@
 <div class="animated fadeIn">
   <div class="card">
-      <div class="card-body">
-        <progressbar class="progress progress-striped progress-animated" [max]="max" [value]="dynamic">
-          <span style="color:white; white-space:nowrap;">Step {{dynamic}} / {{max}}</span>
-        </progressbar>
-      </div>
+    <div class="card-body">
+      <progressbar class="progress progress-striped progress-animated" [max]="max" [value]="dynamic">
+        <span style="color:white; white-space:nowrap;">Step {{dynamic}} / {{max}}</span>
+      </progressbar>
+    </div>
   </div>
   <div class="row animated fadeIn" *ngIf="showClusterTypes">
-      <div class="col-sm-6 col-md-4" *ngFor="let type of clusterTypes">
-          <div class="card" (click)="clusterTypeSelect(type.id)">
-            <a href='#/generator'>
-              <div class="card-body">
-                  <img src={{type.img}} width=100%>
-              </div>
-            </a>
+    <div class="col-sm-6 col-md-4" *ngFor="let type of clusterTypes">
+      <div class="card" (click)="clusterTypeSelect(type.id)">
+        <a href='#/generator'>
+          <div class="card-body">
+            <img src={{type.img}} width=100%>
           </div>
+        </a>
       </div>
+    </div>
   </div>
   <div class="row animated fadeIn" *ngIf="showVersion">
     <div class="col-sm-6 col-md-4">
-        <div class="card">
-            <div class="card-header">
-              <h3>Select Stack Version</h3>
-            </div>
-            <div class="card-body" align="center">
-              3.0.1
-            </div>
+      <div class="card">
+        <div class="card-header">
+          <h3>Select Stack Version</h3>
         </div>
+        <div class="card-body" align="center">
+          3.0.1
+        </div>
+      </div>
     </div>
     <button class="btn btn-block btn-primary" (click)="setSize()">Select Version</button>
   </div>
   <div class="row animated fadeIn" *ngIf="showServices">
-      <!-- <h1>Select Services</h1> mandatory components will not be selectable-->
-      <div class="col-sm-6 col-md-4" *ngFor="let service of services">
-          <div class="card">
-              <div class="card-header">
-                  {{ service.service_description }}
-                  <label class="switch switch-pill switch-success float-right" *ngIf="!service.mandatory">
-                      <input type="checkbox" class="switch-input"  (click)="updateServiceSelected(service.id)">
-                      <span class="switch-slider"></span>
-                  </label>
-                  <label class="switch switch-pill switch-success float-right" *ngIf="service.mandatory">
-                      <input [attr.disabled]="true" type="checkbox" class="switch-input" checked>
-                      <span class="switch-slider"></span>
-                  </label>
-              </div>
-              <!--<div class="card-body">
-                  Should we add a description?
-              </div>-->
-          </div>
+    <div class="col-sm-6 col-md-4" *ngFor="let service of services">
+      <div class="card">
+        <div class="card-header">
+          {{ service.service_description }}
+          <label class="switch switch-pill switch-success float-right" *ngIf="!service.mandatory">
+            <input type="checkbox" class="switch-input" (click)="updateServiceSelected(service.id)">
+            <span class="switch-slider"></span>
+          </label>
+          <label class="switch switch-pill switch-success float-right" *ngIf="service.mandatory">
+            <input [attr.disabled]="true" type="checkbox" class="switch-input" checked>
+            <span class="switch-slider"></span>
+          </label>
+        </div>
       </div>
-      <button class="btn btn-block btn-primary" (click)="addServices()">Add Selected</button>
+    </div>
+    <button class="btn btn-block btn-primary" (click)="addServices()">Add Selected</button>
   </div>
   <div class="row animated fadeIn" *ngIf="showOptions">
-      <h1>Additional Options</h1>
-      <button class="btn btn-block btn-primary" (click)="addOptions()">Add Selected</button>
+    <h1>Additional Options</h1>
+    <button class="btn btn-block btn-primary" (click)="addOptions()">Add Selected</button>
   </div>
   <div class="row animated fadeIn" *ngIf="showGenerate">
+    <div class="row">
       <h1>Generate Bundle</h1>
+    </div>
+    <div class="row">
       <input class="form-control" type="text" placeholder="Enter bundle name..." #nameInput>
       <button class="btn btn-block btn-primary" (click)="genBundle(nameInput.value)">Generate Bundle</button>
-      <button class="btn btn-block btn-primary" (click)="downloadBundle(nameInput.value)">Download Bundle</button>
+    </div>
+    <div *ngIf="readyForDownload">
+      <a [attr.href]="downloadLink"><button class="btn btn-block btn-primary">Download Bundle</button></a>
       <button class="btn btn-block btn-primary" (click)="genBundle()" [attr.disabled]="true">Push Bundle</button>
       <button class="btn btn-block btn-primary" (click)="genBundle()" [attr.disabled]="true">Push Bundle & Launch</button>
+    </div>
   </div>
 </div>
