@@ -47,7 +47,7 @@ CREATE TABLE cloudbreak_cuisine.components_blueprints
 DROP TABLE IF EXISTS cloudbreak_cuisine.components_recipes;
 CREATE TABLE cloudbreak_cuisine.components_recipes
 (
-  id integer unique NOT NULL PRIMARY KEY,
+  id SERIAL NOT NULL PRIMARY KEY,
   service_id integer NOT NULL,
   recipe_description VARCHAR(50) NOT NULL,
   extra_type text,
@@ -69,7 +69,7 @@ CREATE TABLE cloudbreak_cuisine.management_packs
 DROP TABLE IF EXISTS cloudbreak_cuisine.external_bundles;
 CREATE TABLE cloudbreak_cuisine.external_bundles
 (
-  id integer unique NOT NULL PRIMARY KEY,
+  id SERIAL NOT NULL PRIMARY KEY,
   name text,
   description text,
   is_deployment_ready integer,
