@@ -12,7 +12,6 @@ var pgp = require('pg-promise')({});
 var db = pgp('postgres://postgres:pg_pass123!@db:5432/postgres');
 var request = require('request');
 
-
 router.route('/cbcreds/read').get((req, res) => {
     db.any('select * from cloudbreak_cuisine.cb_credentials')
         .then(data => {
@@ -21,14 +20,9 @@ router.route('/cbcreds/read').get((req, res) => {
         .catch(error => {
             console.log('ERROR:', error)
         })
-
 });
 
-
 router.route('/cbcreds/set').post((req, res) => {
-
-
-
     db.any('insert into cloudbreak_cuisine.cb_credentials (instance_name, cb_url, cb_username, cb_password) values (\'' + req.body.instance_name + '\',\'' + req.body.cb_url + '\',\'' + req.body.cb_username + '\',\'' + req.body.cb_password + '\')')
         .then(data => {
             res.json(data);
@@ -39,8 +33,6 @@ router.route('/cbcreds/set').post((req, res) => {
 });
 
 router.route('/cbcreds/delete').post((req, res) => {
-
-
     db.any('delete from cloudbreak_cuisine.cb_credentials where id=' + req.body.cred_id)
         .then(data => {
             res.json("Credential with ID " + req.body.cred_id + " succesfully deleted.");
@@ -49,7 +41,6 @@ router.route('/cbcreds/delete').post((req, res) => {
             console.log('ERROR:', error)
         })
 });
-
 
 router.route('/cluster').get((req, res) => {
     db.any('select * from cloudbreak_cuisine.clusters')
@@ -85,7 +76,6 @@ router.route('/get_token').post((req, res) => {
 })
 
 router.get('/load_recipe/:cb_url/:recipe_name/:recipe_type/:recipe_base64/:token', function (req, res) {
-
     process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
     var request = require("request");
@@ -115,11 +105,9 @@ router.get('/load_recipe/:cb_url/:recipe_name/:recipe_type/:recipe_base64/:token
 
         res.send(body)
     });
-
 })
 
 router.route('/load_blueprint').post((req, res) => {
-
     // Expects the following in body: cb_url, token, bp_base64, cluster_name
     process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
     var request = require("request");
@@ -153,7 +141,6 @@ router.route('/load_blueprint').post((req, res) => {
     });
 
 });
-
 
 router.route('/services').get((req, res) => {
     db.any('select * from cloudbreak_cuisine.services')
@@ -194,6 +181,7 @@ router.route('/services/:cluster_type/:description').get((req, res) => {
             console.log('ERROR:', error)
         })
 });
+
 router.route('/set_custom_recipe').post((req, res) => {   
     db.any('insert into cloudbreak_cuisine.components_recipes (service_id, recipe_description, extra_type, '+req.body.recType+') values (\''+ req.body.service_id + '\',\'' + req.body.recipe_description + '\',\'' + req.body.extra_type + '\',\'' + req.body.recipe + '\')')
         .then(data => {
@@ -203,7 +191,6 @@ router.route('/set_custom_recipe').post((req, res) => {
             console.log('ERROR:', error)
         })
 });
-
 
 router.route('/services/:id/mandatory').get((req, res) => {
     db.any('select * from cloudbreak_cuisine.services where associated_cluster = ' + req.params.id + ' and mandatory = 1')
@@ -331,7 +318,6 @@ router.route('/createsh/:filename').post((req, res) => {
         }
     })
 });
-
 
 router.route('/create_bundle/:name').get((req, res) => {
     var fs = require('fs');
