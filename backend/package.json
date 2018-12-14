@@ -1,15 +1,15 @@
 {
-  "name": "hackathon-backend",
-  "version": "1.0.0",
-  "description": "Backend Express server for Hackathon Team One",
-  "main": "index.js",
+  "name": "cuisine-backend",
+  "version": "0.2.0",
+  "description": "Backend server for Cloudbreak Cuisine",
+  "main": "app.js",
   "scripts": {
-    "dev": "babel-watch server.js"
+    "dev": "babel-watch app.js"
   },
   "repository": {},
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Josiah Goodson",
+  "license": "",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
