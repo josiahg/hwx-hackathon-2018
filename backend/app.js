@@ -18,26 +18,6 @@ initDb();
 
 const db = getDb();
 
-router.route('/cluster').get((req, res) => {
-    db.any('select * from cloudbreak_cuisine.clusters')
-        .then(data => {
-            res.json(data);
-        })
-        .catch(error => {
-            console.log('ERROR:', error)
-        })
-});
-
-router.route('/cluster/:id').get((req, res) => {
-    db.any('select * from cloudbreak_cuisine.clusters where id = ' + req.params.id)
-        .then(data => {
-            res.json(data);
-        })
-        .catch(error => {
-            console.log('ERROR:', error)
-        })
-});
-
 router.route('/get_token').post((req, res) => {
     var exec = require('child_process').exec;
     console.log(req.body);
@@ -118,26 +98,6 @@ router.route('/load_blueprint').post((req, res) => {
 
 });
 
-router.route('/services').get((req, res) => {
-    db.any('select * from cloudbreak_cuisine.services')
-        .then(data => {
-            res.json(data);
-        })
-        .catch(error => {
-            console.log('ERROR:', error)
-        })
-});
-
-router.route('/services/:id').get((req, res) => {
-    db.any('select * from cloudbreak_cuisine.services where associated_cluster = ' + req.params.id + ' order by mandatory, service_description')
-        .then(data => {
-            res.json(data);
-        })
-        .catch(error => {
-            console.log('ERROR:', error)
-        })
-});
-
 router.route('/custom_extras').get((req, res) => {
     db.any("select recipe_description as name, extra_type, case when pre_ambari_start is not null then 'Pre Ambari Start' when post_ambari_start is not null then 'Post Ambari Start' when post_cluster_install is not null then 'Post Cluster Install' else 'Pre Termination' end as recipe_type, case when pre_ambari_start is not null then pre_ambari_start when post_ambari_start is not null then post_ambari_start when post_cluster_install is not null then post_cluster_install else on_termination end as code from cloudbreak_cuisine.components_recipes where extra_type != 'Standard'")
         .then(data => {
@@ -148,68 +108,8 @@ router.route('/custom_extras').get((req, res) => {
         })
 });
 
-router.route('/services/:cluster_type/:description').get((req, res) => {
-    db.any('select services.* from cloudbreak_cuisine.services services, cloudbreak_cuisine.clusters clusters where services.associated_cluster = clusters.id and clusters.cluster_type =\''+req.params.cluster_type+'\' and services.service_description = \''+req.params.description+'\'')
-        .then(data => {
-            res.json(data);
-        })
-        .catch(error => {
-            console.log('ERROR:', error)
-        })
-});
-
 router.route('/set_custom_recipe').post((req, res) => {   
     db.any('insert into cloudbreak_cuisine.components_recipes (service_id, recipe_description, extra_type, '+req.body.recType+') values (\''+ req.body.service_id + '\',\'' + req.body.recipe_description + '\',\'' + req.body.extra_type + '\',\'' + req.body.recipe + '\')')
-        .then(data => {
-            res.json(data);
-        })
-        .catch(error => {
-            console.log('ERROR:', error)
-        })
-});
-
-router.route('/services/:id/mandatory').get((req, res) => {
-    db.any('select * from cloudbreak_cuisine.services where associated_cluster = ' + req.params.id + ' and mandatory = 1')
-        .then(data => {
-            res.json(data);
-        })
-        .catch(error => {
-            console.log('ERROR:', error)
-        })
-});
-
-router.route('/services_distinct').get((req, res) => {
-    db.any('select distinct services.service_description from cloudbreak_cuisine.services')
-        .then(data => {
-            res.json(data);
-        })
-        .catch(error => {
-            console.log('ERROR:', error)
-        })
-});
-
-router.route('/components_blueprints').get((req, res) => {
-    db.any('select * from cloudbreak_cuisine.components_blueprints')
-        .then(data => {
-            res.json(data);
-        })
-        .catch(error => {
-            console.log('ERROR:', error)
-        })
-});
-
-router.route('/components_blueprints/:id').get((req, res) => {
-    db.any('select * from cloudbreak_cuisine.components_blueprints where id = ' + req.params.id)
-        .then(data => {
-            res.json(data);
-        })
-        .catch(error => {
-            console.log('ERROR:', error)
-        })
-});
-
-router.route('/components_blueprints/service/:id').get((req, res) => {
-    db.any('select * from cloudbreak_cuisine.components_blueprints where service_id = ' + req.params.id)
         .then(data => {
             res.json(data);
         })
@@ -326,3 +226,109 @@ app.use(require('./src/routes'));
 app.use('/', router);
 
 app.listen(4000, () => console.log(`Express server running on port 4000`));
+
+
+/* 
+router.route('/services/:id/mandatory').get((req, res) => {
+    db.any('select * from cloudbreak_cuisine.services where associated_cluster = ' + req.params.id + ' and mandatory = 1')
+        .then(data => {
+            res.json(data);
+        })
+        .catch(error => {
+            console.log('ERROR:', error)
+        })
+}); */
+
+/* router.route('/services_distinct').get((req, res) => {
+    db.any('select distinct services.service_description from cloudbreak_cuisine.services')
+        .then(data => {
+            res.json(data);
+        })
+        .catch(error => {
+            console.log('ERROR:', error)
+        })
+});
+ */
+
+
+/* router.route('/services/:cluster_type/:description').get((req, res) => {
+    db.any('select services.* from cloudbreak_cuisine.services services, cloudbreak_cuisine.clusters clusters where services.associated_cluster = clusters.id and clusters.cluster_type =\''+req.params.cluster_type+'\' and services.service_description = \''+req.params.description+'\'')
+        .then(data => {
+            res.json(data);
+        })
+        .catch(error => {
+            console.log('ERROR:', error)
+        })
+}); */
+
+/* router.route('/cluster').get((req, res) => {
+    db.any('select * from cloudbreak_cuisine.clusters')
+        .then(data => {
+            res.json(data);
+        })
+        .catch(error => {
+            console.log('ERROR:', error)
+        })
+});
+
+router.route('/cluster/:id').get((req, res) => {
+    db.any('select * from cloudbreak_cuisine.clusters where id = ' + req.params.id)
+        .then(data => {
+            res.json(data);
+        })
+        .catch(error => {
+            console.log('ERROR:', error)
+        })
+}); */
+
+
+
+/* router.route('/services').get((req, res) => {
+    db.any('select * from cloudbreak_cuisine.services')
+        .then(data => {
+            res.json(data);
+        })
+        .catch(error => {
+            console.log('ERROR:', error)
+        })
+});
+
+router.route('/services/:id').get((req, res) => {
+    db.any('select * from cloudbreak_cuisine.services where associated_cluster = ' + req.params.id + ' order by mandatory, service_description')
+        .then(data => {
+            res.json(data);
+        })
+        .catch(error => {
+            console.log('ERROR:', error)
+        })
+}); */
+
+/* router.route('/components_blueprints').get((req, res) => {
+    db.any('select * from cloudbreak_cuisine.components_blueprints')
+        .then(data => {
+            res.json(data);
+        })
+        .catch(error => {
+            console.log('ERROR:', error)
+        })
+});
+
+router.route('/components_blueprints/:id').get((req, res) => {
+    db.any('select * from cloudbreak_cuisine.components_blueprints where id = ' + req.params.id)
+        .then(data => {
+            res.json(data);
+        })
+        .catch(error => {
+            console.log('ERROR:', error)
+        })
+});
+
+router.route('/components_blueprints/service/:id').get((req, res) => {
+    db.any('select * from cloudbreak_cuisine.components_blueprints where service_id = ' + req.params.id)
+        .then(data => {
+            res.json(data);
+        })
+        .catch(error => {
+            console.log('ERROR:', error)
+        })
+}); */
