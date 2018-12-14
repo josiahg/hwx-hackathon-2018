@@ -8,39 +8,15 @@ const router = express.Router();
 app.use(cors());
 app.use(bodyParser.json());
 
-var pgp = require('pg-promise')({});
-var db = pgp('postgres://postgres:pg_pass123!@db:5432/postgres');
-var request = require('request');
+/*var pgp = require('pg-promise')({});
+var db = pgp('postgres://postgres:pg_pass123!@db:5432/postgres');*/
 
-router.route('/cbcreds/read').get((req, res) => {
-    db.any('select * from cloudbreak_cuisine.cb_credentials')
-        .then(data => {
-            res.json(data);
-        })
-        .catch(error => {
-            console.log('ERROR:', error)
-        })
-});
+const initDb = require('./src/pg-db').initDb;
+const getDb = require('./src/pg-db').getDb;
 
-router.route('/cbcreds/set').post((req, res) => {
-    db.any('insert into cloudbreak_cuisine.cb_credentials (instance_name, cb_url, cb_username, cb_password) values (\'' + req.body.instance_name + '\',\'' + req.body.cb_url + '\',\'' + req.body.cb_username + '\',\'' + req.body.cb_password + '\')')
-        .then(data => {
-            res.json(data);
-        })
-        .catch(error => {
-            console.log('ERROR:', error)
-        })
-});
+initDb();
 
-router.route('/cbcreds/delete').post((req, res) => {
-    db.any('delete from cloudbreak_cuisine.cb_credentials where id=' + req.body.cred_id)
-        .then(data => {
-            res.json("Credential with ID " + req.body.cred_id + " succesfully deleted.");
-        })
-        .catch(error => {
-            console.log('ERROR:', error)
-        })
-});
+const db = getDb();
 
 router.route('/cluster').get((req, res) => {
     db.any('select * from cloudbreak_cuisine.clusters')
@@ -346,7 +322,7 @@ router.route('/download/:name').get((req, res) => {
     res.download('./generated/bundle/'+req.params.name+'.zip');
 });
 
-
+app.use(require('./src/routes'));
 app.use('/', router);
 
 app.listen(4000, () => console.log(`Express server running on port 4000`));
