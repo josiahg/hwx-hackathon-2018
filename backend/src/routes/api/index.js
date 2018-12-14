@@ -5,5 +5,6 @@ router.use('/cluster', require('./cluster'));
 router.use('/services', require('./services'));
 router.use('/services_distinct', require('./services_distinct'));
 router.use('/components_blueprints', require('./components_blueprints'));
+router.use('/filewriter', require('./filewriter'));
 
 module.exports = router;

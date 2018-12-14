@@ -1,5 +1,6 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 dev-docker-compose.yml
+oldroutes.js
 
 # compiled output
 /dist
