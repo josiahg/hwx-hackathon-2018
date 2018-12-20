@@ -1,4 +1,3 @@
-import FormContainer from './components/container/FormContainer.jsx';
 import App from './app';
 import {AppContainer} from 'react-hot-loader';
 import React from 'react';
