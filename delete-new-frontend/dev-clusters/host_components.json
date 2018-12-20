@@ -1,0 +1,18 @@
+{
+  "1": {
+    "href": "http://172.18.0.7:9010/api/v1/clusters/hdf_mpack/configurations/service_config_versions?service_name=STREAMSMSGMGR&is_current=true",
+    "items": [
+      {
+        "href": "http://172.18.0.7:9010/api/v1/clusters/hdf_mpack/configurations/service_config_versions?service_name=STREAMSMSGMGR&service_config_version=3",
+        "HostRoles": {
+          "cluster_name": "hdf_mpack",
+          "component_name": "STREAMSMSGMGR",
+          "host_name": "localhost"
+        },
+        "host": {
+          "href": "http://172.18.0.7:9010/api/v1/clusters/hdf_mpack/hosts/sapin-smm-rmp-11185-fortysix-1.openstacklocal"
+        }
+      }
+    ]
+  }
+}

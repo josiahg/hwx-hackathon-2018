@@ -1,0 +1,389 @@
+/**
+  *   HORTONWORKS DATAPLANE SERVICE AND ITS CONSTITUENT SERVICES
+  *
+  *   (c) 2016-2018 Hortonworks, Inc. All rights reserved.
+  *
+  *   This code is provided to you pursuant to your written agreement with Hortonworks, which may be the terms of the
+  *   Affero General Public License version 3 (AGPLv3), or pursuant to a written agreement with a third party authorized
+  *   to distribute this code.  If you do not have a written agreement with Hortonworks or with an authorized and
+  *   properly licensed third party, you do not have any rights to this code.
+  *
+  *   If this code is provided to you under the terms of the AGPLv3:
+  *   (A) HORTONWORKS PROVIDES THIS CODE TO YOU WITHOUT WARRANTIES OF ANY KIND;
+  *   (B) HORTONWORKS DISCLAIMS ANY AND ALL EXPRESS AND IMPLIED WARRANTIES WITH RESPECT TO THIS CODE, INCLUDING BUT NOT
+  *     LIMITED TO IMPLIED WARRANTIES OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE;
+  *   (C) HORTONWORKS IS NOT LIABLE TO YOU, AND WILL NOT DEFEND, INDEMNIFY, OR HOLD YOU HARMLESS FOR ANY CLAIMS ARISING
+  *     FROM OR RELATED TO THE CODE; AND
+  *   (D) WITH RESPECT TO YOUR EXERCISE OF ANY RIGHTS GRANTED TO YOU FOR THE CODE, HORTONWORKS IS NOT LIABLE FOR ANY
+  *     DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, PUNITIVE OR CONSEQUENTIAL DAMAGES INCLUDING, BUT NOT LIMITED TO,
+  *     DAMAGES RELATED TO LOST REVENUE, LOST PROFITS, LOSS OF INCOME, LOSS OF BUSINESS ADVANTAGE OR UNAVAILABILITY,
+  *     OR LOSS OR CORRUPTION OF DATA.
+**/
+
+
+/* Topology Editor */
+
+#windowSlider, #kafkaSlider {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  width: 650px;
+  padding: 10px;
+  overflow: auto;
+  background-color: #fff;
+  right: -650px;
+  box-shadow: -1px 0px 1px rgba(0, 0, 0, 0.20);
+  z-index: 9;
+  transition: ease .5s all;
+}
+
+#windowSlider.active, #kafkaSlider.active {
+  right: 0px;
+}
+
+h3.slider-title {
+  font-weight: 300;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  padding: 5px;
+  border-bottom: 1px dotted #ccc;
+}
+
+.divider {
+  position: relative;
+  color: #C2CADA;
+  display: inline-block;
+  border-right: 1px solid;
+  height: 20px;
+  top: 4px;
+}
+
+.panel-title>a {
+  cursor: pointer
+}
+
+.topology-icon {
+  width: 48px;
+  margin-right: 3px;
+  margin-bottom: 2px;
+  cursor: pointer;
+}
+
+svg {
+  background-color: transparent;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+path.link.dragline {
+  pointer-events: none;
+  stroke-width: 2px;
+}
+
+path.link.hidden {
+  stroke-width: 0;
+}
+
+circle.node {
+  stroke-width: 1.5px;
+  cursor: pointer;
+}
+
+circle.node.reflexive {
+  stroke-width: 1px;
+}
+
+text.id {
+  text-anchor: middle;
+  font-weight: bold;
+}
+
+.d3-tip {
+  padding: 12px;
+  background: rgba(120, 120, 120, 0.95);
+  color: #fff;
+  z-index: 9;
+}
+
+.modal-tip {
+  z-index: 9999;
+}
+
+
+/* Creates a small triangle extender for the tooltip */
+
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+.d3-tip.e:after {
+  right: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(120, 120, 120, 0);
+  border-right-color: rgba(120, 120, 120, 0.95);
+  border-width: 15px;
+  margin-top: -15px;
+}
+
+
+/* Style northward tooltips differently */
+
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
+.d3-tip ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.d3-tip ul li {
+  line-height: 20px;
+}
+
+.nodeTypeToolTip:after {
+  color: rgba(120, 120, 120, 0.95);
+  text-align: center;
+  font-size: 17px;
+}
+.nodeTypeToolTip.n:after {
+  color: rgba(120, 120, 120, 0.95);
+  text-align: center;
+  font-size: 17px;
+  margin-top: -5px;
+  transform: scaleX(1.8);
+}
+
+.table-backgrid>thead>tr>th>a {
+  color: #707980;
+}
+
+.conceptG {
+  cursor: pointer;
+}
+
+.conceptG.selected {
+  stroke-width: 2;
+}
+
+.conceptG.selected .node-rectangle {
+  stroke: #1190c0;
+}
+
+marker {
+  fill: grey;
+}
+
+g.conceptG circle {
+  stroke-width: 2px;
+  stroke: white;
+}
+
+path.link {
+  fill: transparent;
+  stroke: #636363;
+  cursor: pointer;
+}
+
+path.link:hover {
+  stroke: #67c2ef;
+}
+
+g.connect-node circle {
+  fill: #BEFFFF;
+}
+
+path.link.hidden {
+  stroke-width: 0;
+}
+
+path.link.selected {
+  stroke-dasharray: 5, 5;
+  stroke-width: 2;
+}
+
+rect.node-rectangle {
+  filter: url(#dropshadow);
+}
+
+rect.datasink {
+  fill: #fff;
+}
+
+rect.processor {
+  fill: #fff;
+}
+
+rect.source {
+  fill: #fff;
+}
+
+rect.datasink-img {
+  fill: #fff;
+  cursor: auto;
+}
+
+rect.processor-img {
+  fill: #fff;
+  cursor: auto;
+}
+
+rect.source-img {
+  fill: #fff;
+  cursor: auto;
+}
+
+text.datasink {
+  fill: #a9a9a9;
+}
+
+text.processor {
+  fill: #a9a9a9;
+}
+
+text.source {
+  fill: #a9a9a9;
+}
+
+circle.source, circle.processor, circle.datasink {
+  fill: #3eae49;
+}
+
+text.node-title {
+  font-size: 16px;
+  fill: #666;
+}
+
+@supports (-ms-ime-align:auto) {
+  text.node-title {
+    font-size: 14px;
+  }
+}
+
+text.node-type-label {
+  fill: #a9a9a9;
+  font-size: 12px;
+}
+
+svg>foreignObject>p {
+  text-align: center;
+  overflow: overlay;
+  position: relative;
+}
+
+.conceptG .fa-times {
+  fill: #EA0000;
+  cursor: pointer;
+}
+
+.conceptG .parallelism-count {
+  fill: #666;
+  cursor: pointer;
+  font-size: 12px
+}
+
+.conceptG .fa-caret-right, .conceptG .fa-caret-left {
+  fill: #a9a9a9;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.conceptG .parallelism-count {
+  cursor: auto;
+  font-size: 13px;
+}
+
+.link-group .fa-random {
+  fill: #69BE29;
+  cursor: pointer;
+}
+
+.node {
+  width: 160px;
+  display: inline-block;
+  position: relative;
+  border-style: solid;
+  border-width: 1px 2px 2px 1px;
+  border-color: #666;
+  border-radius: 6px;
+  padding-left: 40px;
+  padding-right: 10px;
+  margin-bottom: 5px;
+  line-height: 35px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #666;
+  background-color: #DDD;
+}
+
+.node .node-icon {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 35px;
+  height: 35px;
+  padding: 5px;
+  background-color: #666;
+  border-radius: 4px 0px 0px 4px;
+}
+
+.node.datasource {
+  border-color: #3db5e6;
+  color: #3db5e6;
+  background-color: #ebf9ff;
+}
+
+.node.datasource .node-icon {
+  background-color: #3db5e6;
+}
+
+.node.processor {
+  border-color: #e17000;
+  color: #e17000;
+  background-color: #fff0e1;
+}
+
+.node.processor .node-icon {
+  background-color: #e17000;
+}
+
+.node.sink {
+  border-color: #f6a800;
+  color: #f6a800;
+  background-color: #fff7ea;
+}
+
+.node.sink .node-icon {
+  background-color: #f6a800;
+}
+
+.invalidInput {
+  border-color: #d81010 !important;
+}
+
+.reconfig-node{
+  stroke : rgba(255,165,0,1);
+  stroke-width :2px;
+}

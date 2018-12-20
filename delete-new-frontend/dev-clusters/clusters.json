@@ -1,0 +1,389 @@
+[{
+        "id": 1,
+        "name": "hdf_mpack",
+        "clusterUrl": "http://sapin-smm-rmp-11185-fortysix-1.openstacklocal:8080/api/v1/clusters/hdf_mpack",
+        "secured": false,
+        "dataplaneClusterId": 1,
+        "userid": 2,
+        "properties": {
+                "cluster_id": 3,
+                "cluster_name": "hdf_mpack",
+                "health_report": {
+                        "Host/stale_config": 0,
+                        "Host/maintenance_state": 0,
+                        "Host/host_state/HEALTHY": 1,
+                        "Host/host_state/UNHEALTHY": 0,
+                        "Host/host_state/HEARTBEAT_LOST": 0,
+                        "Host/host_state/INIT": 0,
+                        "Host/host_status/HEALTHY": 1,
+                        "Host/host_status/UNHEALTHY": 0,
+                        "Host/host_status/UNKNOWN": 0,
+                        "Host/host_status/ALERT": 0
+                },
+                "provisioning_state": "INSTALLED",
+                "security_type": "NONE",
+                "total_hosts": 1,
+                "version": "HDF-3.2",
+                "credential_store_properties": {
+                        "storage.persistent": "false",
+                        "storage.temporary": "true"
+                },
+                "desired_configs": {
+                        "admin-log4j": {
+                                "tag": "a7a03e1e-0af7-4ca5-b970-e13ea69d8a3a",
+                                "version": 1
+                        },
+                        "admin-properties": {
+                                "tag": "50387b91-d1ce-4134-9c06-a4b385e65175",
+                                "version": 1
+                        },
+                        "admin-topology": {
+                                "tag": "cea82a35-7c23-4cbc-bec1-539d446042af",
+                                "version": 2
+                        },
+                        "ams-env": {
+                                "tag": "60f4d4a9-af98-40b6-b2be-2583ac7f76c0",
+                                "version": 1
+                        },
+                        "ams-grafana-env": {
+                                "tag": "72be0f78-e6e2-4be3-8b55-ac53af577d1e",
+                                "version": 1
+                        },
+                        "ams-grafana-ini": {
+                                "tag": "adc946ca-b1c8-4418-93f4-44c0f27c6310",
+                                "version": 1
+                        },
+                        "ams-hbase-env": {
+                                "tag": "17f7fcaa-1bda-4538-9f03-a284d61d1793",
+                                "version": 1
+                        },
+                        "ams-hbase-log4j": {
+                                "tag": "fb74518c-7ebb-47f7-921f-f27ab01dd670",
+                                "version": 1
+                        },
+                        "ams-hbase-policy": {
+                                "tag": "5779512d-9b88-4933-9a23-a3f5672138d8",
+                                "version": 1
+                        },
+                        "ams-hbase-security-site": {
+                                "tag": "88cfc0cf-58a4-4c66-beea-eb7c20942b2c",
+                                "version": 1
+                        },
+                        "ams-hbase-site": {
+                                "tag": "c40f5c25-a187-4bdd-adae-8bb48d3d8185",
+                                "version": 1
+                        },
+                        "ams-log4j": {
+                                "tag": "75b1c0f4-54f7-4be7-b560-cbd01996a640",
+                                "version": 1
+                        },
+                        "ams-site": {
+                                "tag": "5f6f4e3e-43e2-4eb7-a4bf-e29f672e225a",
+                                "version": 1
+                        },
+                        "ams-ssl-client": {
+                                "tag": "c8cbe852-ca76-4031-bc6c-fe377a115378",
+                                "version": 1
+                        },
+                        "ams-ssl-server": {
+                                "tag": "ccfa6d31-e29c-4885-b3e2-65e508bcb9d5",
+                                "version": 1
+                        },
+                        "atlas-tagsync-ssl": {
+                                "tag": "62a2ce62-758b-4349-b930-3ddfcf39b3ce",
+                                "version": 1
+                        },
+                        "cluster-env": {
+                                "tag": "53276769-1237-4166-b8f2-6d1f7625a488",
+                                "version": 1
+                        },
+                        "gateway-log4j": {
+                                "tag": "3b3a194c-c9ae-4f17-a541-f75a3b34f835",
+                                "version": 2
+                        },
+                        "gateway-site": {
+                                "tag": "11da3810-1895-4e56-8096-c1087dde07d6",
+                                "version": 2
+                        },
+                        "kafka-broker": {
+                                "tag": "9ac36028-7955-46a6-ab93-9ef3c8ab2077",
+                                "version": 2
+                        },
+                        "kafka-env": {
+                                "tag": "589e7e71-4366-4dd0-aeb8-e455baf767d8",
+                                "version": 1
+                        },
+                        "kafka-log4j": {
+                                "tag": "85b47e7c-fc8c-4e4f-a402-3e856b320cbb",
+                                "version": 2
+                        },
+                        "kafka_client_jaas_conf": {
+                                "tag": "b4bc4614-2f9c-430c-9b57-7458aa8408dc",
+                                "version": 1
+                        },
+                        "kafka_jaas_conf": {
+                                "tag": "0facd873-95bd-4556-86d4-64f37974f970",
+                                "version": 1
+                        },
+                        "knox-env": {
+                                "tag": "03911a6e-a520-499e-8a67-9f667d1948ee",
+                                "version": 2
+                        },
+                        "knoxsso-topology": {
+                                "tag": "c71c9b27-795b-46ed-b946-413ccf36cabc",
+                                "version": 3
+                        },
+                        "ldap-log4j": {
+                                "tag": "8bf8dc2e-b7ce-43d9-80bc-951b51a4101d",
+                                "version": 2
+                        },
+                        "ranger-admin-site": {
+                                "tag": "f76ae478-b3db-44d8-8434-284b7055f449",
+                                "version": 1
+                        },
+                        "ranger-env": {
+                                "tag": "9bb7d2a0-4959-4366-99eb-94d7ebb6d778",
+                                "version": 1
+                        },
+                        "ranger-kafka-audit": {
+                                "tag": "c9e64b4a-f503-4470-8366-5b070802195f",
+                                "version": 2
+                        },
+                        "ranger-kafka-plugin-properties": {
+                                "tag": "13808465-c5a9-4119-bc8d-fac79b79eb3f",
+                                "version": 3
+                        },
+                        "ranger-kafka-policymgr-ssl": {
+                                "tag": "53013a40-d54c-4909-a044-9c79c6e56150",
+                                "version": 2
+                        },
+                        "ranger-kafka-security": {
+                                "tag": "84c911cc-6dbc-4bcb-b3fe-708a7834e1f1",
+                                "version": 2
+                        },
+                        "ranger-knox-audit": {
+                                "tag": "745e748e-ac0a-404f-92cd-16637bd3db12",
+                                "version": 3
+                        },
+                        "ranger-knox-plugin-properties": {
+                                "tag": "16432ee2-b47d-4932-9560-b2fd584c6a6c",
+                                "version": 3
+                        },
+                        "ranger-knox-policymgr-ssl": {
+                                "tag": "d451f446-c0e2-46e5-9d35-5051b65ec90b",
+                                "version": 3
+                        },
+                        "ranger-knox-security": {
+                                "tag": "c33d8e1c-f74c-49f8-a3e2-7d274be11f9b",
+                                "version": 3
+                        },
+                        "ranger-smm-kafka-audit": {
+                                "tag": "df88760d-56ee-4d58-b4ac-f2a1cc92cb53",
+                                "version": 4
+                        },
+                        "ranger-smm-kafka-plugin-properties": {
+                                "tag": "d75da6aa-1262-4319-98dd-00d51ef498b2",
+                                "version": 4
+                        },
+                        "ranger-smm-kafka-policymgr-ssl": {
+                                "tag": "59fd2746-b619-479b-b524-ef2d0fd94863",
+                                "version": 4
+                        },
+                        "ranger-smm-kafka-security": {
+                                "tag": "947d6d2c-ab59-4eac-a75c-62b7e446aad6",
+                                "version": 4
+                        },
+                        "ranger-solr-configuration": {
+                                "tag": "163347da-6b91-4301-a24a-32029a2d893c",
+                                "version": 1
+                        },
+                        "ranger-tagsync-policymgr-ssl": {
+                                "tag": "b43eea62-0c16-4e1c-a906-62f6cba31014",
+                                "version": 1
+                        },
+                        "ranger-tagsync-site": {
+                                "tag": "0ffdc439-0ba5-4a27-8835-f7c20ef6ad89",
+                                "version": 1
+                        },
+                        "ranger-ugsync-site": {
+                                "tag": "a9e64930-f62c-49f4-9fbb-a14f27c759aa",
+                                "version": 1
+                        },
+                        "registry-common": {
+                                "tag": "08283cf7-a658-443e-98b0-2c99d41503a8",
+                                "version": 1
+                        },
+                        "registry-env": {
+                                "tag": "d6aeb2ae-d203-420a-8622-fd44e07acd51",
+                                "version": 1
+                        },
+                        "registry-log4j": {
+                                "tag": "65146eda-e278-4404-8b24-929f2cde85da",
+                                "version": 1
+                        },
+                        "registry-logsearch-conf": {
+                                "tag": "2afb12ca-0973-4619-b533-4207f2df83e0",
+                                "version": 1
+                        },
+                        "streams-messaging-manager-common": {
+                                "tag": "21e2fdaa-f5dd-46bc-bec4-e855880f87bc",
+                                "version": 6
+                        },
+                        "streams-messaging-manager-env": {
+                                "tag": "a22a93a2-45ba-4125-abc0-7550d3e1d7b2",
+                                "version": 6
+                        },
+                        "streams-messaging-manager-ssl-config": {
+                                "tag": "428179c4-846d-447a-98d9-e3a9e4210228",
+                                "version": 7
+                        },
+                        "streams-messaging-manager-sso-config": {
+                                "tag": "11cf9115-275b-47f1-81ff-e735b222c708",
+                                "version": 9
+                        },
+                        "streams-messaging-manager_jaas_conf": {
+                                "tag": "2ef34028-42c2-4aee-ac03-32773cdb8006",
+                                "version": 6
+                        },
+                        "tagsync-application-properties": {
+                                "tag": "1694bbbe-b37c-4ac0-a555-40bb0a6bb323",
+                                "version": 1
+                        },
+                        "tagsync-log4j": {
+                                "tag": "8df92f92-0a3b-49d9-b534-ae942369960a",
+                                "version": 1
+                        },
+                        "topology": {
+                                "tag": "d61a2e3a-0c2e-4186-ae76-c5e6d99e9e85",
+                                "version": 2
+                        },
+                        "users-ldif": {
+                                "tag": "8e377171-b0cc-45bf-9beb-f1782abd0a1b",
+                                "version": 2
+                        },
+                        "usersync-log4j": {
+                                "tag": "ee88a215-b5ae-45d9-8784-17a54aedfb4a",
+                                "version": 1
+                        },
+                        "zoo.cfg": {
+                                "tag": "4af8e2f6-ef2b-47f9-a59f-5a23505eb83a",
+                                "version": 1
+                        },
+                        "zookeeper-env": {
+                                "tag": "c8bebc67-9b84-4d2a-a76d-fc7e1d0d9819",
+                                "version": 1
+                        },
+                        "zookeeper-log4j": {
+                                "tag": "04e9e0eb-af65-4ba3-b175-47b1ba6848f8",
+                                "version": 1
+                        }
+                },
+                "desired_service_config_versions": {
+                        "AMBARI_METRICS": [{
+                                "hosts": [],
+                                "compatibleWithCurrentStack": true,
+                                "cluster_name": "hdf_mpack",
+                                "service_name": "AMBARI_METRICS",
+                                "service_config_version": 1,
+                                "createtime": 1528318232340,
+                                "group_id": -1,
+                                "group_name": "Default",
+                                "user": "admin",
+                                "service_config_version_note": "Initial configurations for Ambari Metrics",
+                                "stack_id": "HDF-3.2",
+                                "is_current": true,
+                                "is_cluster_compatible": true
+                        }],
+                        "KAFKA": [{
+                                "hosts": [],
+                                "compatibleWithCurrentStack": true,
+                                "cluster_name": "hdf_mpack",
+                                "service_name": "KAFKA",
+                                "service_config_version": 3,
+                                "createtime": 1528495963169,
+                                "group_id": -1,
+                                "group_name": "Default",
+                                "user": "admin",
+                                "service_config_version_note": "",
+                                "stack_id": "HDF-3.2",
+                                "is_current": true,
+                                "is_cluster_compatible": true
+                        }],
+                        "KNOX": [{
+                                "hosts": [],
+                                "compatibleWithCurrentStack": true,
+                                "cluster_name": "hdf_mpack",
+                                "service_name": "KNOX",
+                                "service_config_version": 3,
+                                "createtime": 1528492696854,
+                                "group_id": -1,
+                                "group_name": "Default",
+                                "user": "admin",
+                                "service_config_version_note": "",
+                                "stack_id": "HDF-3.2",
+                                "is_current": true,
+                                "is_cluster_compatible": true
+                        }],
+                        "RANGER": [{
+                                "hosts": [],
+                                "compatibleWithCurrentStack": true,
+                                "cluster_name": "hdf_mpack",
+                                "service_name": "RANGER",
+                                "service_config_version": 1,
+                                "createtime": 1528491523153,
+                                "group_id": -1,
+                                "group_name": "Default",
+                                "user": "admin",
+                                "service_config_version_note": "Initial configurations for Ranger",
+                                "stack_id": "HDF-3.2",
+                                "is_current": true,
+                                "is_cluster_compatible": true
+                        }],
+                        "REGISTRY": [{
+                                "hosts": [],
+                                "compatibleWithCurrentStack": true,
+                                "cluster_name": "hdf_mpack",
+                                "service_name": "REGISTRY",
+                                "service_config_version": 1,
+                                "createtime": 1528318232556,
+                                "group_id": -1,
+                                "group_name": "Default",
+                                "user": "admin",
+                                "service_config_version_note": "Initial configurations for Schema Registry",
+                                "stack_id": "HDF-3.2",
+                                "is_current": true,
+                                "is_cluster_compatible": true
+                        }],
+                        "STREAMSMSGMGR": [{
+                                "hosts": [],
+                                "compatibleWithCurrentStack": true,
+                                "cluster_name": "hdf_mpack",
+                                "service_name": "STREAMSMSGMGR",
+                                "service_config_version": 3,
+                                "createtime": 1528838016702,
+                                "group_id": -1,
+                                "group_name": "Default",
+                                "user": "admin",
+                                "service_config_version_note": "enabled sso",
+                                "stack_id": "HDF-3.2",
+                                "is_current": true,
+                                "is_cluster_compatible": true
+                        }],
+                        "ZOOKEEPER": [{
+                                "hosts": [],
+                                "compatibleWithCurrentStack": true,
+                                "cluster_name": "hdf_mpack",
+                                "service_name": "ZOOKEEPER",
+                                "service_config_version": 1,
+                                "createtime": 1528318231833,
+                                "group_id": -1,
+                                "group_name": "Default",
+                                "user": "admin",
+                                "service_config_version_note": "Initial configurations for ZooKeeper",
+                                "stack_id": "HDF-3.2",
+                                "is_current": true,
+                                "is_cluster_compatible": true
+                        }]
+                }
+        }
+}]

@@ -1,0 +1,124 @@
+[{
+        "id": 3,
+        "prefix": "/cloudbreak",
+        "name": "cloudbreak",
+        "label": "Cloudbreak",
+        "version": "cb-1.0.0-Final",
+        "flow_type": "PROXY",
+        "enablement_type": "BY_DEFAULT",
+        "roles": [],
+        "require_ambari_version": [{
+                "min": "2.6.2",
+                "max": "3.0.0"
+        }],
+        "require_platform_roles": ["INFRAADMIN"],
+        "require_cluster_services": [],
+        "platform_events_endpoint": "/events",
+        "health_check_endpoint": "/health",
+        "logo_endpoints": {
+                "switcher": "/assets/images/cloudbreak-logo.png",
+                "enablement": "/assets/images/cloudbreak-logo-blue.png"
+        }
+}, {
+        "id": 1,
+        "prefix": "/dlm",
+        "name": "dlm",
+        "label": "Data Lifecycle Manager",
+        "version": "dlm-1.0.0-Final",
+        "flow_type": "PROXY",
+        "enablement_type": "BY_ADMIN",
+        "roles": [],
+        "require_ambari_version": [{
+                "min": "2.6.2",
+                "max": "3.0.0"
+        }],
+        "require_platform_roles": ["INFRAADMIN"],
+        "require_cluster_services": [{
+                "name": "BEACON",
+                "type": "REQUIRED",
+                "label": "DLM Engine",
+                "is_agent": true
+        }, {
+                "name": "HIVE",
+                "type": "REQUIRED",
+                "is_agent": false
+        }, {
+                "name": "HDFS",
+                "type": "REQUIRED",
+                "is_agent": false
+        }],
+        "platform_events_endpoint": "/events",
+        "health_check_endpoint": "/health",
+        "logo_endpoints": {
+                "switcher": "/assets/images/dlm-logo-top-nav.png",
+                "enablement": "/assets/images/dlm-logo-blue.png"
+        }
+}, {
+        "id": 2,
+        "prefix": "/dss",
+        "name": "dss",
+        "label": "Data Steward Studio",
+        "version": "dss-1.0.0-Final",
+        "flow_type": "PROXY",
+        "enablement_type": "BY_ADMIN",
+        "roles": [],
+        "require_ambari_version": [{
+                "min": "2.6.2",
+                "max": "3.0.0"
+        }],
+        "require_platform_roles": ["CURATOR"],
+        "require_cluster_services": [{
+                "name": "ATLAS",
+                "type": "REQUIRED",
+                "is_agent": false
+        }, {
+                "name": "DPPROFILER",
+                "type": "OPTIONAL",
+                "label": "DSS Profiler Service",
+                "is_agent": true
+        }, {
+                "name": "RANGER",
+                "type": "OPTIONAL",
+                "is_agent": false
+        }],
+        "platform_events_endpoint": "/events",
+        "health_check_endpoint": "/health",
+        "logo_endpoints": {
+                "switcher": "/assets/images/steward-logo.png",
+                "enablement": "/assets/images/dss-logo-blue.png"
+        }
+}, {
+        "id": 4,
+        "prefix": "/smmapp/",
+        "name": "smmapp",
+        "label": "Streams Messaging Manager",
+        "version": "smm-1.0.0-Final",
+        "flow_type": "PROXY",
+        "enablement_type": "BY_ADMIN",
+        "roles": [],
+        "require_ambari_version": [{
+                "min": "2.6.2",
+                "max": "3.0.0"
+        }],
+        "require_platform_roles": ["KAFKADEVOPS"],
+        "require_cluster_services": [{
+                "name": "ZOOKEEPER",
+                "type": "REQUIRED",
+                "is_agent": false
+        }, {
+                "name": "KAFKA",
+                "type": "REQUIRED",
+                "is_agent": false
+        }, {
+                "name": "STREAMSMSGMGR",
+                "type": "REQUIRED",
+                "label": "Kafka REST Server",
+                "is_agent": true
+        }],
+        "platform_events_endpoint": "/events",
+        "health_check_endpoint": "/health",
+        "logo_endpoints": {
+                "switcher": "/assets/images/smm-logo-blue.png",
+                "enablement": "/assets/images/smm-logo-blue.png"
+        }
+}]

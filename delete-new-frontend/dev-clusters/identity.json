@@ -1,0 +1,12 @@
+{
+        "id": 2,
+        "username": "Administrator",
+        "roles": ["SUPERADMIN"],
+        "services": [],
+        "display": "Administrator",
+        "password": "",
+        "active": true,
+        "dbManaged": false,
+        "groupManaged": false,
+        "updatedAt": 1530242047
+}

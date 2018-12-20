@@ -1,0 +1,200 @@
+{
+  "1": {
+    "href": "http://172.18.0.7:9010/api/v1/clusters/hdf_mpack/configurations/service_config_versions?service_name=STREAMSMSGMGR&is_current=true",
+    "items": [{
+      "href": "http://172.18.0.7:9010/api/v1/clusters/hdf_mpack/configurations/service_config_versions?service_name=STREAMSMSGMGR&service_config_version=3",
+      "cluster_name": "hdf_mpack",
+      "configurations": [{
+        "Config": {
+          "cluster_name": "hdf_mpack",
+          "stack_id": "HDF-3.2"
+        },
+        "type": "ranger-smm-kafka-audit",
+        "tag": "df88760d-56ee-4d58-b4ac-f2a1cc92cb53",
+        "version": 4,
+        "properties": {
+          "xasecure.audit.credential.provider.file": "jceks://file{{credential_file}}",
+          "xasecure.audit.destination.db": "false",
+          "xasecure.audit.destination.db.batch.filespool.dir": "/var/log/kafka/audit/db/spool",
+          "xasecure.audit.destination.db.jdbc.driver": "{{jdbc_driver}}",
+          "xasecure.audit.destination.db.jdbc.url": "{{audit_jdbc_url}}",
+          "xasecure.audit.destination.db.password": "SECRET:ranger-smm-kafka-audit:4:xasecure.audit.destination.db.password",
+          "xasecure.audit.destination.db.user": "{{xa_audit_db_user}}",
+          "xasecure.audit.destination.hdfs": "true",
+          "xasecure.audit.destination.hdfs.batch.filespool.dir": "/var/log/kafka/audit/hdfs/spool",
+          "xasecure.audit.destination.hdfs.dir": "hdfs://NAMENODE_HOSTNAME:8020/ranger/audit",
+          "xasecure.audit.destination.solr": "false",
+          "xasecure.audit.destination.solr.batch.filespool.dir": "/var/log/kafka/audit/solr/spool",
+          "xasecure.audit.destination.solr.urls": "",
+          "xasecure.audit.destination.solr.zookeepers": "NONE",
+          "xasecure.audit.is.enabled": "true",
+          "xasecure.audit.provider.summary.enabled": "true"
+        },
+        "properties_attributes": {}
+      }, {
+        "Config": {
+          "cluster_name": "hdf_mpack",
+          "stack_id": "HDF-3.2"
+        },
+        "type": "ranger-smm-kafka-plugin-properties",
+        "tag": "d75da6aa-1262-4319-98dd-00d51ef498b2",
+        "version": 4,
+        "properties": {
+          "REPOSITORY_CONFIG_PASSWORD": "SECRET:ranger-smm-kafka-plugin-properties:4:REPOSITORY_CONFIG_PASSWORD",
+          "REPOSITORY_CONFIG_USERNAME": "kafka",
+          "common.name.for.certificate": "",
+          "hadoop.rpc.protection": "",
+          "policy_user": "ambari-qa",
+          "ranger-kafka-plugin-enabled": "No",
+          "zookeeper.connect": "sapin-smm-rmp-11185-fortysix-1.openstacklocal:2181"
+        },
+        "properties_attributes": {}
+      }, {
+        "Config": {
+          "cluster_name": "hdf_mpack",
+          "stack_id": "HDF-3.2"
+        },
+        "type": "ranger-smm-kafka-policymgr-ssl",
+        "tag": "59fd2746-b619-479b-b524-ef2d0fd94863",
+        "version": 4,
+        "properties": {
+          "xasecure.policymgr.clientssl.keystore": "kafkadev-clientcert.jks",
+          "xasecure.policymgr.clientssl.keystore.credential.file": "jceks://file/{{credential_file}}",
+          "xasecure.policymgr.clientssl.keystore.password": "SECRET:ranger-smm-kafka-policymgr-ssl:4:xasecure.policymgr.clientssl.keystore.password",
+          "xasecure.policymgr.clientssl.truststore": "cacerts-xasecure.jks",
+          "xasecure.policymgr.clientssl.truststore.credential.file": "jceks://file/{{credential_file}}",
+          "xasecure.policymgr.clientssl.truststore.password": "SECRET:ranger-smm-kafka-policymgr-ssl:4:xasecure.policymgr.clientssl.truststore.password"
+        },
+        "properties_attributes": {}
+      }, {
+        "Config": {
+          "cluster_name": "hdf_mpack",
+          "stack_id": "HDF-3.2"
+        },
+        "type": "ranger-smm-kafka-security",
+        "tag": "947d6d2c-ab59-4eac-a75c-62b7e446aad6",
+        "version": 4,
+        "properties": {
+          "ranger.plugin.kafka.policy.cache.dir": "/etc/ranger/{{repo_name}}/policycache",
+          "ranger.plugin.kafka.policy.pollIntervalMs": "30000",
+          "ranger.plugin.kafka.policy.rest.ssl.config.file": "/etc/kafka/conf/ranger-policymgr-ssl.xml",
+          "ranger.plugin.kafka.policy.rest.url": "{{policymgr_mgr_url}}",
+          "ranger.plugin.kafka.policy.source.impl": "org.apache.ranger.admin.client.RangerAdminRESTClient",
+          "ranger.plugin.kafka.service.name": "{{repo_name}}"
+        },
+        "properties_attributes": {}
+      }, {
+        "Config": {
+          "cluster_name": "hdf_mpack",
+          "stack_id": "HDF-3.2"
+        },
+        "type": "streams-messaging-manager-common",
+        "tag": "21e2fdaa-f5dd-46bc-bec4-e855880f87bc",
+        "version": 6,
+        "properties": {
+          "adminPort": "8586",
+          "ams.kafka.appid": "kafka_broker",
+          "ams.timeline.metrics.batch.size": "10",
+          "ams.timeline.metrics.hosts": "sapin-smm-rmp-11185-fortysix-1.openstacklocal",
+          "ams.timeline.metrics.port": "6188",
+          "ams.timeline.metrics.protocol": "http",
+          "ams.timeline.metrics.truststore.password": "",
+          "ams.timeline.metrics.truststore.path": "",
+          "ams.timeline.metrics.truststore.type": "",
+          "consumer.group.refresh.interval.ms": "300000",
+          "database_name": "streamsmsgmgr",
+          "kafka.bootstrap.servers": "sapin-smm-rmp-11185-fortysix-1.openstacklocal:6667",
+          "kafka.consumer.poll.timeout.ms": "1000",
+          "metrics.cache.refresh.interval.ms": "300000",
+          "port": "8585",
+          "schema.registry.url": "http://sapin-smm-rmp-11185-fortysix-1.openstacklocal:7788/api/v1",
+          "streams_messaging_manager.ssl.adminPort": "8588",
+          "streams_messaging_manager.ssl.port": "8587",
+          "streams_messaging_manager.storage.connector.connectURI": "jdbc:mysql://localhost:3306/streamsmsgmgr",
+          "streams_messaging_manager.storage.connector.password": "SECRET:streams-messaging-manager-common:6:streams_messaging_manager.storage.connector.password",
+          "streams_messaging_manager.storage.connector.user": "streamsmsgmgr",
+          "streams_messaging_manager.storage.query.timeout": "30",
+          "streams_messaging_manager.storage.type": "mysql"
+        },
+        "properties_attributes": {}
+      }, {
+        "Config": {
+          "cluster_name": "hdf_mpack",
+          "stack_id": "HDF-3.2"
+        },
+        "type": "streams-messaging-manager-env",
+        "tag": "a22a93a2-45ba-4125-abc0-7550d3e1d7b2",
+        "version": 6,
+        "properties": {
+          "content": "\n#!/bin/bash\n\n# Set Streams Messaging Manager's specific environment variables here.\n\n# The java implementation to use.\nexport JAVA_HOME={{jdk64_home}}\nexport PATH=$PATH:$JAVA_HOME/bin\nexport PID_DIR={{streams_messaging_manager_pid_dir}}\nexport LOG_DIR={{streams_messaging_manager_log_dir}}\nexport SMM_DIR=/usr/smm/current\nexport SMM_KERBEROS_OPTS={{streams_messaging_manager_kerberos_params}}\nexport HDFS_CLIENT_LIBS={{hdfs_client_libs}}",
+          "streams_messaging_manager_group": "streamsmsgmgr",
+          "streams_messaging_manager_log_dir": "/var/log/streams-messaging-manager",
+          "streams_messaging_manager_pid_dir": "/var/run/streams-messaging-manager",
+          "streams_messaging_manager_principal_name": "streams_messaging_manager",
+          "streams_messaging_manager_user": "streamsmsgmgr",
+          "streams_messaging_manager_user_nofile_limit": "65536",
+          "streams_messaging_manager_user_nproc_limit": "65536"
+        },
+        "properties_attributes": {}
+      }, {
+        "Config": {
+          "cluster_name": "hdf_mpack",
+          "stack_id": "HDF-3.2"
+        },
+        "type": "streams-messaging-manager-ssl-config",
+        "tag": "428179c4-846d-447a-98d9-e3a9e4210228",
+        "version": 7,
+        "properties": {
+          "streams_messaging_manager.keyStorePassword": "",
+          "streams_messaging_manager.keyStorePath": "",
+          "streams_messaging_manager.keyStoreType": "",
+          "streams_messaging_manager.ssl.isenabled": "false",
+          "streams_messaging_manager.trustStorePassword": "",
+          "streams_messaging_manager.trustStorePath": "",
+          "streams_messaging_manager.trustStoreType": "",
+          "streams_messaging_manager.validateCerts": "false",
+          "streams_messaging_manager.validatePeers": "false"
+        },
+        "properties_attributes": {}
+      }, {
+        "Config": {
+          "cluster_name": "hdf_mpack",
+          "stack_id": "HDF-3.2"
+        },
+        "type": "streams-messaging-manager_jaas_conf",
+        "tag": "2ef34028-42c2-4aee-ac03-32773cdb8006",
+        "version": 6,
+        "properties": {
+          "content": "\nKafkaServer {\n        com.sun.security.auth.module.Krb5LoginModule required\n        useKeyTab=true\n        keyTab=\"{{kafka_keytab_path}}\"\n        storeKey=true\n        useTicketCache=false\n        serviceName=\"{{kafka_bare_jaas_principal}}\"\n        principal=\"{{kafka_jaas_principal}}\";\n        };\nKafkaClient {\n        com.sun.security.auth.module.Krb5LoginModule required\n        useKeyTab=true\n        keyTab=\"{{kafka_keytab_path}}\"\n        storeKey=true\n        useTicketCache=false\n        serviceName=\"{{kafka_bare_jaas_principal}}\"\n        principal=\"{{kafka_jaas_principal}}\";\n        };"
+        },
+        "properties_attributes": {}
+      }, {
+        "Config": {
+          "cluster_name": "hdf_mpack",
+          "stack_id": "HDF-3.2"
+        },
+        "type": "streams-messaging-manager-sso-config",
+        "tag": "11cf9115-275b-47f1-81ff-e735b222c708",
+        "version": 9,
+        "properties": {
+          "streams_messaging_manager.authentication.provider.url": "https://sapin-smm-rmp-11185-fortysix-1.openstacklocal:8443/gateway/knoxsso/api/v1/websso",
+          "streams_messaging_manager.public.key.pem": "MIICgzCCAeygAwIBAgIIeUASFE90R5QwDQYJKoZIhvcNAQEFBQAwgYMxCzAJBgNV\nBAYTAlVTMQ0wCwYDVQQIEwRUZXN0MQ0wCwYDVQQHEwRUZXN0MQ8wDQYDVQQKEwZI\nYWRvb3AxDTALBgNVBAsTBFRlc3QxNjA0BgNVBAMTLXNhcGluLXNtbS1ybXAtMTEx\nODUtZm9ydHlzaXgtMS5vcGVuc3RhY2tsb2NhbDAeFw0xODA2MDYyMjIwMDBaFw0x\nOTA2MDYyMjIwMDBaMIGDMQswCQYDVQQGEwJVUzENMAsGA1UECBMEVGVzdDENMAsG\nA1UEBxMEVGVzdDEPMA0GA1UEChMGSGFkb29wMQ0wCwYDVQQLEwRUZXN0MTYwNAYD\nVQQDEy1zYXBpbi1zbW0tcm1wLTExMTg1LWZvcnR5c2l4LTEub3BlbnN0YWNrbG9j\nYWwwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAI8EXTcBWX2Ou99GTREvhvNP\nywYdLhfB8q3uKnTY4FS1JGPEJLF50Bji285CNoEcwxjZAJE7CZC9wnjYNajUqHHA\nYyUMxqmGmqt11e6k4j60escVqbRes7HVoQjNtsDXaX2Hm6PpIfkpD/mgQhxUY71u\nebXRvpQrfmEspPcRq6O3AgMBAAEwDQYJKoZIhvcNAQEFBQADgYEACnmiDB3d+zW1\nCzHf/1QBXtv4tNx8gWGIl1sUabjP7jtf4UxyTtzqAAwoeWvQhXV62CJWXoMOzgCn\n0uAhIDP3YUmhGnXCDI18U8XC3tXhirkbjjnSOr2gxvy0uwi2oqX/FZTra59LiVTN\nmKLPynUDJwdkVpSbjbnjrgNDscPIez8=",
+          "streams_messaging_manager.sso.isenabled": "true",
+          "streams_messaging_manager.token.validity": "5"
+        },
+        "properties_attributes": {}
+      }],
+      "createtime": 1528838016702,
+      "group_id": -1,
+      "group_name": "Default",
+      "hosts": [],
+      "is_cluster_compatible": true,
+      "is_current": true,
+      "service_config_version": 3,
+      "service_config_version_note": "enabled sso",
+      "service_name": "STREAMSMSGMGR",
+      "stack_id": "HDF-3.2",
+      "user": "admin"
+    }]
+  }
+}

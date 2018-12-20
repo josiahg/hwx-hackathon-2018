@@ -1,0 +1,108 @@
+[{
+	"id": 1,
+	"clusterId": 1,
+	"serviceName": "STREAMSMSGMGR",
+	"hosts": ["localhost"],
+	"properties": [{
+		"Config": {
+			"cluster_name": "hdf_mpack",
+			"stack_id": "HDF-3.2"
+		},
+		"type": "streams-messaging-manager-ssl-config",
+		"tag": "4f1ba3f6-0ecf-48c1-85a8-06de85d232e0",
+		"version": 4,
+		"properties": {
+			"streams_messaging_manager.keyStorePassword": "SECRET:streams-messaging-manager-ssl-config:4:streams_messaging_manager.keyStorePassword",
+			"streams_messaging_manager.keyStorePath": "/usr/smm/current/streams-messaging-manager/security/selfsigned.keystore",
+			"streams_messaging_manager.keyStoreType": "PKCS12",
+			"streams_messaging_manager.ssl.isenabled": "false",
+			"streams_messaging_manager.trustStorePassword": "SECRET:streams-messaging-manager-ssl-config:4:streams_messaging_manager.trustStorePassword",
+			"streams_messaging_manager.trustStorePath": "/usr/smm/current/streams-messaging-manager/security/truststore.jks",
+			"streams_messaging_manager.trustStoreType": "JKS",
+			"streams_messaging_manager.validateCerts": "true",
+			"streams_messaging_manager.validatePeers": "true"
+		},
+		"properties_attributes": {}
+	}, {
+		"Config": {
+			"cluster_name": "hdf_mpack",
+			"stack_id": "HDF-3.2"
+		},
+		"type": "streams-messaging-manager-common",
+		"tag": "102c3610-e28a-474a-bb92-37a7e8ead091",
+		"version": 3,
+		"properties": {
+			"adminPort": "8586",
+			"ams.kafka.appid": "kafka_broker",
+			"ams.timeline.metrics.hosts": "priyank-smm-testing-one-1.openstacklocal",
+			"ams.timeline.metrics.port": "6188",
+			"ams.timeline.metrics.protocol": "http",
+			"ams.timeline.metrics.truststore.password": "",
+			"ams.timeline.metrics.truststore.path": "",
+			"ams.timeline.metrics.truststore.type": "",
+			"consumer.group.refresh.interval.ms": "300000",
+			"database_name": "streamsmsgmgr",
+			"inactive.group.timeout.ms": "1800000",
+			"inactive.producer.timeout.ms": "1800000",
+			"kafka.bootstrap.servers": "priyank-smm-testing-one-3.openstacklocal:6667,priyank-smm-testing-one-1.openstacklocal:6667,priyank-smm-testing-one-2.openstacklocal:6667",
+			"kafka.consumer.poll.timeout.ms": "1000",
+			"metrics.cache.refresh.interval.ms": "300000",
+			"metrics.fetcher.threads": "20",
+			"port": "8585",
+			"schema.registry.url": "",
+			"streams_messaging_manager.ssl.adminPort": "8588",
+			"streams_messaging_manager.ssl.port": "8587",
+			"streams_messaging_manager.storage.connector.connectURI": "jdbc:mysql://localhost:3306/streamsmsgmgr",
+			"streams_messaging_manager.storage.connector.password": "SECRET:streams-messaging-manager-common:3:streams_messaging_manager.storage.connector.password",
+			"streams_messaging_manager.storage.connector.user": "streamsmsgmgr",
+			"streams_messaging_manager.storage.query.timeout": "30",
+			"streams_messaging_manager.storage.type": "mysql"
+		},
+		"properties_attributes": {}
+	}, {
+		"Config": {
+			"cluster_name": "hdf_mpack",
+			"stack_id": "HDF-3.2"
+		},
+		"type": "streams-messaging-manager-env",
+		"tag": "7ba6229f-fd92-4a57-ac6d-f2226adbfbec",
+		"version": 3,
+		"properties": {
+			"content": "\n#!/bin/bash\n\n# Set Streams Messaging Manager's specific environment variables here.\n\n# The java implementation to use.\nexport JAVA_HOME={{jdk64_home}}\nexport PATH=$PATH:$JAVA_HOME/bin\nexport PID_DIR={{streams_messaging_manager_pid_dir}}\nexport LOG_DIR={{streams_messaging_manager_log_dir}}\nexport SMM_DIR={{streams_messaging_manager_current}}\nexport SMM_KERBEROS_OPTS={{streams_messaging_manager_kerberos_params}}\nexport HDFS_CLIENT_LIBS={{hdfs_client_libs}}",
+			"streams_messaging_manager_group": "streamsmsgmgr",
+			"streams_messaging_manager_log_dir": "/var/log/streams-messaging-manager",
+			"streams_messaging_manager_pid_dir": "/var/run/streams-messaging-manager",
+			"streams_messaging_manager_principal_name": "streams_messaging_manager",
+			"streams_messaging_manager_user": "streamsmsgmgr",
+			"streams_messaging_manager_user_nofile_limit": "65536",
+			"streams_messaging_manager_user_nproc_limit": "65536"
+		},
+		"properties_attributes": {}
+	}, {
+		"Config": {
+			"cluster_name": "hdf_mpack",
+			"stack_id": "HDF-3.2"
+		},
+		"type": "streams-messaging-manager-sso-config",
+		"tag": "458207eb-3f67-442b-aa6c-9ef3d91d38c3",
+		"version": 3,
+		"properties": {
+			"streams_messaging_manager.authentication.provider.url": "https://priyank-smm-testing-one-1.openstacklocal:8443/gateway/knoxsso/api/v1/websso",
+			"streams_messaging_manager.public.key.pem": "MIICeDCCAeGgAwIBAgIJAM/93ONEyM6FMA0GCSqGSIb3DQEBBQUAMH4xCzAJBgNV\nBAYTAlVTMQ0wCwYDVQQIEwRUZXN0MQ0wCwYDVQQHEwRUZXN0MQ8wDQYDVQQKEwZI\nYWRvb3AxDTALBgNVBAsTBFRlc3QxMTAvBgNVBAMTKHByaXlhbmstc21tLXRlc3Rp\nbmctb25lLTEub3BlbnN0YWNrbG9jYWwwHhcNMTgwNjIyMjE0ODIwWhcNMTkwNjIy\nMjE0ODIwWjB+MQswCQYDVQQGEwJVUzENMAsGA1UECBMEVGVzdDENMAsGA1UEBxME\nVGVzdDEPMA0GA1UEChMGSGFkb29wMQ0wCwYDVQQLEwRUZXN0MTEwLwYDVQQDEyhw\ncml5YW5rLXNtbS10ZXN0aW5nLW9uZS0xLm9wZW5zdGFja2xvY2FsMIGfMA0GCSqG\nSIb3DQEBAQUAA4GNADCBiQKBgQCfpDOSgtk7XuXMiy0AvW1AtIiQxxPgBb6Aoa6d\nsO4tJ4/skvO8WIGYONFgRsaajB2AVujtfuJFqB6l24Zbfq+EwDVr4FCBNKBou1gh\n7rLCj0DF16SxjUJTVk2jD1a1n1spcMhGt4n/KHmIwX+eEPe4gVyR9unv0gfb6Pp1\nQTtPmQIDAQABMA0GCSqGSIb3DQEBBQUAA4GBAFDzt+k0CAGLFJBVVw5ul0dyYv0Y\nxa2gWHdpLo5a2Uu41j5U16RG9gpEzA6geAKYK+sTX6MHsEXC5S55+Ae5VrCvv2eN\nof1Vu/KKAZiuPm75psB8JkcgG31V74OOSyvvQ6RuN4IAjGg46Egd8EEKm0Var/ia\nDkcLAba1RtbOLHLt",
+			"streams_messaging_manager.token.validity": "5"
+		},
+		"properties_attributes": {}
+	}, {
+		"Config": {
+			"cluster_name": "hdf_mpack",
+			"stack_id": "HDF-3.2"
+		},
+		"type": "streams-messaging-manager_jaas_conf",
+		"tag": "a70a97c8-0b6d-4af3-9e94-a619ad342b4e",
+		"version": 3,
+		"properties": {
+			"content": "\nKafkaServer {\n        com.sun.security.auth.module.Krb5LoginModule required\n        useKeyTab=true\n        keyTab=\"{{kafka_keytab_path}}\"\n        storeKey=true\n        useTicketCache=false\n        serviceName=\"{{kafka_bare_jaas_principal}}\"\n        principal=\"{{kafka_jaas_principal}}\";\n        };\nKafkaClient {\n        com.sun.security.auth.module.Krb5LoginModule required\n        useKeyTab=true\n        keyTab=\"{{kafka_keytab_path}}\"\n        storeKey=true\n        useTicketCache=false\n        serviceName=\"{{kafka_bare_jaas_principal}}\"\n        principal=\"{{kafka_jaas_principal}}\";\n        };"
+		},
+		"properties_attributes": {}
+	}]
+}]

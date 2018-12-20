@@ -1,0 +1,343 @@
+[{
+	"id": 4,
+	"clusterId": 1,
+	"serviceName": "AMBARI_METRICS",
+	"hosts": ["priyank-smm-testing-one-1.openstacklocal"],
+	"properties": [{
+		"Config": {
+			"cluster_name": "hdf_mpack",
+			"stack_id": "HDF-3.2"
+		},
+		"type": "ams-env",
+		"tag": "a054891a-6732-471d-9dcf-c536dbb7dbbd",
+		"version": 1,
+		"properties": {
+			"ambari_metrics_user": "ams",
+			"ams_classpath_additional": "",
+			"content": "\n# Set environment variables here.\n\n# AMS instance name\nexport AMS_INSTANCE_NAME={{hostname}}\n\n# The java implementation to use. Java 1.6 required.\nexport JAVA_HOME={{java64_home}}\n\n# Collector Log directory for log4j\nexport AMS_COLLECTOR_LOG_DIR={{ams_collector_log_dir}}\n\n# Monitor Log directory for outfile\nexport AMS_MONITOR_LOG_DIR={{ams_monitor_log_dir}}\n\n# Collector pid directory\nexport AMS_COLLECTOR_PID_DIR={{ams_collector_pid_dir}}\n\n# Monitor pid directory\nexport AMS_MONITOR_PID_DIR={{ams_monitor_pid_dir}}\n\n# AMS HBase pid directory\nexport AMS_HBASE_PID_DIR={{hbase_pid_dir}}\n\n# AMS Collector heapsize\nexport AMS_COLLECTOR_HEAPSIZE={{metrics_collector_heapsize}}\n\n# HBase Tables Initialization check enabled\nexport AMS_HBASE_INIT_CHECK_ENABLED={{ams_hbase_init_check_enabled}}\n\n# AMS Collector options\nexport AMS_COLLECTOR_OPTS=\"-Djava.library.path=/usr/lib/ams-hbase/lib/hadoop-native\"\n{% if security_enabled %}\nexport AMS_COLLECTOR_OPTS=\"$AMS_COLLECTOR_OPTS -Djava.security.auth.login.config={{ams_collector_jaas_config_file}}\"\n{% endif %}\n\n# AMS Collector GC options\nexport AMS_COLLECTOR_GC_OPTS=\"-XX:+UseConcMarkSweepGC -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:{{ams_collector_log_dir}}/collector-gc.log-`date +'%Y%m%d%H%M'`\"\nexport AMS_COLLECTOR_OPTS=\"$AMS_COLLECTOR_OPTS $AMS_COLLECTOR_GC_OPTS\"\n\n# Metrics collector host will be blacklisted for specified number of seconds if metric monitor failed to connect to it.\nexport AMS_FAILOVER_STRATEGY_BLACKLISTED_INTERVAL={{failover_strategy_blacklisted_interval}}\n\n# Extra Java CLASSPATH elements for Metrics Collector. Optional.\nexport COLLECTOR_ADDITIONAL_CLASSPATH={{ams_classpath_additional}}",
+			"failover_strategy_blacklisted_interval": "300",
+			"metrics_collector_heapsize": "512",
+			"metrics_collector_log_dir": "/var/log/ambari-metrics-collector",
+			"metrics_collector_pid_dir": "/var/run/ambari-metrics-collector",
+			"metrics_monitor_log_dir": "/var/log/ambari-metrics-monitor",
+			"metrics_monitor_pid_dir": "/var/run/ambari-metrics-monitor",
+			"min_ambari_metrics_hadoop_sink_version": "2.7.0.0",
+			"timeline.metrics.host.inmemory.aggregation.jvm.arguments": "-Xmx256m -Xms128m -XX:PermSize=68m",
+			"timeline.metrics.skip.disk.metrics.patterns": "true",
+			"timeline.metrics.skip.network.interfaces.patterns": "None",
+			"timeline.metrics.skip.virtual.interfaces": "false"
+		},
+		"properties_attributes": {}
+	}, {
+		"Config": {
+			"cluster_name": "hdf_mpack",
+			"stack_id": "HDF-3.2"
+		},
+		"type": "ams-grafana-env",
+		"tag": "387c2078-a745-4978-b929-a993625e0bdc",
+		"version": 1,
+		"properties": {
+			"content": "\n# Set environment variables here.\n\n# AMS UI Server Home Dir\nexport AMS_GRAFANA_HOME_DIR={{ams_grafana_home_dir}}\n\n# AMS UI Server Data Dir\nexport AMS_GRAFANA_DATA_DIR={{ams_grafana_data_dir}}\n\n# AMS UI Server Log Dir\nexport AMS_GRAFANA_LOG_DIR={{ams_grafana_log_dir}}\n\n# AMS UI Server PID Dir\nexport AMS_GRAFANA_PID_DIR={{ams_grafana_pid_dir}}",
+			"metrics_grafana_data_dir": "/var/lib/ambari-metrics-grafana",
+			"metrics_grafana_log_dir": "/var/log/ambari-metrics-grafana",
+			"metrics_grafana_password": "SECRET:ams-grafana-env:1:metrics_grafana_password",
+			"metrics_grafana_pid_dir": "/var/run/ambari-metrics-grafana",
+			"metrics_grafana_username": "admin"
+		},
+		"properties_attributes": {}
+	}, {
+		"Config": {
+			"cluster_name": "hdf_mpack",
+			"stack_id": "HDF-3.2"
+		},
+		"type": "ams-grafana-ini",
+		"tag": "ab875bd4-8a4e-4c45-ba1d-16bc9f761dd6",
+		"version": 1,
+		"properties": {
+			"ca_cert": "",
+			"cert_file": "/etc/ambari-metrics-grafana/conf/ams-grafana.crt",
+			"cert_key": "/etc/ambari-metrics-grafana/conf/ams-grafana.key",
+			"content": "\n##################### Grafana Configuration Example #####################\n#\n# Everything has defaults so you only need to uncomment things you want to\n# change\n\n# possible values : production, development\n; app_mode = production\n\n#################################### Paths ####################################\n[paths]\n# Path to where grafana can store temp files, sessions, and the sqlite3 db (if that is used)\n#\n;data = /var/lib/grafana\ndata = {{ams_grafana_data_dir}}\n#\n# Directory where grafana can store logs\n#\n;logs = /var/log/grafana\nlogs = {{ams_grafana_log_dir}}\n\n\n#################################### Server ####################################\n[server]\n# Protocol (http or https)\n;protocol = http\nprotocol = {{ams_grafana_protocol}}\n# The ip address to bind to, empty will bind to all interfaces\n;http_addr =\n\n# The http port  to use\n;http_port = 3000\nhttp_port = {{ams_grafana_port}}\n\n# The public facing domain name used to access grafana from a browser\n;domain = localhost\n\n# Redirect to correct domain if host header does not match domain\n# Prevents DNS rebinding attacks\n;enforce_domain = false\n\n# The full public facing url\n;root_url = %(protocol)s://%(domain)s:%(http_port)s/\n\n# Log web requests\n;router_logging = false\n\n# the path relative working path\n;static_root_path = public\nstatic_root_path = /usr/lib/ambari-metrics-grafana/public\n\n# enable gzip\n;enable_gzip = false\n\n# https certs & key file\n;cert_file =\n;cert_key =\ncert_file = {{ams_grafana_cert_file}}\ncert_key = {{ams_grafana_cert_key}}\n\n#################################### Database ####################################\n[database]\n# Either \"mysql\", \"postgres\" or \"sqlite3\", it's your choice\n;type = sqlite3\n;host = 127.0.0.1:3306\n;name = grafana\n;user = root\n;password =\n\n# For \"postgres\" only, either \"disable\", \"require\" or \"verify-full\"\n;ssl_mode = disable\n\n# For \"sqlite3\" only, path relative to data_path setting\n;path = grafana.db\n\n#################################### Session ####################################\n[session]\n# Either \"memory\", \"file\", \"redis\", \"mysql\", \"postgres\", default is \"file\"\n;provider = file\n\n# Provider config options\n# memory: not have any config yet\n# file: session dir path, is relative to grafana data_path\n# redis: config like redis server e.g. `addr=127.0.0.1:6379,pool_size=100,db=grafana`\n# mysql: go-sql-driver/mysql dsn config string, e.g. `user:password@tcp(127.0.0.1:3306)/database_name`\n# postgres: user=a password=b host=localhost port=5432 dbname=c sslmode=disable\n;provider_config = sessions\n\n# Session cookie name\n;cookie_name = grafana_sess\n\n# If you use session in https only, default is false\n;cookie_secure = false\n\n# Session life time, default is 86400\n;session_life_time = 86400\n\n#################################### Analytics ####################################\n[analytics]\n# Server reporting, sends usage counters to stats.grafana.org every 24 hours.\n# No ip addresses are being tracked, only simple counters to track\n# running instances, dashboard and error counts. It is very helpful to us.\n# Change this option to false to disable reporting.\n;reporting_enabled = true\n\n# Google Analytics universal tracking code, only enabled if you specify an id here\n;google_analytics_ua_id =\n\n#################################### Security ####################################\n[security]\n# default admin user, created on startup\nadmin_user = {{ams_grafana_admin_user}}\n\n# default admin password, can be changed before first start of grafana,  or in profile settings\n;admin_password =\n\n# used for signing\n;secret_key = SW2YcwTIb9zpOOhoPsMm\n\n# Auto-login remember days\n;login_remember_days = 7\n;cookie_username = grafana_user\n;cookie_remember_name = grafana_remember\n\n# disable gravatar profile images\n;disable_gravatar = false\n\n# data source proxy whitelist (ip_or_domain:port seperated by spaces)\n;data_source_proxy_whitelist =\n\n#################################### Users ####################################\n[users]\n# disable user signup / registration\n;allow_sign_up = true\n\n# Allow non admin users to create organizations\n;allow_org_create = true\n\n# Set to true to automatically assign new users to the default organization (id 1)\n;auto_assign_org = true\n\n# Default role new users will be automatically assigned (if disabled above is set to true)\n;auto_assign_org_role = Viewer\n\n# Background text for the user field on the login page\n;login_hint = email or username\n\n#################################### Anonymous Auth ##########################\n[auth.anonymous]\n# enable anonymous access\nenabled = true\n\n# specify organization name that should be used for unauthenticated users\norg_name = Main Org.\n\n# specify role for unauthenticated users\n;org_role = Admin\n\n#################################### Github Auth ##########################\n[auth.github]\n;enabled = false\n;allow_sign_up = false\n;client_id = some_id\n;client_secret = some_secret\n;scopes = user:email,read:org\n;auth_url = https://github.com/login/oauth/authorize\n;token_url = https://github.com/login/oauth/access_token\n;api_url = https://api.github.com/user\n;team_ids =\n;allowed_organizations =\n\n#################################### Google Auth ##########################\n[auth.google]\n;enabled = false\n;allow_sign_up = false\n;client_id = some_client_id\n;client_secret = some_client_secret\n;scopes = https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email\n;auth_url = https://accounts.google.com/o/oauth2/auth\n;token_url = https://accounts.google.com/o/oauth2/token\n;api_url = https://www.googleapis.com/oauth2/v1/userinfo\n;allowed_domains =\n\n#################################### Auth Proxy ##########################\n[auth.proxy]\n;enabled = false\n;header_name = X-WEBAUTH-USER\n;header_property = username\n;auto_sign_up = true\n\n#################################### Basic Auth ##########################\n[auth.basic]\n;enabled = true\n\n#################################### Auth LDAP ##########################\n[auth.ldap]\n;enabled = false\n;config_file = /etc/grafana/ldap.toml\n\n#################################### SMTP / Emailing ##########################\n[smtp]\n;enabled = false\n;host = localhost:25\n;user =\n;password =\n;cert_file =\n;key_file =\n;skip_verify = false\n;from_address = admin@grafana.localhost\n\n[emails]\n;welcome_email_on_sign_up = false\n\n#################################### Logging ##########################\n[log]\n# Either \"console\", \"file\", default is \"console\"\n# Use comma to separate multiple modes, e.g. \"console, file\"\n;mode = console, file\n\n# Buffer length of channel, keep it as it is if you don't know what it is.\n;buffer_len = 10000\n\n# Either \"Trace\", \"Debug\", \"Info\", \"Warn\", \"Error\", \"Critical\", default is \"Trace\"\n;level = Info\n\n# For \"console\" mode only\n[log.console]\n;level =\n\n# For \"file\" mode only\n[log.file]\n;level =\n# This enables automated log rotate(switch of following options), default is true\n;log_rotate = true\n\n# Max line number of single file, default is 1000000\n;max_lines = 1000000\n\n# Max size shift of single file, default is 28 means 1 << 28, 256MB\n;max_lines_shift = 28\n\n# Segment log daily, default is true\n;daily_rotate = true\n\n# Expired days of log file(delete after max days), default is 7\n;max_days = 7\n\n#################################### AMPQ Event Publisher ##########################\n[event_publisher]\n;enabled = false\n;rabbitmq_url = amqp://localhost/\n;exchange = grafana_events\n\n;#################################### Dashboard JSON files ##########################\n[dashboards.json]\n;enabled = false\n;path = /var/lib/grafana/dashboards\npath = /usr/lib/ambari-metrics-grafana/public/dashboards",
+			"port": "3000",
+			"protocol": "http"
+		},
+		"properties_attributes": {}
+	}, {
+		"Config": {
+			"cluster_name": "hdf_mpack",
+			"stack_id": "HDF-3.2"
+		},
+		"type": "ams-hbase-env",
+		"tag": "e439d616-a34d-4dfc-9032-7326a3d7b451",
+		"version": 1,
+		"properties": {
+			"content": "\n# Set environment variables here.\n\n# The java implementation to use. Java 1.6+ required.\nexport JAVA_HOME={{java64_home}}\n\n# HBase Configuration directory\nexport HBASE_CONF_DIR=${HBASE_CONF_DIR:-{{hbase_conf_dir}}}\n\n# Extra Java CLASSPATH elements. Optional.\nadditional_cp={{hbase_classpath_additional}}\nif [  -n \"$additional_cp\" ];\nthen\n  export HBASE_CLASSPATH=${HBASE_CLASSPATH}:$additional_cp\nelse\n  export HBASE_CLASSPATH=${HBASE_CLASSPATH}\nfi\n\n# The maximum amount of heap to use for hbase shell.\nexport HBASE_SHELL_OPTS=\"-Xmx256m\"\n\n# Extra Java runtime options.\n# Below are what we set by default. May only work with SUN JVM.\n# For more on why as well as other possible settings,\n# see http://wiki.apache.org/hadoop/PerformanceTuning\nexport HBASE_OPTS=\"-XX:+UseConcMarkSweepGC -XX:ErrorFile={{hbase_log_dir}}/hs_err_pid%p.log -Djava.io.tmpdir={{hbase_tmp_dir}}\"\nexport SERVER_GC_OPTS=\"-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:{{hbase_log_dir}}/gc.log-`date +'%Y%m%d%H%M'`\"\n# Uncomment below to enable java garbage collection logging.\n# export HBASE_OPTS=\"$HBASE_OPTS -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:$HBASE_HOME/logs/gc-hbase.log\"\n\n# Uncomment and adjust to enable JMX exporting\n# See jmxremote.password and jmxremote.access in $JRE_HOME/lib/management to configure remote password access.\n# More details at: http://java.sun.com/javase/6/docs/technotes/guides/management/agent.html\n#\n# export HBASE_JMX_BASE=\"-Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false\"\n\n{% if java_version < 8 %}\nexport HBASE_MASTER_OPTS=\" -XX:PermSize=64m -XX:MaxPermSize={{hbase_master_maxperm_size}} -Xms{{hbase_heapsize}} -Xmx{{hbase_heapsize}} -Xmn{{hbase_master_xmn_size}} -XX:CMSInitiatingOccupancyFraction=70 -XX:+UseCMSInitiatingOccupancyOnly\"\nexport HBASE_REGIONSERVER_OPTS=\"-XX:MaxPermSize=128m -Xmn{{regionserver_xmn_size}} -XX:CMSInitiatingOccupancyFraction=70 -XX:+UseCMSInitiatingOccupancyOnly -Xms{{regionserver_heapsize}} -Xmx{{regionserver_heapsize}}\"\n{% else %}\nexport HBASE_MASTER_OPTS=\" -Xms{{hbase_heapsize}} -Xmx{{hbase_heapsize}} -Xmn{{hbase_master_xmn_size}} -XX:CMSInitiatingOccupancyFraction=70 -XX:+UseCMSInitiatingOccupancyOnly\"\nexport HBASE_REGIONSERVER_OPTS=\" -Xmn{{regionserver_xmn_size}} -XX:CMSInitiatingOccupancyFraction=70 -XX:+UseCMSInitiatingOccupancyOnly -Xms{{regionserver_heapsize}} -Xmx{{regionserver_heapsize}}\"\n{% endif %}\n\n\n# export HBASE_THRIFT_OPTS=\"$HBASE_JMX_BASE -Dcom.sun.management.jmxremote.port=10103\"\n# export HBASE_ZOOKEEPER_OPTS=\"$HBASE_JMX_BASE -Dcom.sun.management.jmxremote.port=10104\"\n\n# File naming hosts on which HRegionServers will run. $HBASE_HOME/conf/regionservers by default.\nexport HBASE_REGIONSERVERS=${HBASE_CONF_DIR}/regionservers\n\n# Extra ssh options. Empty by default.\n# export HBASE_SSH_OPTS=\"-o ConnectTimeout=1 -o SendEnv=HBASE_CONF_DIR\"\n\n# Where log files are stored. $HBASE_HOME/logs by default.\nexport HBASE_LOG_DIR={{hbase_log_dir}}\n\n# A string representing this instance of hbase. $USER by default.\n# export HBASE_IDENT_STRING=$USER\n\n# The scheduling priority for daemon processes. See 'man nice'.\n# export HBASE_NICENESS=10\n\n# The directory where pid files are stored. /tmp by default.\nexport HBASE_PID_DIR={{hbase_pid_dir}}\n\n# Seconds to sleep between slave commands. Unset by default. This\n# can be useful in large clusters, where, e.g., slave rsyncs can\n# otherwise arrive faster than the master can service them.\n# export HBASE_SLAVE_SLEEP=0.1\n\n# Tell HBase whether it should manage it's own instance of Zookeeper or not.\nexport HBASE_MANAGES_ZK=false\n\n{% if security_enabled %}\nexport HBASE_OPTS=\"$HBASE_OPTS -Djava.security.auth.login.config={{client_jaas_config_file}}\"\nexport HBASE_MASTER_OPTS=\"$HBASE_MASTER_OPTS -Djava.security.auth.login.config={{master_jaas_config_file}} -Djavax.security.auth.useSubjectCredsOnly=false\"\nexport HBASE_REGIONSERVER_OPTS=\"$HBASE_REGIONSERVER_OPTS -Djava.security.auth.login.config={{regionserver_jaas_config_file}} -Djavax.security.auth.useSubjectCredsOnly=false\"\nexport HBASE_ZOOKEEPER_OPTS=\"$HBASE_ZOOKEEPER_OPTS -Djava.security.auth.login.config={{ams_zookeeper_jaas_config_file}}\"\n{% endif %}\n\n# use embedded native libs\n_HADOOP_NATIVE_LIB=\"/usr/lib/ams-hbase/lib/hadoop-native/\"\nexport HBASE_OPTS=\"$HBASE_OPTS -Djava.library.path=${_HADOOP_NATIVE_LIB}\"\n\n# Unset HADOOP_HOME to avoid importing HADOOP installed cluster related configs like: /usr/hdp/2.2.0.0-2041/hadoop/conf/\nexport HADOOP_HOME={{ams_hbase_home_dir}}\n\n# Explicitly Setting HBASE_HOME for AMS HBase so that there is no conflict\nexport HBASE_HOME={{ams_hbase_home_dir}}",
+			"hbase_classpath_additional": "",
+			"hbase_log_dir": "/var/log/ambari-metrics-collector",
+			"hbase_master_heapsize": "640",
+			"hbase_master_maxperm_size": "128",
+			"hbase_master_xmn_size": "192",
+			"hbase_pid_dir": "/var/run/ambari-metrics-collector/",
+			"hbase_regionserver_heapsize": "768",
+			"hbase_regionserver_shutdown_timeout": "30",
+			"hbase_regionserver_xmn_ratio": "0.2",
+			"max_open_files_limit": "32768",
+			"regionserver_xmn_size": "128"
+		},
+		"properties_attributes": {}
+	}, {
+		"Config": {
+			"cluster_name": "hdf_mpack",
+			"stack_id": "HDF-3.2"
+		},
+		"type": "ams-hbase-log4j",
+		"tag": "74efaf95-9af0-40cb-98a6-566a0ce3f138",
+		"version": 1,
+		"properties": {
+			"ams_hbase_log_maxbackupindex": "20",
+			"ams_hbase_log_maxfilesize": "256",
+			"ams_hbase_security_log_maxbackupindex": "20",
+			"ams_hbase_security_log_maxfilesize": "256",
+			"content": "\n# Licensed to the Apache Software Foundation (ASF) under one\n# or more contributor license agreements.  See the NOTICE file\n# distributed with this work for additional information\n# regarding copyright ownership.  The ASF licenses this file\n# to you under the Apache License, Version 2.0 (the\n# \"License\"); you may not use this file except in compliance\n# with the License.  You may obtain a copy of the License at\n#\n#     http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n\n\n# Define some default values that can be overridden by system properties\nhbase.root.logger=INFO,console\nhbase.security.logger=INFO,console\nhbase.log.dir=.\nhbase.log.file=hbase.log\n\n# Define the root logger to the system property \"hbase.root.logger\".\nlog4j.rootLogger=${hbase.root.logger}\n\n# Logging Threshold\nlog4j.threshold=ALL\n\n#\n# Daily Rolling File Appender\n#\nlog4j.appender.DRFA=org.apache.log4j.DailyRollingFileAppender\nlog4j.appender.DRFA.File=${hbase.log.dir}/${hbase.log.file}\n\n# Rollver at midnight\nlog4j.appender.DRFA.DatePattern=.yyyy-MM-dd\n\n# 30-day backup\n#log4j.appender.DRFA.MaxBackupIndex=30\nlog4j.appender.DRFA.layout=org.apache.log4j.PatternLayout\n\n# Pattern format: Date LogLevel LoggerName LogMessage\nlog4j.appender.DRFA.layout.ConversionPattern=%d{ISO8601} %-5p [%t] %c{2}: %m%n\n\n# Rolling File Appender properties\nhbase.log.maxfilesize={{ams_hbase_log_maxfilesize}}MB\nhbase.log.maxbackupindex={{ams_hbase_log_maxbackupindex}}\n\n# Rolling File Appender\nlog4j.appender.RFA=org.apache.log4j.RollingFileAppender\nlog4j.appender.RFA.File=${hbase.log.dir}/${hbase.log.file}\n\nlog4j.appender.RFA.MaxFileSize=${hbase.log.maxfilesize}\nlog4j.appender.RFA.MaxBackupIndex=${hbase.log.maxbackupindex}\n\nlog4j.appender.RFA.layout=org.apache.log4j.PatternLayout\nlog4j.appender.RFA.layout.ConversionPattern=%d{ISO8601} %-5p [%t] %c{2}: %m%n\n\n#\n# Security audit appender\n#\nhbase.security.log.file=SecurityAuth.audit\nhbase.security.log.maxfilesize={{ams_hbase_security_log_maxfilesize}}MB\nhbase.security.log.maxbackupindex={{ams_hbase_security_log_maxbackupindex}}\nlog4j.appender.RFAS=org.apache.log4j.RollingFileAppender\nlog4j.appender.RFAS.File=${hbase.log.dir}/${hbase.security.log.file}\nlog4j.appender.RFAS.MaxFileSize=${hbase.security.log.maxfilesize}\nlog4j.appender.RFAS.MaxBackupIndex=${hbase.security.log.maxbackupindex}\nlog4j.appender.RFAS.layout=org.apache.log4j.PatternLayout\nlog4j.appender.RFAS.layout.ConversionPattern=%d{ISO8601} %p %c: %m%n\nlog4j.category.SecurityLogger=${hbase.security.logger}\nlog4j.additivity.SecurityLogger=false\n#log4j.logger.SecurityLogger.org.apache.hadoop.hbase.security.access.AccessController=TRACE\n\n#\n# Null Appender\n#\nlog4j.appender.NullAppender=org.apache.log4j.varia.NullAppender\n\n#\n# console\n# Add \"console\" to rootlogger above if you want to use this\n#\nlog4j.appender.console=org.apache.log4j.ConsoleAppender\nlog4j.appender.console.target=System.err\nlog4j.appender.console.layout=org.apache.log4j.PatternLayout\nlog4j.appender.console.layout.ConversionPattern=%d{ISO8601} %-5p [%t] %c{2}: %m%n\n\n# Custom Logging levels\n\nlog4j.logger.org.apache.zookeeper=INFO\n#log4j.logger.org.apache.hadoop.fs.FSNamesystem=DEBUG\nlog4j.logger.org.apache.hadoop.hbase=INFO\n# Make these two classes INFO-level. Make them DEBUG to see more zk debug.\nlog4j.logger.org.apache.hadoop.hbase.zookeeper.ZKUtil=INFO\nlog4j.logger.org.apache.hadoop.hbase.zookeeper.ZooKeeperWatcher=INFO\n#log4j.logger.org.apache.hadoop.dfs=DEBUG\n# Set this class to log INFO only otherwise its OTT\n# Enable this to get detailed connection error/retry logging.\n# log4j.logger.org.apache.hadoop.hbase.client.HConnectionManager$HConnectionImplementation=TRACE\n\n\n# Uncomment this line to enable tracing on _every_ RPC call (this can be a lot of output)\n#log4j.logger.org.apache.hadoop.ipc.HBaseServer.trace=DEBUG\n\n# Uncomment the below if you want to remove logging of client region caching'\n# and scan of .META. messages\n# log4j.logger.org.apache.hadoop.hbase.client.HConnectionManager$HConnectionImplementation=INFO\n# log4j.logger.org.apache.hadoop.hbase.client.MetaScanner=INFO"
+		},
+		"properties_attributes": {}
+	}, {
+		"Config": {
+			"cluster_name": "hdf_mpack",
+			"stack_id": "HDF-3.2"
+		},
+		"type": "ams-hbase-policy",
+		"tag": "31fc20e4-6d8f-44a4-a55d-309df2d21a91",
+		"version": 1,
+		"properties": {
+			"security.admin.protocol.acl": "*",
+			"security.client.protocol.acl": "*",
+			"security.masterregion.protocol.acl": "*"
+		},
+		"properties_attributes": {}
+	}, {
+		"Config": {
+			"cluster_name": "hdf_mpack",
+			"stack_id": "HDF-3.2"
+		},
+		"type": "ams-hbase-security-site",
+		"tag": "8baae1c6-cbb9-486c-b6ea-3dc75228d07f",
+		"version": 1,
+		"properties": {
+			"ams.zookeeper.keytab": "",
+			"ams.zookeeper.principal": "",
+			"hadoop.security.authentication": "",
+			"hbase.coprocessor.master.classes": "",
+			"hbase.coprocessor.region.classes": "",
+			"hbase.master.kerberos.principal": "",
+			"hbase.master.keytab.file": "",
+			"hbase.myclient.keytab": "",
+			"hbase.myclient.principal": "",
+			"hbase.regionserver.kerberos.principal": "",
+			"hbase.regionserver.keytab.file": "",
+			"hbase.security.authentication": "",
+			"hbase.security.authorization": "",
+			"hbase.zookeeper.property.authProvider.1": "",
+			"hbase.zookeeper.property.jaasLoginRenew": "",
+			"hbase.zookeeper.property.kerberos.removeHostFromPrincipal": "",
+			"hbase.zookeeper.property.kerberos.removeRealmFromPrincipal": ""
+		},
+		"properties_attributes": {}
+	}, {
+		"Config": {
+			"cluster_name": "hdf_mpack",
+			"stack_id": "HDF-3.2"
+		},
+		"type": "ams-hbase-site",
+		"tag": "a25934a4-3448-41b3-935d-6319b83f4f6e",
+		"version": 1,
+		"properties": {
+			"dfs.client.read.shortcircuit": "true",
+			"hbase.client.scanner.caching": "10000",
+			"hbase.client.scanner.timeout.period": "300000",
+			"hbase.cluster.distributed": "false",
+			"hbase.hregion.majorcompaction": "0",
+			"hbase.hregion.max.filesize": "4294967296",
+			"hbase.hregion.memstore.block.multiplier": "4",
+			"hbase.hregion.memstore.flush.size": "134217728",
+			"hbase.hstore.blockingStoreFiles": "200",
+			"hbase.hstore.flusher.count": "2",
+			"hbase.local.dir": "${hbase.tmp.dir}/local",
+			"hbase.master.info.bindAddress": "0.0.0.0",
+			"hbase.master.info.port": "61310",
+			"hbase.master.normalizer.class": "org.apache.hadoop.hbase.master.normalizer.SimpleRegionNormalizer",
+			"hbase.master.port": "61300",
+			"hbase.master.wait.on.regionservers.mintostart": "1",
+			"hbase.normalizer.enabled": "false",
+			"hbase.normalizer.period": "600000",
+			"hbase.regionserver.global.memstore.lowerLimit": "0.3",
+			"hbase.regionserver.global.memstore.upperLimit": "0.35",
+			"hbase.regionserver.info.port": "61330",
+			"hbase.regionserver.port": "61320",
+			"hbase.regionserver.thread.compaction.large": "2",
+			"hbase.regionserver.thread.compaction.small": "3",
+			"hbase.replication": "false",
+			"hbase.rootdir": "file:///grid/0/var/lib/ambari-metrics-collector/hbase",
+			"hbase.rpc.timeout": "300000",
+			"hbase.snapshot.enabled": "false",
+			"hbase.tmp.dir": "/var/lib/ambari-metrics-collector/hbase-tmp",
+			"hbase.unsafe.stream.capability.enforce": "false",
+			"hbase.zookeeper.leaderport": "61388",
+			"hbase.zookeeper.peerport": "61288",
+			"hbase.zookeeper.property.clientPort": "{{zookeeper_clientPort}}",
+			"hbase.zookeeper.property.dataDir": "${hbase.tmp.dir}/zookeeper",
+			"hbase.zookeeper.property.tickTime": "6000",
+			"hbase.zookeeper.quorum": "{{zookeeper_quorum_hosts}}",
+			"hfile.block.cache.size": "0.3",
+			"phoenix.coprocessor.maxMetaDataCacheSize": "20480000",
+			"phoenix.coprocessor.maxServerCacheTimeToLiveMs": "60000",
+			"phoenix.groupby.maxCacheSize": "307200000",
+			"phoenix.mutate.batchSize": "10000",
+			"phoenix.query.keepAliveMs": "300000",
+			"phoenix.query.maxGlobalMemoryPercentage": "15",
+			"phoenix.query.rowKeyOrderSaltedTable": "true",
+			"phoenix.query.spoolThresholdBytes": "20971520",
+			"phoenix.query.timeoutMs": "300000",
+			"phoenix.sequence.saltBuckets": "2",
+			"phoenix.spool.directory": "${hbase.tmp.dir}/phoenix-spool",
+			"zookeeper.session.timeout": "120000",
+			"zookeeper.session.timeout.localHBaseCluster": "120000",
+			"zookeeper.znode.parent": "/ams-hbase-unsecure"
+		},
+		"properties_attributes": {
+			"final": {
+				"hbase.zookeeper.quorum": "true"
+			}
+		}
+	}, {
+		"Config": {
+			"cluster_name": "hdf_mpack",
+			"stack_id": "HDF-3.2"
+		},
+		"type": "ams-log4j",
+		"tag": "ec62b76d-2f87-4882-b6c9-0c396c1268d8",
+		"version": 1,
+		"properties": {
+			"ams_log_max_backup_size": "80",
+			"ams_log_number_of_backup_files": "60",
+			"content": "\n#\n# Licensed to the Apache Software Foundation (ASF) under one\n# or more contributor license agreements.  See the NOTICE file\n# distributed with this work for additional information\n# regarding copyright ownership.  The ASF licenses this file\n# to you under the Apache License, Version 2.0 (the\n# \"License\"); you may not use this file except in compliance\n# with the License.  You may obtain a copy of the License at\n#\n#     http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n#\n\n# Define some default values that can be overridden by system properties\nams.log.dir=.\nams.log.file=ambari-metrics-collector.log\n\n# Root logger option\nlog4j.rootLogger=INFO,file\n\n# Direct log messages to a log file\nlog4j.appender.file=org.apache.log4j.RollingFileAppender\nlog4j.appender.file.File=${ams.log.dir}/${ams.log.file}\nlog4j.appender.file.MaxFileSize={{ams_log_max_backup_size}}MB\nlog4j.appender.file.MaxBackupIndex={{ams_log_number_of_backup_files}}\nlog4j.appender.file.layout=org.apache.log4j.PatternLayout\nlog4j.appender.file.layout.ConversionPattern=%d{ISO8601} %p %c: %m%n"
+		},
+		"properties_attributes": {}
+	}, {
+		"Config": {
+			"cluster_name": "hdf_mpack",
+			"stack_id": "HDF-3.2"
+		},
+		"type": "ams-site",
+		"tag": "265ae410-ae04-4e16-9fc0-51a8658a85ae",
+		"version": 1,
+		"properties": {
+			"cluster.zookeeper.property.clientPort": "{{cluster_zookeeper_clientPort}}",
+			"cluster.zookeeper.quorum": "{{cluster_zookeeper_quorum_hosts}}",
+			"failover.strategy": "round-robin",
+			"phoenix.query.maxGlobalMemoryPercentage": "25",
+			"phoenix.spool.directory": "/tmp",
+			"timeline.metrics.aggregator.checkpoint.dir": "/var/lib/ambari-metrics-collector/checkpoint",
+			"timeline.metrics.aggregators.skip.blockcache.enabled": "false",
+			"timeline.metrics.cache.commit.interval": "3",
+			"timeline.metrics.cache.enabled": "true",
+			"timeline.metrics.cache.size": "150",
+			"timeline.metrics.cluster.aggregate.splitpoints": "kafka.network.RequestMetrics.ResponseQueueTimeMs.request.OffsetFetch.98percentile",
+			"timeline.metrics.cluster.aggregation.sql.filters": "sdisk\\_%,boottime",
+			"timeline.metrics.cluster.aggregator.daily.checkpointCutOffMultiplier": "2",
+			"timeline.metrics.cluster.aggregator.daily.disabled": "false",
+			"timeline.metrics.cluster.aggregator.daily.interval": "86400",
+			"timeline.metrics.cluster.aggregator.daily.ttl": "63072000",
+			"timeline.metrics.cluster.aggregator.hourly.checkpointCutOffMultiplier": "2",
+			"timeline.metrics.cluster.aggregator.hourly.disabled": "false",
+			"timeline.metrics.cluster.aggregator.hourly.interval": "3600",
+			"timeline.metrics.cluster.aggregator.hourly.ttl": "31536000",
+			"timeline.metrics.cluster.aggregator.interpolation.enabled": "true",
+			"timeline.metrics.cluster.aggregator.minute.checkpointCutOffMultiplier": "2",
+			"timeline.metrics.cluster.aggregator.minute.disabled": "false",
+			"timeline.metrics.cluster.aggregator.minute.interval": "300",
+			"timeline.metrics.cluster.aggregator.minute.ttl": "2592000",
+			"timeline.metrics.cluster.aggregator.second.checkpointCutOffMultiplier": "2",
+			"timeline.metrics.cluster.aggregator.second.disabled": "false",
+			"timeline.metrics.cluster.aggregator.second.interval": "120",
+			"timeline.metrics.cluster.aggregator.second.timeslice.interval": "30",
+			"timeline.metrics.cluster.aggregator.second.ttl": "259200",
+			"timeline.metrics.daily.aggregator.minute.interval": "86400",
+			"timeline.metrics.downsampler.event.metric.patterns": "topology\\.%",
+			"timeline.metrics.downsampler.topn.function": "max",
+			"timeline.metrics.downsampler.topn.metric.patterns": "dfs.NNTopUserOpCounts.windowMs=60000.op=__%.user=%,dfs.NNTopUserOpCounts.windowMs=300000.op=__%.user=%,dfs.NNTopUserOpCounts.windowMs=1500000.op=__%.user=%",
+			"timeline.metrics.downsampler.topn.value": "10",
+			"timeline.metrics.hbase.compression.scheme": "SNAPPY",
+			"timeline.metrics.hbase.data.block.encoding": "FAST_DIFF",
+			"timeline.metrics.hbase.init.check.enabled": "true",
+			"timeline.metrics.host.aggregate.splitpoints": "kafka.network.RequestMetrics.ResponseQueueTimeMs.request.OffsetFetch.98percentile",
+			"timeline.metrics.host.aggregator.daily.checkpointCutOffMultiplier": "2",
+			"timeline.metrics.host.aggregator.daily.disabled": "false",
+			"timeline.metrics.host.aggregator.daily.ttl": "31536000",
+			"timeline.metrics.host.aggregator.hourly.checkpointCutOffMultiplier": "2",
+			"timeline.metrics.host.aggregator.hourly.disabled": "false",
+			"timeline.metrics.host.aggregator.hourly.interval": "3600",
+			"timeline.metrics.host.aggregator.hourly.ttl": "2592000",
+			"timeline.metrics.host.aggregator.minute.checkpointCutOffMultiplier": "2",
+			"timeline.metrics.host.aggregator.minute.disabled": "false",
+			"timeline.metrics.host.aggregator.minute.interval": "300",
+			"timeline.metrics.host.aggregator.minute.ttl": "604800",
+			"timeline.metrics.host.aggregator.ttl": "86400",
+			"timeline.metrics.host.inmemory.aggregation": "false",
+			"timeline.metrics.host.inmemory.aggregation.http.policy": "HTTP_ONLY",
+			"timeline.metrics.host.inmemory.aggregation.port": "61888",
+			"timeline.metrics.service.checkpointDelay": "60",
+			"timeline.metrics.service.cluster.aggregator.appIds": "datanode,nodemanager,hbase",
+			"timeline.metrics.service.default.result.limit": "5760",
+			"timeline.metrics.service.handler.thread.count": "20",
+			"timeline.metrics.service.http.policy": "HTTP_ONLY",
+			"timeline.metrics.service.metadata.filters": "ContainerResource",
+			"timeline.metrics.service.operation.mode": "embedded",
+			"timeline.metrics.service.resultset.fetchSize": "2000",
+			"timeline.metrics.service.rpc.address": "0.0.0.0:60200",
+			"timeline.metrics.service.use.groupBy.aggregators": "true",
+			"timeline.metrics.service.watcher.delay": "30",
+			"timeline.metrics.service.watcher.disabled": "false",
+			"timeline.metrics.service.watcher.initial.delay": "600",
+			"timeline.metrics.service.watcher.timeout": "30",
+			"timeline.metrics.service.webapp.address": "priyank-smm-testing-one-1.openstacklocal:6188",
+			"timeline.metrics.sink.report.interval": "60",
+			"timeline.metrics.transient.metric.patterns": "topology\\.%",
+			"timeline.metrics.whitelisting.enabled": "false"
+		},
+		"properties_attributes": {}
+	}, {
+		"Config": {
+			"cluster_name": "hdf_mpack",
+			"stack_id": "HDF-3.2"
+		},
+		"type": "ams-ssl-client",
+		"tag": "b85aa666-bb29-47f4-ba29-6ebc535ed62d",
+		"version": 1,
+		"properties": {
+			"ssl.client.truststore.location": "/etc/security/clientKeys/all.jks",
+			"ssl.client.truststore.password": "SECRET:ams-ssl-client:1:ssl.client.truststore.password",
+			"ssl.client.truststore.type": "jks"
+		},
+		"properties_attributes": {}
+	}, {
+		"Config": {
+			"cluster_name": "hdf_mpack",
+			"stack_id": "HDF-3.2"
+		},
+		"type": "ams-ssl-server",
+		"tag": "423b33dd-52ac-444e-834e-6b1606b43b24",
+		"version": 1,
+		"properties": {
+			"ssl.server.keystore.keypassword": "SECRET:ams-ssl-server:1:ssl.server.keystore.keypassword",
+			"ssl.server.keystore.location": "/etc/security/serverKeys/keystore.jks",
+			"ssl.server.keystore.password": "SECRET:ams-ssl-server:1:ssl.server.keystore.password",
+			"ssl.server.keystore.type": "jks",
+			"ssl.server.truststore.location": "/etc/security/serverKeys/all.jks",
+			"ssl.server.truststore.password": "SECRET:ams-ssl-server:1:ssl.server.truststore.password",
+			"ssl.server.truststore.reload.interval": "10000",
+			"ssl.server.truststore.type": "jks"
+		},
+		"properties_attributes": {}
+	}]
+}]

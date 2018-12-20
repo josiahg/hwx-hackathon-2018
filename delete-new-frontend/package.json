@@ -1,0 +1,42 @@
+{
+  "name": "cuisine-frontend",
+  "version": "0.0.2",
+  "description": "Frontend for Cloudbreak Cuisine",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "css-loader": "^2.0.1"
+  },
+  "scripts": {
+    "start": "NODE_ENV=development node dev-server.js",
+    "dev": "NODE_ENV=development babel-watch dev-server.js"
+  },
+  "author": "Josiah Goodson",
+  "license": "ISC",
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "dependencies": {
+    "autoprefixer": "^9.4.3",
+    "babel-polyfill": "^6.26.0",
+    "babel-watch": "^2.0.7",
+    "express": "^4.16.4",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "html-webpack-plugin": "^3.2.0",
+    "http-proxy-middleware": "^0.19.1",
+    "path": "^0.12.7",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-hot-loader": "^4.6.3",
+    "react-router": "^4.3.1",
+    "webpack": "^4.28.1",
+    "webpack-dev-middleware": "^3.4.0",
+    "webpack-hot-middleware": "^2.24.3",
+    "webpack-merge": "^4.1.5"
+  }
+}

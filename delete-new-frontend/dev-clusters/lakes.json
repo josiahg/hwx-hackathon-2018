@@ -1,0 +1,22 @@
+[{
+        "id": 1,
+        "name": "hdf_mpack",
+        "dcName": "DC1",
+        "description": "test",
+        "ambariUrl": "http://sapin-smm-rmp-11185-fortysix-1.openstacklocal:8080",
+        "ambariIpAddress": "http://172.22.107.177:8080",
+        "location": 7053,
+        "createdBy": 2,
+        "properties": {
+                "tags": [{
+                        "name": "test"
+                }]
+        },
+        "state": "SYNCED",
+        "isDatalake": false,
+        "allowUntrusted": false,
+        "behindGateway": false,
+        "clusterType": "HDF",
+        "created": "2018-06-12T23:45:12.193",
+        "updated": "2018-06-13T05:48:09.324"
+}]
