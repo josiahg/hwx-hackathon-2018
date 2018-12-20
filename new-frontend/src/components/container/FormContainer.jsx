@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Input from '../presentational/Input.jsx';
+import Sidebar from '../Site/Sidebar';
 
 class FormContainer extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       seo_title: ""
@@ -20,16 +21,19 @@ class FormContainer extends Component {
   render() {
     const { seo_title } = this.state;
     return(
-      <form id='article-form'>
+      <section>
+        {this.props.children}
+      </section>
+      /*<form id='article-form'>
         <Input
-          text='SEO title'
+          text='Lets change the title'
           label='seo_title'
           type='text'
           id='seo_title'
           value={seo_title}
           handleChange={this.handleChange}
         />
-      </form>
+      </form>*/
     );
   }
 }
