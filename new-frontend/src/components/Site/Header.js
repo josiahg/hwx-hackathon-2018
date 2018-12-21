@@ -76,10 +76,10 @@ export default class Header extends Component {
           className="logo"
         >
           <span className="logo-mini" style={{textAlign: 'center'}}>
-            <img src="styles/img/icon-SMM-color.png" data-stest="logo-collapsed" width="70%"/>
+            <img src="src/styles/img/favicon.ico" data-stest="logo-collapsed" width="70%"/>
           </span>
           <span className="logo-lg">
-            <img src="styles/img/icon-SMMname-color.png" data-stest="logo-expanded" width="90%"/>
+            <img src="src/styles/img/favicon.ico" data-stest="logo-expanded" width="20%"/>
           </span>
         </div>
         <nav className="navbar navbar-default navbar-static-top">
