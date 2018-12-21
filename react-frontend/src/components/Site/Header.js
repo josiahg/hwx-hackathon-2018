@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-//import {Switcher} from 'dps-apps';
 import app_state from '../../app_state';
 import {observer} from 'mobx-react';
 import {Nav, Navbar, NavItem, NavDropdown, MenuItem,DropdownButton, Dropdown, Button} from 'react-bootstrap';
@@ -30,39 +29,9 @@ export default class Header extends Component {
   }
   render() {
     const app = this.context.App;
-    console.log(app.state); //debug
     const titleContent = (<a>{app.state.selectedCluster.name || 'none'}</a>);
     const usersIcon = <i className="fa fa-user"></i>;
-    const alertsData = [
-      {
-        title: "Append Lag High",
-        name: "OtherEvents",
-        description: "ipsum dolor sit amet, consecteturing elit, sed do eiusmod tempor",
-        type: "Alert",
-        timestamp: 1537864293605
-      },
-      /*{
-        title: "Re-Partition",
-        name: "OtherEvents",
-        description: "ipsum dolor sit amet, consecteturing elit, sed do eiusmod tempor",
-        type: "Recommended",
-        timestamp: 1537864293605
-      },*/
-      {
-        title: "Replica out of sync",
-        name: "T_Events",
-        description: "ipsum dolor sit amet, consecteturing elit, sed do eiusmod tempor",
-        timestamp: 1537866093605,
-        type: "Alert"
-      }
-      /*{
-        title: "Re-Partition",
-        name: "TruckrEvents",
-        description: "ipsum dolor sit amet, consecteturing elit, sed do eiusmod tempor",
-        type: "Recommended",
-        timestamp: 1537770162822
-      }*/
-    ];
+    const alertsData = [];
     const {showType} = this.state;
     const renderData = alertsData.filter((item)=>{
       return showType === "All" || showType === item.type;
@@ -83,7 +52,7 @@ export default class Header extends Component {
           </span>
         </div>
         <nav className="navbar navbar-default navbar-static-top">
-          <div>
+          {/*<div>
             <div className="headContentText">
               {app_state.headerContent}
             </div>
@@ -170,7 +139,7 @@ export default class Header extends Component {
                     <a className="btn-xs pull-right btn btn-success" href="#/alerts">view all</a>
                   </div>
                 </DropdownButton>
-              </li>*/}
+              </li>*
               <li className="user-dropdown">
                 <DropdownButton
                   title={<i className="fa fa-user"></i>}
@@ -184,7 +153,7 @@ export default class Header extends Component {
                 </DropdownButton>
               </li>
             </ul>
-          </div>
+          </div>*/}
         </nav>
 
       </header>

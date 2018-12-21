@@ -1,11 +1,6 @@
 import React, {Component} from 'react';
 import app_state from '../../app_state';
 import {observer} from 'mobx-react';
-/*
-import {Link} from 'react-router';
-import {NavItem} from 'react-bootstrap';
-
-*/
 
 //@observer
 export default class Sidebar extends Component {

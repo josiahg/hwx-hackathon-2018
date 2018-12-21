@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Breadcrumbs from 'react-breadcrumbs';
-//import {Link} from 'react-router';
 
 export default class Footer extends Component {
   render() {
