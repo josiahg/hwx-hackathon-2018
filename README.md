@@ -2,9 +2,7 @@
 
 This project has been migrated to Cloudbreak Cuisine.
 
-[Cloudbreak Cuisine Frontend](https://github.com/paulvid/cloudbreak-cuisine-frontend)
-
-[Cloudbreak Cuisine Backend](https://github.com/josiahg/cloudbreak-cuisine-backend)
+[Cloudbreak Cuisine](https://github.com/josiahg/cloudbreak-cuisine)
 
 # Authors
 
