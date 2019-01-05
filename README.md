@@ -1,8 +1,6 @@
 # Deprecation Notice
 
-This project has been migrated to Cloudbreak Cuisine.
-
-[Cloudbreak Cuisine](https://github.com/josiahg/cloudbreak-cuisine)
+This project has been migrated to [Cloudbreak Cuisine](https://github.com/josiahg/cloudbreak-cuisine).
 
 # Authors
 
